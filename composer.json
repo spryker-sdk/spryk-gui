@@ -1,5 +1,5 @@
 {
-  "name": "spryker/spryk-gui",
+  "name": "spryker-sdk/spryk-gui",
   "type": "library",
   "description": "SprykGui module",
   "license": "proprietary",
