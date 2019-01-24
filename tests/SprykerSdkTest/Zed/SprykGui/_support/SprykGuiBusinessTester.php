@@ -5,10 +5,10 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\SprykGui;
+namespace SprykerSdkTest\Zed\SprykGui;
 
 use Codeception\Actor;
-use Spryker\Zed\SprykGui\Business\SprykGuiFacadeInterface;
+use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
 
 /**
  * Inherited Methods
@@ -30,7 +30,7 @@ class SprykGuiBusinessTester extends Actor
     use _generated\SprykGuiBusinessTesterActions;
 
     /**
-     * @return \Spryker\Zed\SprykGui\Business\SprykGuiFacadeInterface|\Spryker\Zed\Kernel\Business\AbstractFacade
+     * @return \SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface
      */
     public function getSprykGuiFacade(): SprykGuiFacadeInterface
     {

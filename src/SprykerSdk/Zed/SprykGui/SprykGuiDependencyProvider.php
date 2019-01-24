@@ -7,7 +7,7 @@
 
 namespace SprykerSdk\Zed\SprykGui;
 
-use Spryker\Spryk\SprykFacade;
+use SprykerSdk\Spryk\SprykFacade;
 use Spryker\Zed\Graph\Communication\Plugin\GraphPlugin;
 use Spryker\Zed\Kernel\AbstractBundleDependencyProvider;
 use Spryker\Zed\Kernel\Container;

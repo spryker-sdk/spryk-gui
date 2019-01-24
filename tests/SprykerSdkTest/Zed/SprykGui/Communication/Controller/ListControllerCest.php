@@ -5,13 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\SprykGui\Communication\Controller;
+namespace SprykerSdkTest\Zed\SprykGui\Communication\Controller;
 
-use SprykerTest\Zed\SprykGui\SprykGuiCommunicationTester;
+use SprykerSdkTest\Zed\SprykGui\SprykGuiCommunicationTester;
 
 /**
  * Auto-generated group annotations
- * @group SprykerTest
+ * @group SprykerSdkTest
  * @group Zed
  * @group SprykGui
  * @group Communication
@@ -22,7 +22,7 @@ use SprykerTest\Zed\SprykGui\SprykGuiCommunicationTester;
 class ListControllerCest
 {
     /**
-     * @param \SprykerTest\Zed\SprykGui\SprykGuiCommunicationTester $i
+     * @param \SprykerSdkTest\Zed\SprykGui\SprykGuiCommunicationTester $i
      *
      * @return void
      */

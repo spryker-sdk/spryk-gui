@@ -10,12 +10,12 @@ namespace SprykerSdk\Zed\SprykGui\Dependency\Facade;
 class SprykGuiToSprykFacadeBridge implements SprykGuiToSprykFacadeInterface
 {
     /**
-     * @var \Spryker\Spryk\SprykFacadeInterface
+     * @var \SprykerSdk\Spryk\SprykFacadeInterface
      */
     protected $sprykFacade;
 
     /**
-     * @param \Spryker\Spryk\SprykFacadeInterface $sprykFacade
+     * @param \SprykerSdk\Spryk\SprykFacadeInterface $sprykFacade
      */
     public function __construct($sprykFacade)
     {

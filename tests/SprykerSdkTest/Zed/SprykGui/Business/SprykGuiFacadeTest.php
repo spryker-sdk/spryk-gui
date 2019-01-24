@@ -5,7 +5,7 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerTest\Zed\SprykGui\Business;
+namespace SprykerSdkTest\Zed\SprykGui\Business;
 
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ModuleTransfer;
@@ -13,7 +13,7 @@ use Generated\Shared\Transfer\OrganizationTransfer;
 
 /**
  * Auto-generated group annotations
- * @group SprykerTest
+ * @group SprykerSdkTest
  * @group Zed
  * @group SprykGui
  * @group Business
@@ -24,7 +24,7 @@ use Generated\Shared\Transfer\OrganizationTransfer;
 class SprykGuiFacadeTest extends Unit
 {
     /**
-     * @var \SprykerTest\Zed\SprykGui\SprykGuiBusinessTester
+     * @var \SprykerSdkTest\Zed\SprykGui\SprykGuiBusinessTester
      */
     protected $tester;
 
