@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Spryker\\": "src/Spryker/"
+      "Spryker\\": "src/SprykerSdk/"
     }
   },
   "autoload-dev": {
