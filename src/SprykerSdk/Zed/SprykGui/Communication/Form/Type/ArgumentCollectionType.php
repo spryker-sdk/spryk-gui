@@ -67,8 +67,12 @@ class ArgumentCollectionType extends AbstractType
                 $argumentCollectionTransfer = new ArgumentCollectionTransfer();
                 foreach ($this->getArgumentsFromEvent($event) as $argumentTransfer) {
                     $innerArgumentTransfer = $argumentTransfer->getInnerArgument();
-                    $argumentTransfer->setType($innerArgumentTransfer->getType());
-                    $argumentTransfer->setArgumentMeta($innerArgumentTransfer->getArgumentMeta());
+
+                    if ($innerArgumentTransfer !== null) {
+                        $argumentTransfer->setType($innerArgumentTransfer->getType());
+                        $argumentTransfer->setArgumentMeta($innerArgumentTransfer->getArgumentMeta());
+                    }
+
                     $argumentTransfer->setInnerArgument(null);
 
                     $argumentCollectionTransfer->addArgument($argumentTransfer);

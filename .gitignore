@@ -17,3 +17,4 @@
 
 /tests/_output/*
 !/tests/_output/.gitkeep
+/tests/SprykerSdkTest/Zed/SprykGui/_support/_generated/

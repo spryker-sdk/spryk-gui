@@ -53,9 +53,13 @@ class BuildControllerCest
             'defaultValue' => '',
         ];
 
+        $firstSprykerModuleName = $i->grabTextFrom(
+            'select#spryk_main_form_module optgroup[label=\'Spryker\'] option:nth-child(1)'
+        );
+
         $formData = [
             'spryk_main_form' => [
-                'module' => 'SprykGui',
+                'module' => $firstSprykerModuleName,
                 'organization' => 'Spryker',
                 'sprykDetails' => [
                     'comment' => "Line one.\r\nLine two.",

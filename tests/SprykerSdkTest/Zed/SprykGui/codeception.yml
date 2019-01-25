@@ -20,7 +20,11 @@ suites:
                 - Asserts
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
-                - \SprykerTest\Shared\Testify\Helper\LocatorHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                    coreNamespaces:
+                        - SprykerShop
+                        - Spryker
+                        - SprykerSdk
 
     Communication:
         path: Communication/
@@ -30,7 +34,11 @@ suites:
                 - Asserts
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
-                - \SprykerTest\Shared\Testify\Helper\LocatorHelper
+                - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                    coreNamespaces:
+                        - SprykerShop
+                        - Spryker
+                        - SprykerSdk
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Zed\ZedNavigation\Helper\BreadcrumbHelper
