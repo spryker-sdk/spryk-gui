@@ -2,7 +2,7 @@ namespace: SprykGui
 actor: Tester
 
 include:
-    - tests/SprykerTest/Zed/SprykGui
+    - tests/SprykerSdkTest/Zed/SprykGui
 
 paths:
     tests: tests
