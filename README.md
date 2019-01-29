@@ -5,7 +5,7 @@ GUI for [Spryk](https://github.com/spryker-sdk/spryk/) tool. The Spryk tool can 
 ## Installation
 
 ```
-composer require spryker-sdk/spryk-gui
+composer require --dev spryker-sdk/spryk-gui
 ```
 
 ## Documentation
