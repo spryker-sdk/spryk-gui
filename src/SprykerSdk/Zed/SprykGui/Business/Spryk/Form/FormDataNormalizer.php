@@ -35,8 +35,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     protected function normalizeFormDataRecursive(array $data, array $normalizedData): array
     {
         foreach ($data as $key => $value) {
-            if ($key === 'organization' && $value instanceof OrganizationTransfer)
-            {
+            if ($key === 'organization' && $value instanceof OrganizationTransfer) {
                 $normalizedData['organization'] = $value->getName();
                 $normalizedData['rootPath'] = $value->getRootPath();
             }

@@ -112,12 +112,12 @@ interface SprykGuiFacadeInterface
     public function getFactoryInformation(string $className): ClassInformationTransfer;
 
     /**
+     * @api
+     *
      * @deprecated Use `SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface::getSprykDefinition()` instead.
      *
      * Specification:
      * - Returns an array with the Spryk definition.
-     *
-     * @api
      *
      * @param string $spryk
      *

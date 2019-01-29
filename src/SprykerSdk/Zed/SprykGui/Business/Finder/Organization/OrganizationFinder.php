@@ -75,7 +75,7 @@ class OrganizationFinder implements OrganizationFinderInterface
 
         $organizationCollectionTransfer = new OrganizationCollectionTransfer();
 
-        foreach ($organizationNamespaces as $organizationName ) {
+        foreach ($organizationNamespaces as $organizationName) {
             $organizationTransfer = new OrganizationTransfer();
             $organizationTransfer->setName($organizationName);
 

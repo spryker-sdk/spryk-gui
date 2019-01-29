@@ -9,8 +9,8 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\OrganizationTransfer;
-use SprykerSdk\Spryk\SprykFacade;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerSdk\Spryk\SprykFacade;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ArgumentCollectionType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\OutputChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
