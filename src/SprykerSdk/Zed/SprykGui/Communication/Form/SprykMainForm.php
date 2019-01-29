@@ -55,7 +55,7 @@ class SprykMainForm extends AbstractType
         $typeToAddListenerTo = static::MODULE;
 
         $spryk = $options[static::SPRYK];
-        $sprykDefinition = $this->getFacade()->getSprykDefinitionByName($spryk);
+        $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk);
 
         if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::TYPE])) {
             $builder->add(static::MODULE, NewModuleType::class, ['sprykDefinition' => $sprykDefinition]);

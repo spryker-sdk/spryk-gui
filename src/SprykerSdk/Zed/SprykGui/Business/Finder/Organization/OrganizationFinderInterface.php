@@ -15,4 +15,11 @@ interface OrganizationFinderInterface
      * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
      */
     public function findOrganizations(): OrganizationCollectionTransfer;
+
+    /**
+     * @param string $mode
+     *
+     * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
+     */
+    public function findOrganizationsByMode(string $mode): OrganizationCollectionTransfer;
 }

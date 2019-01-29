@@ -59,7 +59,8 @@ class SprykDataProvider
      */
     protected function getOptionsBySprykDefinition(string $sprykName, ModuleTransfer $moduleTransfer): array
     {
-        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinitionByName($sprykName);
+        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition($sprykName);
+
         if (isset($sprykDefinition[ModuleTransfer::APPLICATION])) {
             $applicationTransfer = new ApplicationTransfer();
             $applicationTransfer->setName($sprykDefinition[ModuleTransfer::APPLICATION]);
@@ -118,7 +119,7 @@ class SprykDataProvider
      */
     protected function addSprykDefinitionDefaultData(array $formData, string $spryk): array
     {
-        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinitionByName($spryk);
+        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition($spryk);
 
         foreach ($sprykDefinition['arguments'] as $argumentName => $argumentDefinition) {
             if (isset($argumentDefinition['default'])) {

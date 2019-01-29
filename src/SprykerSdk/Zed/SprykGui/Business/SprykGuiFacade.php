@@ -173,4 +173,35 @@ class SprykGuiFacade extends AbstractFacade implements SprykGuiFacadeInterface
     {
         return $this->getFactory()->createChoiceLoader()->loadChoices($choiceLoaderName, $moduleTransfer);
     }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param string $sprykName
+     * @param string|null $sprykMode
+     *
+     * @return array
+     */
+    public function getSprykDefinition(string $sprykName, ?string $sprykMode = null): array
+    {
+        return $this->getFactory()->getSprykFacade()->getSprykDefinition($sprykName, $sprykMode);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @api
+     *
+     * @param string $developmentMode
+     *
+     * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
+     */
+    public function getOrganizationsByMode(string $developmentMode): OrganizationCollectionTransfer
+    {
+        return $this->getFactory()
+            ->createOrganizationFinder()
+            ->findOrganizationsByMode($developmentMode);
+    }
 }

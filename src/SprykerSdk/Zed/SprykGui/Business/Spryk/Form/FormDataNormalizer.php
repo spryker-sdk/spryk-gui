@@ -11,6 +11,7 @@ use Generated\Shared\Transfer\ArgumentCollectionTransfer;
 use Generated\Shared\Transfer\ArgumentTransfer;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
+use Generated\Shared\Transfer\OrganizationTransfer;
 use Generated\Shared\Transfer\ReturnTypeTransfer;
 
 class FormDataNormalizer implements FormDataNormalizerInterface
@@ -34,6 +35,12 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     protected function normalizeFormDataRecursive(array $data, array $normalizedData): array
     {
         foreach ($data as $key => $value) {
+            if ($key === 'organization' && $value instanceof OrganizationTransfer)
+            {
+                $normalizedData['organization'] = $value->getName();
+                $normalizedData['rootPath'] = $value->getRootPath();
+            }
+
             if ($key === 'spryk' || isset($normalizedData[$key])) {
                 continue;
             }
@@ -52,8 +59,6 @@ class FormDataNormalizer implements FormDataNormalizerInterface
 
             if ($value instanceof ModuleTransfer) {
                 $normalizedData['module'] = $value->getName();
-                $normalizedData['organization'] = $value->getOrganization()->getName();
-                $normalizedData['rootPath'] = $value->getOrganization()->getRootPath();
 
                 continue;
             }
