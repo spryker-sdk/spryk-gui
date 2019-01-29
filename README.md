@@ -1,11 +1,11 @@
 # SprykGui Module
 
-GUI for the spryker-sdk/spryk tool. The spryker-sdk/spryk tool can be used standalone, for optimized usage in Spryker this Module offers a GUI.
+GUI for [Spryk](https://github.com/spryker-sdk/spryk/) tool. The Spryk tool can be used standalone, for optimized usage in Spryker this module offers a GUI in Zed.
 
 ## Installation
 
 ```
-composer require spryker-sdk/spryk-gui
+composer require --dev spryker-sdk/spryk-gui
 ```
 
 ## Documentation
