@@ -58,7 +58,8 @@ class SprykDetailsForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $sprykDefinition = $this->getFacade()->getSprykDefinition($options[static::SPRYK]);
+        $mode = $builder->getData()['mode'] ?? null;
+        $sprykDefinition = $this->getFacade()->getSprykDefinition($options[static::SPRYK], $mode);
 
         $filteredArguments = $this->getRelevantArguments($sprykDefinition['arguments']);
 

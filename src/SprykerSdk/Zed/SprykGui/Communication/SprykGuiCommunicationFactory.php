@@ -8,6 +8,8 @@
 namespace SprykerSdk\Zed\SprykGui\Communication;
 
 use Generated\Shared\Transfer\ModuleTransfer;
+use Generated\Shared\Transfer\SprykDefinitionTransfer;
+use Generated\Shared\Transfer\SprykRequestTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider\SprykDataProvider;
 use SprykerSdk\Zed\SprykGui\Communication\Form\SprykDetailsForm;
@@ -41,16 +43,16 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param string $spryk
+     * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function getSprykMainForm(string $spryk): FormInterface
+    public function getSprykMainForm(SprykDefinitionTransfer $sprykDefinitionTransfer): FormInterface
     {
         return $this->getFormFactory()->create(
             SprykMainForm::class,
-            $this->createSprykFormDataProvider()->getData($spryk),
-            $this->createSprykFormDataProvider()->getOptions($spryk)
+            $this->createSprykFormDataProvider()->getData($sprykDefinitionTransfer),
+            $this->createSprykFormDataProvider()->getOptions($sprykDefinitionTransfer)
         );
     }
 

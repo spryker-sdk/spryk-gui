@@ -10,6 +10,9 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider;
 use Generated\Shared\Transfer\ApplicationTransfer;
 use Generated\Shared\Transfer\LayerTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
+use Generated\Shared\Transfer\SprykDefinitionTransfer;
+use Generated\Shared\Transfer\SprykRequestTransfer;
+use SprykerSdk\Zed\SprykGui\Business\Spryk\Spryk;
 use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
 
 class SprykDataProvider
@@ -28,38 +31,41 @@ class SprykDataProvider
     }
 
     /**
-     * @param string $sprykName
+     * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      * @param \Generated\Shared\Transfer\ModuleTransfer|null $moduleTransfer
      *
      * @return array
      */
-    public function getOptions(string $sprykName, ?ModuleTransfer $moduleTransfer = null): array
+    public function getOptions(SprykDefinitionTransfer $sprykDefinitionTransfer, ?ModuleTransfer $moduleTransfer = null): array
     {
         $options = [];
         $options['allow_extra_fields'] = true;
         $options['auto_initialize'] = false;
 
-        if ($sprykName) {
-            $options['spryk'] = $sprykName;
+        if ($sprykDefinitionTransfer->getName()) {
+            $options['spryk'] = $sprykDefinitionTransfer->getName();
         }
 
-        if ($sprykName && $moduleTransfer) {
+        if ($sprykDefinitionTransfer->getName() && $moduleTransfer) {
             $options['module'] = $moduleTransfer;
-            $options += $this->getOptionsBySprykDefinition($sprykName, $moduleTransfer);
+            $options += $this->getOptionsBySprykDefinition($sprykDefinitionTransfer, $moduleTransfer);
         }
 
         return $options;
     }
 
     /**
-     * @param string $sprykName
+     * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
      *
      * @return array
      */
-    protected function getOptionsBySprykDefinition(string $sprykName, ModuleTransfer $moduleTransfer): array
+    protected function getOptionsBySprykDefinition(SprykDefinitionTransfer $sprykDefinitionTransfer, ModuleTransfer $moduleTransfer): array
     {
-        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition($sprykName);
+        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
+            $sprykDefinitionTransfer->getName(),
+            $sprykDefinitionTransfer->getMode()
+        );
 
         if (isset($sprykDefinition[ModuleTransfer::APPLICATION])) {
             $applicationTransfer = new ApplicationTransfer();
@@ -91,35 +97,40 @@ class SprykDataProvider
     }
 
     /**
-     * @param string $spryk
+     * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      * @param \Generated\Shared\Transfer\ModuleTransfer|null $moduleTransfer
      *
      * @return array
      */
-    public function getData(string $spryk, ?ModuleTransfer $moduleTransfer = null): array
+    public function getData(SprykDefinitionTransfer $sprykDefinitionTransfer, ?ModuleTransfer $moduleTransfer = null): array
     {
         if (!$moduleTransfer) {
             $moduleTransfer = new ModuleTransfer();
         }
 
         $formData = [
-            'spryk' => $spryk,
+            'spryk' => $sprykDefinitionTransfer->getName(),
             'module' => $moduleTransfer,
             'dependentModule' => $moduleTransfer,
         ];
 
-        return $this->addSprykDefinitionDefaultData($formData, $spryk);
+        return $this->addSprykDefinitionDefaultData($formData, $sprykDefinitionTransfer);
     }
 
     /**
      * @param array $formData
-     * @param string $spryk
+     * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      *
      * @return array
      */
-    protected function addSprykDefinitionDefaultData(array $formData, string $spryk): array
+    protected function addSprykDefinitionDefaultData(array $formData, SprykDefinitionTransfer $sprykDefinitionTransfer): array
     {
-        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition($spryk);
+        $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
+            $sprykDefinitionTransfer->getName(),
+            $sprykDefinitionTransfer->getMode()
+        );
+
+        $formData['mode'] = $sprykDefinition['mode'];
 
         foreach ($sprykDefinition['arguments'] as $argumentName => $argumentDefinition) {
             if (isset($argumentDefinition['default'])) {

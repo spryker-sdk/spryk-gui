@@ -7,6 +7,8 @@
 
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
+use Generated\Shared\Transfer\SprykDefinitionTransfer;
+use Generated\Shared\Transfer\SprykRequestTransfer;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -23,10 +25,10 @@ class BuildController extends AbstractController
      */
     public function indexAction(Request $request): array
     {
-        $spryk = $request->query->get('spryk');
+        $sprykDefinitionTransfer = $this->createSprykDefinitionTransfer($request);
 
         $sprykForm = $this->getFactory()
-            ->getSprykMainForm($spryk)
+            ->getSprykMainForm($sprykDefinitionTransfer)
             ->handleRequest($request);
 
         $canRunBuild = $this->canRunBuild($sprykForm);
@@ -78,5 +80,20 @@ class BuildController extends AbstractController
         }
 
         return false;
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return \Generated\Shared\Transfer\SprykDefinitionTransfer
+     */
+    protected function createSprykDefinitionTransfer(Request $request): SprykDefinitionTransfer
+    {
+        $spryk = $request->query->get('spryk');
+        $mode = $request->query->get('mode');
+
+        $sprykDefinitionTransfer = new SprykDefinitionTransfer();
+
+        return $sprykDefinitionTransfer->setName($spryk)->setMode($mode);
     }
 }
