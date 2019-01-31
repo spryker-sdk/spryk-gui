@@ -112,10 +112,12 @@ interface SprykGuiFacadeInterface
     public function getFactoryInformation(string $className): ClassInformationTransfer;
 
     /**
+     * @api
+     *
+     * @deprecated Use `SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface::getSprykDefinition()` instead.
+     *
      * Specification:
      * - Returns an array with the Spryk definition.
-     *
-     * @api
      *
      * @param string $spryk
      *
@@ -150,4 +152,29 @@ interface SprykGuiFacadeInterface
      * @return array
      */
     public function loadChoices(string $choiceLoaderName, ModuleTransfer $moduleTransfer): array;
+
+    /**
+     * Specification:
+     * - Returns an array with the Spryk definition.
+     *
+     * @api
+     *
+     * @param string $sprykName
+     * @param string|null $sprykMode
+     *
+     * @return array
+     */
+    public function getSprykDefinition(string $sprykName, ?string $sprykMode = null): array;
+
+    /**
+     * Specification
+     * - Returns organization collection by development mode.
+     *
+     * @api
+     *
+     * @param string $developmentMode
+     *
+     * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
+     */
+    public function getOrganizationsByMode(string $developmentMode): OrganizationCollectionTransfer;
 }

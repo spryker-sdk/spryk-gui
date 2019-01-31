@@ -13,6 +13,8 @@ env:
     global:
         - APPLICATION_ENV=development
         - APPLICATION_STORE=DE
+before_install:
+    - phpenv config-add ci/travis.php.ini
 
 install:
     - composer install --no-interaction --prefer-dist

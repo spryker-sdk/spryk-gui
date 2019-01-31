@@ -12,6 +12,29 @@ use Generated\Shared\Transfer\OrganizationTransfer;
 
 class OrganizationFinder implements OrganizationFinderInterface
 {
+    protected const NAME_DEVELOPMENT_LAYER_CORE = 'core';
+    protected const NAME_DEVELOPMENT_LAYER_PROJECT = 'project';
+
+    /**
+     * @var array
+     */
+    protected $coreOrganizationList;
+
+    /**
+     * @var array
+     */
+    protected $projectOrganizationList;
+
+    /**
+     * @param array $coreOrganizationList
+     * @param array $projectOrganizationList
+     */
+    public function __construct(array $coreOrganizationList, array $projectOrganizationList)
+    {
+        $this->coreOrganizationList = $coreOrganizationList;
+        $this->projectOrganizationList = $projectOrganizationList;
+    }
+
     /**
      * @var array
      */
@@ -32,6 +55,29 @@ class OrganizationFinder implements OrganizationFinderInterface
             $organizationTransfer = new OrganizationTransfer();
             $organizationTransfer->setName($organizationName)
                 ->setRootPath(APPLICATION_ROOT_DIR . '/vendor/' . $subDirectory);
+
+            $organizationCollectionTransfer->addOrganization($organizationTransfer);
+        }
+
+        return $organizationCollectionTransfer;
+    }
+
+    /**
+     * @param string $mode
+     *
+     * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
+     */
+    public function findOrganizationsByMode(string $mode): OrganizationCollectionTransfer
+    {
+        $organizationNamespaces = $mode === static::NAME_DEVELOPMENT_LAYER_PROJECT
+            ? $this->projectOrganizationList
+            : $this->coreOrganizationList;
+
+        $organizationCollectionTransfer = new OrganizationCollectionTransfer();
+
+        foreach ($organizationNamespaces as $organizationName) {
+            $organizationTransfer = new OrganizationTransfer();
+            $organizationTransfer->setName($organizationName);
 
             $organizationCollectionTransfer->addOrganization($organizationTransfer);
         }

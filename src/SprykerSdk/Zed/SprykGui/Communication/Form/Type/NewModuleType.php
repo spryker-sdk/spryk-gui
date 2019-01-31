@@ -48,9 +48,13 @@ class NewModuleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $organizationCollection = isset($options['sprykDefinition']['mode'])
+            ? $this->getFacade()->getOrganizationsByMode($options['sprykDefinition']['mode'])->getOrganizations()
+            : $this->getFacade()->getOrganizations()->getOrganizations();
+
         $builder->add('name', TextType::class);
         $builder->add('organization', ChoiceType::class, [
-            'choices' => $this->getFacade()->getOrganizations()->getOrganizations(),
+            'choices' => $organizationCollection,
             'choice_label' => function (OrganizationTransfer $organizationTransfer) {
                 return $organizationTransfer->getName();
             },

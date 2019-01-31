@@ -8,10 +8,12 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 
 use Generated\Shared\Transfer\ModuleTransfer;
-use SprykerSdk\Spryk\SprykFacade;
+use Generated\Shared\Transfer\OrganizationTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerSdk\Spryk\SprykFacade;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ArgumentCollectionType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\OutputChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -44,6 +46,7 @@ class SprykDetailsForm extends AbstractType
             'classNameChoices' => [],
             'outputChoices' => [],
             'argumentChoices' => [],
+            'organizationChoices' => [],
         ]);
     }
 
@@ -55,10 +58,12 @@ class SprykDetailsForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $sprykDefinition = $this->getSprykDefinition($options[static::SPRYK]);
+        $mode = $builder->getData()['mode'] ?? null;
+        $sprykDefinition = $this->getFacade()->getSprykDefinition($options[static::SPRYK], $mode);
 
         $filteredArguments = $this->getRelevantArguments($sprykDefinition['arguments']);
 
+        $this->addOrganizationChoice($builder, $sprykDefinition);
         $this->addArgumentsToForm($builder, $filteredArguments, $options);
     }
 
@@ -250,5 +255,27 @@ class SprykDetailsForm extends AbstractType
         ]);
 
         return $this;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param array $sprykDefinition
+     *
+     * @return void
+     */
+    protected function addOrganizationChoice(FormBuilderInterface $builder, array $sprykDefinition): void
+    {
+        $organizationCollection = isset($sprykDefinition['mode'])
+            ? $this->getFacade()->getOrganizationsByMode($sprykDefinition['mode'])->getOrganizations()
+            : $this->getFacade()->getOrganizations()->getOrganizations();
+
+        $builder->add('organization', ChoiceType::class, [
+            'choices' => $organizationCollection,
+            'choice_label' => function (OrganizationTransfer $organizationTransfer) {
+                return $organizationTransfer->getName();
+            },
+            'choice_value' => 'name',
+            'placeholder' => '',
+        ]);
     }
 }

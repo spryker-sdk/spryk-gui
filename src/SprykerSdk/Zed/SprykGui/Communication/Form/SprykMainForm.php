@@ -8,6 +8,7 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 
 use Generated\Shared\Transfer\ModuleTransfer;
+use Generated\Shared\Transfer\SprykDefinitionTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleChoiceType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\NewModuleType;
@@ -55,7 +56,9 @@ class SprykMainForm extends AbstractType
         $typeToAddListenerTo = static::MODULE;
 
         $spryk = $options[static::SPRYK];
-        $sprykDefinition = $this->getFacade()->getSprykDefinitionByName($spryk);
+
+        $mode = $builder->getData()['mode'] ?? null;
+        $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
         if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::TYPE])) {
             $builder->add(static::MODULE, NewModuleType::class, ['sprykDefinition' => $sprykDefinition]);
@@ -84,7 +87,7 @@ class SprykMainForm extends AbstractType
 
         $this->addNextButton($builder);
 
-        $builder->get($typeToAddListenerTo)->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($options, $builder) {
+        $builder->get($typeToAddListenerTo)->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($options, $builder, $sprykDefinition) {
             $form = $event->getForm()->getParent();
             $moduleTransfer = $this->getModuleTransferFromForm($form);
 
@@ -98,13 +101,17 @@ class SprykMainForm extends AbstractType
                     $moduleTransfer->setDependentModule($dependentModuleTransfer);
                 }
 
+                $sprykDefinitionTransfer = new SprykDefinitionTransfer();
+                $sprykDefinitionTransfer->setName($options[static::SPRYK])
+                    ->setMode($sprykDefinition['mode']);
+
                 $sprykDataProvider = $this->getFactory()->createSprykFormDataProvider();
                 $sprykDetailsForm = $builder->getFormFactory()
                     ->createNamedBuilder(
                         'sprykDetails',
                         SprykDetailsForm::class,
-                        $sprykDataProvider->getData($options[static::SPRYK], $moduleTransfer),
-                        $sprykDataProvider->getOptions($options[static::SPRYK], $moduleTransfer)
+                        $sprykDataProvider->getData($sprykDefinitionTransfer, $moduleTransfer),
+                        $sprykDataProvider->getOptions($sprykDefinitionTransfer, $moduleTransfer)
                     )->getForm();
 
                 $form->add($sprykDetailsForm);

@@ -94,4 +94,10 @@
         <property name="argumentCollection" type="ArgumentCollection" />
     </transfer>
 
+    <transfer name="SprykDefinition">
+        <property name="name" type="string" />
+        <property name="mode" type="string" />
+        <property name="organization" type="string" />
+    </transfer>
+
 </transfers>

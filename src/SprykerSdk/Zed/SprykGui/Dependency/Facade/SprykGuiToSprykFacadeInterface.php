@@ -13,4 +13,12 @@ interface SprykGuiToSprykFacadeInterface
      * @return array
      */
     public function getSprykDefinitions(): array;
+
+    /**
+     * @param string $sprykName
+     * @param string|null $sprykMode
+     *
+     * @return array
+     */
+    public function getSprykDefinition(string $sprykName, ?string $sprykMode = null): array;
 }

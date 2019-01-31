@@ -29,4 +29,15 @@ class SprykGuiToSprykFacadeBridge implements SprykGuiToSprykFacadeInterface
     {
         return $this->sprykFacade->getSprykDefinitions();
     }
+
+    /**
+     * @param string $sprykName
+     * @param string|null $sprykMode
+     *
+     * @return array
+     */
+    public function getSprykDefinition(string $sprykName, ?string $sprykMode = null): array
+    {
+        return $this->sprykFacade->getSprykDefinition($sprykName, $sprykMode);
+    }
 }

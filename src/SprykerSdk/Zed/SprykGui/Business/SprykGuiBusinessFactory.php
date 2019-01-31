@@ -105,7 +105,10 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
      */
     public function createOrganizationFinder(): OrganizationFinderInterface
     {
-        return new OrganizationFinder();
+        return new OrganizationFinder(
+            $this->getConfig()->getCoreNamespaces(),
+            $this->getConfig()->getProjectNamespaces()
+        );
     }
 
     /**
