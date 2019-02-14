@@ -15,15 +15,9 @@
   },
   "require-dev": {
     "spryker/application": "*",
-    "spryker/code-sniffer": "*",
     "spryker/propel": "*",
     "spryker/testify": "*",
     "spryker/zed-navigation": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "SprykerSdk\\": "src/SprykerSdk/"
-    }
   },
   "autoload-dev": {
     "psr-4": {
