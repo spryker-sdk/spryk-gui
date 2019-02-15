@@ -14,6 +14,7 @@
     "spryker/zend": "^2.0.0"
   },
   "require-dev": {
+    "jakoch/phantomjs-installer": "^2.1.0",
     "site5/phantoman": "^2.0.0",
     "spryker/application": "*",
     "spryker/code-sniffer": "*",
@@ -40,7 +41,13 @@
   },
   "scripts": {
     "cs-check": "vendor/bin/phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'",
-    "phpstan": "vendor/bin/phpstan analyse -l 7 -c phpstan.neon src/"
+    "phpstan": "vendor/bin/phpstan analyse -l 7 -c phpstan.neon src/",
+    "post-install-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
   },
   "config": {
     "sort-packages": true
