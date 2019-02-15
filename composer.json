@@ -14,11 +14,12 @@
     "spryker/zend": "^2.0.0"
   },
   "require-dev": {
+    "site5/phantoman": "^2.0.0",
     "spryker/application": "*",
     "spryker/code-sniffer": "*",
     "spryker/propel": "*",
     "spryker/testify": "*",
-    "spryker/zed-navigation": "*"
+    "spryker/zed-navigation": "*",
   },
   "autoload": {
     "psr-4": {
@@ -38,8 +39,8 @@
     }
   },
   "scripts": {
-    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'",
-    "phpstan": "phpstan analyse -l 7 -c phpstan.neon src/"
+    "cs-check": "vendor/bin/phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'",
+    "phpstan": "vendor/bin/phpstan analyse -l 7 -c phpstan.neon src/"
   },
   "config": {
     "sort-packages": true

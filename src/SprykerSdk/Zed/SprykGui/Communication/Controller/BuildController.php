@@ -8,7 +8,6 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
-use Generated\Shared\Transfer\SprykRequestTransfer;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
