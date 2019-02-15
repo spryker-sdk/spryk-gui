@@ -8,6 +8,8 @@ php:
 
 env:
     global:
+        - APPLICATION_ENV=development
+        - APPLICATION_STORE=DE
         - DEFAULT=1 CI=1
 
 matrix:
@@ -25,11 +27,6 @@ cache:
         - vendor
         - $HOME/.composer/cache
 
-env:
-    global:
-        - APPLICATION_ENV=development
-        - APPLICATION_STORE=DE
-        -
 before_script:
     - phpenv config-add ci/travis.php.ini
     - if [[ $PREFER_LOWEST != 1 ]]; then composer update --no-interaction; fi;

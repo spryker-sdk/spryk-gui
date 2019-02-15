@@ -37,6 +37,10 @@
       "dev-master": "1.0.x-dev"
     }
   },
+  "scripts": {
+    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'",
+    "phpstan": "phpstan analyse -l 7 -c phpstan.neon src/"
+  },
   "config": {
     "sort-packages": true
   }
