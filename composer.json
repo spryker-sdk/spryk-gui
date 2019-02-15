@@ -19,7 +19,7 @@
     "spryker/code-sniffer": "*",
     "spryker/propel": "*",
     "spryker/testify": "*",
-    "spryker/zed-navigation": "*",
+    "spryker/zed-navigation": "*"
   },
   "autoload": {
     "psr-4": {
