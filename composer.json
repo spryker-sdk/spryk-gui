@@ -32,6 +32,9 @@
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "scripts": {
+    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'"
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
