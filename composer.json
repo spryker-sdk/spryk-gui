@@ -7,7 +7,7 @@
     "php": ">=7.1",
     "spryker-sdk/spryk": "dev-master",
     "spryker/config": "^3.1.3",
-    "spryker/development": "dev-beta/mp-66/master-internal-tools",
+    "spryker/development": "^3.12.0",
     "spryker/graph": "^3.0.0",
     "spryker/kernel": "^3.0.0",
     "spryker/symfony": "^3.0.0",
