@@ -14,9 +14,6 @@
     "spryker/zend": "^2.0.0"
   },
   "require-dev": {
-    "phpstan/phpstan": "^0.11.2",
-    "phpstan/phpstan-phpunit": "^0.11.0",
-    "phpstan/phpstan-strict-rules": "^0.11.0",
     "spryker/application": "*",
     "spryker/code-sniffer": "*",
     "spryker/propel": "*",
@@ -42,7 +39,6 @@
   },
   "scripts": {
     "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'",
-    "phpstan": "phpstan analyse -l 7 -c phpstan.neon src/"
   },
   "config": {
     "sort-packages": true

@@ -4,14 +4,6 @@ php:
     - 7.1
     - 7.3
 
-matrix:
-    fast_finish: true
-
-    allow_failures:
-        -   php: "7.3"
-            env:
-                - STANDALONE=1
-
 cache:
     directories:
         - vendor
@@ -21,7 +13,6 @@ env:
     global:
         - APPLICATION_ENV=development
         - APPLICATION_STORE=DE
-        - STANDALONE=0
 
 before_install:
     - phpenv config-add ci/travis.php.ini
@@ -30,9 +21,7 @@ install:
     - composer install --no-interaction --prefer-dist
 
 script:
-    - if [[ $STANDALONE == 0 ]] ; then composer cs-check ; fi
-    - if [[ $STANDALONE == 0 ]] ; then composer phpstan ; fi
-    - if [[ $STANDALONE == 1 ]] ; then vendor/bin/codecept run --env isolated --coverage-xml ; fi
+    - composer cs-check
 
 after_success:
     - vendor/bin/coveralls -vvv
