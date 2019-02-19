@@ -4,6 +4,16 @@ php:
     - 7.1
     - 7.3
 
+matrix:
+    fast_finish: true
+
+    allow_failures: []
+
+    include:
+        - php: "7.3"
+          env:
+              - STANDALONE=1
+
 cache:
     directories:
         - vendor
@@ -13,19 +23,18 @@ env:
     global:
         - APPLICATION_ENV=development
         - APPLICATION_STORE=DE
+        - STANDALONE=0
 
 before_install:
     - phpenv config-add ci/travis.php.ini
 
 install:
     - composer install --no-interaction --prefer-dist
-    - mkdir ./config/Shared
-    - cp ci/stores.php ./config/Shared/stores.php
 
 script:
     - vendor/bin/phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'
     - vendor/bin/phpstan analyse -l 7 -c phpstan.neon src/
-    - vendor/bin/codecept run --env isolated --coverage-xml
+    - if [[ $STANDALONE == 1 ]] ; then vendor/bin/codecept run --env isolated --coverage-xml ; fi
 
 after_success:
     - vendor/bin/coveralls -vvv
