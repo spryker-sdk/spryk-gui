@@ -38,7 +38,7 @@
     }
   },
   "scripts": {
-    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'",
+    "cs-check": "phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'"
   },
   "config": {
     "sort-packages": true
