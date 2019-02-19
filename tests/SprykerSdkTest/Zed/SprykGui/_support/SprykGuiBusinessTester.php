@@ -66,6 +66,8 @@ vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --module=\'FooBar\' --c
 "module"
 // FooBar
 
+"organization"
+
 "comment"
 // Specification:
 // - Line one.

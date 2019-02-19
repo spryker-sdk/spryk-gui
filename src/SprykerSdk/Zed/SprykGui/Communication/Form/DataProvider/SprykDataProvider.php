@@ -11,8 +11,6 @@ use Generated\Shared\Transfer\ApplicationTransfer;
 use Generated\Shared\Transfer\LayerTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
-use Generated\Shared\Transfer\SprykRequestTransfer;
-use SprykerSdk\Zed\SprykGui\Business\Spryk\Spryk;
 use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
 
 class SprykDataProvider
