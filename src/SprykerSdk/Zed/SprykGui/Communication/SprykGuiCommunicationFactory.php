@@ -9,7 +9,6 @@ namespace SprykerSdk\Zed\SprykGui\Communication;
 
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
-use Generated\Shared\Transfer\SprykRequestTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider\SprykDataProvider;
 use SprykerSdk\Zed\SprykGui\Communication\Form\SprykDetailsForm;
