@@ -19,7 +19,8 @@ before_install:
 
 install:
     - composer install --no-interaction --prefer-dist
-    - cp ci/stores.php /config/Shared/stores.php
+    - mkdir config/Shared
+    - cp ci/stores.php config/Shared/stores.php
 
 script:
     - vendor/bin/phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'
