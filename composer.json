@@ -14,6 +14,8 @@
     "spryker/zend": "^2.0.0"
   },
   "require-dev": {
+    "jakoch/phantomjs-installer": "*",
+    "site5/phantoman": "*",
     "spryker/application": "*",
     "spryker/code-sniffer": "*",
     "spryker/propel": "*",
@@ -36,6 +38,14 @@
     "branch-alias": {
       "dev-master": "1.0.x-dev"
     }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
   },
   "config": {
     "sort-packages": true
