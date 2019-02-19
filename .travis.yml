@@ -33,8 +33,8 @@ install:
     - composer install --no-interaction --prefer-dist
 
 script:
-    - vendor/bin/phpcs --standard=vendor/spryker/code-sniffer/Spryker/ruleset.xml -v src/ tests/ --ignore='/Fixtures/'
-    - vendor/bin/phpstan analyse -l 7 -c phpstan.neon src/
+    - if [[ $STANDALONE == 0 ]] ; then composer cs-check ; fi
+    - if [[ $STANDALONE == 0 ]] ; then composer phpstan ; fi
     - if [[ $STANDALONE == 1 ]] ; then vendor/bin/codecept run --env isolated --coverage-xml ; fi
 
 after_success:
