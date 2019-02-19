@@ -28,6 +28,15 @@ class SprykGuiFacadeTest extends Unit
      */
     protected $tester;
 
+    protected function setUp()
+    {
+        if (!defined('APPLICATION_ROOT_DIR')) {
+            define('APPLICATION_ROOT_DIR', dirname(__FILE__));
+        }
+
+        return parent::setUp();
+    }
+
     /**
      * @return void
      */
