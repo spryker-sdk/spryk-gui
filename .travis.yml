@@ -16,6 +16,7 @@ env:
 
 before_install:
     - phpenv config-add ci/travis.php.ini
+    - composer global require hirak/prestissimo
 
 install:
     - composer install --no-interaction --prefer-dist
