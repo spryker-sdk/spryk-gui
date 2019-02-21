@@ -11,6 +11,8 @@ GUI for [Spryk](https://github.com/spryker-sdk/spryk/) tool. The Spryk tool can 
 composer require --dev spryker-sdk/spryk-gui
 ```
 
+This is a development only "require-dev" module. Please make sure you include it as such.
+
 ## Documentation
 
 [Module Documentation](https://academy.spryker.com/developing_with_spryker/module_guide/modules.html)
