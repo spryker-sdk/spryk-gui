@@ -8,7 +8,7 @@
     "spryker-sdk/spryk": "dev-improvment/te-2031-service-spryks as 0.2.1",
     "spryker/development": "^3.12.0",
     "spryker/graph": "^3.0.0",
-    "spryker/kernel": "^3.0.0",
+    "spryker/kernel": "^3.30.0",
     "spryker/symfony": "^3.0.0",
     "spryker/zend": "^2.0.0"
   },
