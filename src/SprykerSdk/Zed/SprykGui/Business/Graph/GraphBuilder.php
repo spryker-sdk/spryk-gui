@@ -67,6 +67,9 @@ class GraphBuilder implements GraphBuilderInterface
                 continue;
             }
             foreach ($sprykDefinition[$subSprykType] as $subSprykName) {
+                if (is_array($subSprykName)) {
+                    $subSprykName = current(array_keys($subSprykName));
+                }
                 $this->graphPlugin->addNode($subSprykName);
                 $this->graphPlugin->addEdge($sprykName, $subSprykName, ['color' => $color]);
 
