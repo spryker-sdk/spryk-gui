@@ -7,7 +7,6 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business\Finder\AccessibleTransfer;
 
-use Generated\Shared\Transfer\AccessibleTransferCollection;
 use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
 
 interface AccessibleTransferFinderInterface

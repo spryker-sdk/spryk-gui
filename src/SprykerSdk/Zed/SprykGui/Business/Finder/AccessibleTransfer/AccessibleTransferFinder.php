@@ -7,7 +7,6 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business\Finder\AccessibleTransfer;
 
-use Generated\Shared\Transfer\AccessibleTransferCollection;
 use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
