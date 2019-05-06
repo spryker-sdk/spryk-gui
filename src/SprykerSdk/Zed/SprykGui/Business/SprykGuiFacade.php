@@ -7,7 +7,7 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business;
 
-use Generated\Shared\Transfer\AccessibleTransferCollection;
+use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\ModuleFilterTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
@@ -110,9 +110,9 @@ class SprykGuiFacade extends AbstractFacade implements SprykGuiFacadeInterface
      *
      * @param string $module
      *
-     * @return \Generated\Shared\Transfer\AccessibleTransferCollection
+     * @return \Generated\Shared\Transfer\AccessibleTransferCollectionTransfer
      */
-    public function getAccessibleTransfers(string $module): AccessibleTransferCollection
+    public function getAccessibleTransfers(string $module): AccessibleTransferCollectionTransfer
     {
         return $this->getFactory()->createAccessibleTransferFinder()->findAccessibleTransfers($module);
     }
