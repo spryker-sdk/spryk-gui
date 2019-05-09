@@ -7,7 +7,7 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business\Finder\AccessibleTransfer;
 
-use Generated\Shared\Transfer\AccessibleTransferCollection;
+use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -16,11 +16,11 @@ class AccessibleTransferFinder implements AccessibleTransferFinderInterface
     /**
      * @param string $module
      *
-     * @return \Generated\Shared\Transfer\AccessibleTransferCollection
+     * @return \Generated\Shared\Transfer\AccessibleTransferCollectionTransfer
      */
-    public function findAccessibleTransfers(string $module): AccessibleTransferCollection
+    public function findAccessibleTransfers(string $module): AccessibleTransferCollectionTransfer
     {
-        $transferClassNameCollection = new AccessibleTransferCollection();
+        $transferClassNameCollection = new AccessibleTransferCollectionTransfer();
 
         $finder = new Finder();
 
