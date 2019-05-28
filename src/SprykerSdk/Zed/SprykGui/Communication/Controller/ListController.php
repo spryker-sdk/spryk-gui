@@ -10,7 +10,6 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 /**
  * @method \SprykerSdk\Zed\SprykGui\Communication\SprykGuiCommunicationFactory getFactory()
  * @method \SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface getFacade()
- * @method \SprykerSdk\Zed\SprykGui\Persistence\SprykGuiQueryContainerInterface getQueryContainer()
  */
 class ListController extends AbstractController
 {

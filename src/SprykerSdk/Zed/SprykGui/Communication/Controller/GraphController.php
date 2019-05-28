@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 /**
  * @method \SprykerSdk\Zed\SprykGui\Communication\SprykGuiCommunicationFactory getFactory()
  * @method \SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface getFacade()
- * @method \SprykerSdk\Zed\SprykGui\Persistence\SprykGuiQueryContainerInterface getQueryContainer()
  */
 class GraphController extends AbstractController
 {
