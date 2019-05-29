@@ -28,12 +28,4 @@ class SprykGuiConfig extends AbstractBundleConfig
     {
         return Config::get(KernelConstants::PROJECT_NAMESPACES, []);
     }
-
-    /**
-     * @return bool
-     */
-    public function isSprykGuiEnabled(): bool
-    {
-        return APPLICATION_ENV === 'production';
-    }
 }

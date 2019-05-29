@@ -8,6 +8,7 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController as SprykerAbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @method \SprykerSdk\Zed\SprykGui\Communication\SprykGuiCommunicationFactory getFactory()
@@ -16,12 +17,23 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController as SprykerAbs
 class AbstractController extends SprykerAbstractController
 {
     /**
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
      * @return void
      */
     public function initialize(): void
     {
         parent::initialize();
 
-        $this->getFactory()->createRequestValidator()->assertNonProductionEnvironment();
+        $isProductionEnvironment = APPLICATION_ENV === 'production';
+        $isCli = PHP_SAPI === 'cli';
+
+        if (!$isProductionEnvironment || $isCli) {
+            return;
+        }
+
+        throw new NotFoundHttpException(
+            'Spryk available only on Development environment. Include this module as require-dev dependency in your composer file for security reasons.'
+        );
     }
 }

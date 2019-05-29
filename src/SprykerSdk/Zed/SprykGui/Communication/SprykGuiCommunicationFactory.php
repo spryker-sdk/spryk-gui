@@ -13,8 +13,6 @@ use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider\SprykDataProvider;
 use SprykerSdk\Zed\SprykGui\Communication\Form\SprykDetailsForm;
 use SprykerSdk\Zed\SprykGui\Communication\Form\SprykMainForm;
-use SprykerSdk\Zed\SprykGui\Communication\Validator\RequestValidator;
-use SprykerSdk\Zed\SprykGui\Communication\Validator\RequestValidatorInterface;
 use SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeInterface;
 use SprykerSdk\Zed\SprykGui\SprykGuiDependencyProvider;
 use Symfony\Component\Form\FormInterface;
@@ -32,16 +30,6 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
     {
         return new SprykDataProvider(
             $this->getFacade()
-        );
-    }
-
-    /**
-     * @return \SprykerSdk\Zed\SprykGui\Communication\Validator\RequestValidatorInterface
-     */
-    public function createRequestValidator(): RequestValidatorInterface
-    {
-        return new RequestValidator(
-            $this->getConfig()
         );
     }
 
