@@ -10,7 +10,6 @@ namespace SprykerSdk\Zed\SprykGui;
 use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
-use SprykerSdk\Shared\SprykGui\SprykGuiConstants;
 
 class SprykGuiConfig extends AbstractBundleConfig
 {
