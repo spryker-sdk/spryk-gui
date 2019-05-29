@@ -35,6 +35,6 @@ class SprykGuiConfig extends AbstractBundleConfig
      */
     public function isSprykGuiEnabled(): bool
     {
-        return $this->get(SprykGuiConstants::ENABLE_GUI, APPLICATION_ENV === 'production');
+        return APPLICATION_ENV === 'production';
     }
 }

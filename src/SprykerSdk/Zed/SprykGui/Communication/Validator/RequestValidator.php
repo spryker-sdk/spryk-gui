@@ -32,7 +32,7 @@ class RequestValidator implements RequestValidatorInterface
      */
     public function assertNonProductionEnvironment(): void
     {
-        $isProductionEnvironment = Environment::isProduction();
+        $isProductionEnvironment = $this->spryGuiConfig->isSprykGuiEnabled();
         $isCli = PHP_SAPI === 'cli';
 
         if (!$isProductionEnvironment || $isCli) {
