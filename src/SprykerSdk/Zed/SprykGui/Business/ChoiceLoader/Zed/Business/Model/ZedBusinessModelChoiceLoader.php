@@ -62,6 +62,7 @@ class ZedBusinessModelChoiceLoader implements ChoiceLoaderInterface
             $moduleTransfer->getOrganization()->getName(),
             $moduleTransfer->getName()
         );
+
         return $moduleBusinessDirectory;
     }
 }
