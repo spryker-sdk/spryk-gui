@@ -7,7 +7,6 @@
 
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
-use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController as SprykerAbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -18,6 +17,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class AbstractController extends SprykerAbstractController
 {
     /**
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     *
      * @return void
      */
     public function initialize(): void
