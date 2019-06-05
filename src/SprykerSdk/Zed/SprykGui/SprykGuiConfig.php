@@ -7,7 +7,6 @@
 
 namespace SprykerSdk\Zed\SprykGui;
 
-use Spryker\Shared\Config\Config;
 use Spryker\Shared\Kernel\KernelConstants;
 use Spryker\Zed\Kernel\AbstractBundleConfig;
 
@@ -18,7 +17,7 @@ class SprykGuiConfig extends AbstractBundleConfig
      */
     public function getCoreNamespaces(): array
     {
-        return Config::get(KernelConstants::CORE_NAMESPACES, []);
+        return $this->get(KernelConstants::CORE_NAMESPACES, []);
     }
 
     /**
@@ -26,6 +25,14 @@ class SprykGuiConfig extends AbstractBundleConfig
      */
     public function getProjectNamespaces(): array
     {
-        return Config::get(KernelConstants::PROJECT_NAMESPACES, []);
+        return $this->get(KernelConstants::PROJECT_NAMESPACES, []);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSprykWebInterfaceEnabled(): bool
+    {
+        return $this->getEnvironmentName() !== 'production';
     }
 }
