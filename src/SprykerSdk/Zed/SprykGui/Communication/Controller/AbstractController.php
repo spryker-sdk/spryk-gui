@@ -17,8 +17,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class AbstractController extends SprykerAbstractController
 {
     /**
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     *
      * @return void
      */
     public function initialize(): void
