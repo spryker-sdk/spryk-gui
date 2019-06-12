@@ -29,10 +29,12 @@ class SprykGuiConfig extends AbstractBundleConfig
     }
 
     /**
+     * @deprecated Method will be removed without replacement.
+     *
      * @return bool
      */
     public function isSprykWebInterfaceEnabled(): bool
     {
-        return $this->getEnvironmentName() !== 'production';
+        return APPLICATION_ENV !== 'production';
     }
 }
