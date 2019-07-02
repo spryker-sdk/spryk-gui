@@ -7,7 +7,6 @@
 
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
-use Spryker\Shared\Config\Environment;
 use Spryker\Zed\Kernel\Communication\Controller\AbstractController as SprykerAbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -34,10 +33,9 @@ class AbstractController extends SprykerAbstractController
      */
     protected function assertNonProductionEnvironment(): void
     {
-        $isProductionEnvironment = Environment::isProduction();
         $isCli = PHP_SAPI === 'cli';
 
-        if (!$isProductionEnvironment || $isCli) {
+        if ($isCli || $this->getFactory()->getConfig()->isSprykWebInterfaceEnabled()) {
             return;
         }
 
