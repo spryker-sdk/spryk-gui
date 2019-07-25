@@ -5,7 +5,7 @@
   "license": "proprietary",
   "require": {
     "php": ">=7.1",
-    "spryker-sdk/spryk": "dev-improvment/te-2031-service-spryks as 0.2.1",
+    "spryker-sdk/spryk": "^0.2.2",
     "spryker/development": "^3.12.0",
     "spryker/graph": "^3.0.0",
     "spryker/kernel": "^3.30.0",
