@@ -142,7 +142,7 @@ class Spryk implements SprykInterface
     {
         $humanizedSprykName = $this->createHumanizeFilter()->filter($sprykName);
         $humanizedSprykNameFragments = explode(' ', $humanizedSprykName);
-        $applications = ['Client', 'Shared', 'Yves', 'Zed'];
+        $applications = ['Client', 'Shared', 'Yves', 'Zed', 'Service'];
 
         if (in_array($humanizedSprykNameFragments[1], $applications)) {
             return $humanizedSprykNameFragments[1];
