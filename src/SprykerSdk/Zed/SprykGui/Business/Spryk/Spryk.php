@@ -87,7 +87,7 @@ class Spryk implements SprykInterface
     {
         $normalizedFormData = (new FormDataNormalizer())->normalizeFormData($formData);
         $commandLine = $this->getCommandLine($sprykName, $normalizedFormData);
-        $process = new Process($commandLine, APPLICATION_ROOT_DIR);
+        $process = $this->getProcess($commandLine);
         $process->run();
 
         if ($process->isSuccessful()) {
@@ -95,6 +95,20 @@ class Spryk implements SprykInterface
         }
 
         return $process->getErrorOutput();
+    }
+
+    /**
+     * @param string $commandLine
+     *
+     * @return \Symfony\Component\Process\Process
+     */
+    protected function getProcess(string $commandLine): Process
+    {
+        if (method_exists(Process::class, 'fromShellCommandline')) {
+            return Process::fromShellCommandline($commandLine, APPLICATION_ROOT_DIR);
+        }
+
+        return new Process($commandLine, APPLICATION_ROOT_DIR);
     }
 
     /**
