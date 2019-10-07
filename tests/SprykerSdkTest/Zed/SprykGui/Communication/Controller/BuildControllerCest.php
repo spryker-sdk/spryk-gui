@@ -11,6 +11,7 @@ use SprykerSdkTest\Zed\SprykGui\SprykGuiCommunicationTester;
 
 /**
  * Auto-generated group annotations
+ *
  * @group SprykerSdkTest
  * @group Zed
  * @group SprykGui

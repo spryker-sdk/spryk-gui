@@ -12,6 +12,7 @@ use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)

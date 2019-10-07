@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\OrganizationTransfer;
 
 /**
  * Auto-generated group annotations
+ *
  * @group SprykerSdkTest
  * @group Zed
  * @group SprykGui
