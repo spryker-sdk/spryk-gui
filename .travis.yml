@@ -3,6 +3,7 @@ language: php
 php:
     - 7.1
     - 7.3
+    - 7.4snapshot
 
 cache:
     directories:
@@ -15,7 +16,7 @@ env:
 
 before_install:
     - phpenv config-add ci/travis.php.ini
-    - phpenv config-rm xdebug.ini
+    - if [[ ${TRAVIS_PHP_VERSION} != "7.4snapshot" ]]; then phpenv config-rm xdebug.ini ; fi
     - composer global require hirak/prestissimo
 
 install:
