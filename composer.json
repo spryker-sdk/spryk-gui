@@ -4,7 +4,7 @@
   "description": "SprykGui module",
   "license": "proprietary",
   "require": {
-    "php": ">=7.1",
+    "php": ">=7.2",
     "spryker-sdk/spryk": "^0.2.2",
     "spryker/development": "^3.12.0",
     "spryker/graph": "^3.0.0",
