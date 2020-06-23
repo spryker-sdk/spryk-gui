@@ -13,6 +13,8 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 class SprykGuiConfig extends AbstractBundleConfig
 {
     /**
+     * @api
+     *
      * @return array
      */
     public function getCoreNamespaces(): array
@@ -21,6 +23,8 @@ class SprykGuiConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @return array
      */
     public function getProjectNamespaces(): array
@@ -29,6 +33,8 @@ class SprykGuiConfig extends AbstractBundleConfig
     }
 
     /**
+     * @api
+     *
      * @deprecated Method will be removed without replacement.
      *
      * @return bool
