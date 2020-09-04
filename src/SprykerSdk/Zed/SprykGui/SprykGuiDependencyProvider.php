@@ -56,11 +56,11 @@ class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addSprykFacade(Container $container): Container
     {
-        $container[static::SPRYK_FACADE] = function () {
+        $container->set(static::SPRYK_FACADE, function () {
             return new SprykGuiToSprykFacadeBridge(
                 new SprykFacade()
             );
-        };
+        });
 
         return $container;
     }
@@ -72,11 +72,11 @@ class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addDevelopmentFacade(Container $container): Container
     {
-        $container[static::DEVELOPMENT_FACADE] = function () use ($container) {
+        $container->set(static::DEVELOPMENT_FACADE, function () use ($container) {
             return new SprykGuiToDevelopmentFacadeBridge(
                 $container->getLocator()->development()->facade()
             );
-        };
+        });
 
         return $container;
     }
@@ -88,9 +88,9 @@ class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
      */
     protected function addGraphPlugin(Container $container): Container
     {
-        $container[static::PLUGIN_GRAPH] = function () {
+        $container->set(static::PLUGIN_GRAPH, function () {
             return new GraphPlugin();
-        };
+        });
 
         return $container;
     }
