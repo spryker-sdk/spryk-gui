@@ -31,7 +31,7 @@ class ListControllerCest
     {
         $i->amOnPage('/spryk-gui/list');
         $i->seeResponseCodeIs(200);
-        $i->seeBreadcrumbNavigation('Dashboard / SprykGui');
+        $i->seeBreadcrumbNavigation('Maintenance / SprykGui');
         $i->see('Spryk', 'h2');
     }
 }
