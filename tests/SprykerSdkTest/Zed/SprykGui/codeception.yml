@@ -58,7 +58,7 @@ suites:
                       twigPlugins:
                           - \Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin
                           - \Spryker\Zed\ZedNavigation\Communication\Plugin\Twig\ZedNavigationTwigPlugin
-                - \SprykerTest\Zed\Gui\Helper\TwigPluginHelper
+                - \SprykerTest\Zed\Gui\Helper\GuiTwigPluginHelper
                 - \SprykerTest\Zed\Router\Helper\RouterHelper:
                       routerPlugins:
                           - \Spryker\Zed\Router\Communication\Plugin\Router\ZedDevelopmentRouterPlugin
