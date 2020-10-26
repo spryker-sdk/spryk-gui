@@ -8,12 +8,12 @@
 namespace SprykerSdk\Zed\SprykGui\Business\Spryk;
 
 use Generated\Shared\Transfer\ArgumentTransfer;
+use Laminas\Filter\FilterChain;
+use Laminas\Filter\Word\CamelCaseToSeparator;
 use SprykerSdk\Zed\SprykGui\Business\Graph\GraphBuilderInterface;
 use SprykerSdk\Zed\SprykGui\Business\Spryk\Form\FormDataNormalizer;
 use SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeInterface;
 use Symfony\Component\Process\Process;
-use Zend\Filter\FilterChain;
-use Zend\Filter\Word\CamelCaseToSeparator;
 
 class Spryk implements SprykInterface
 {
@@ -166,7 +166,7 @@ class Spryk implements SprykInterface
     }
 
     /**
-     * @return \Zend\Filter\FilterChain
+     * @return \Laminas\Filter\FilterChain
      */
     protected function createHumanizeFilter(): FilterChain
     {
