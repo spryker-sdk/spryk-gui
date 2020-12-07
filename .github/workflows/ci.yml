@@ -1,10 +1,11 @@
 name: CI
 
 on:
-  push:
   pull_request:
   schedule:
   - cron: "0 0 * * *"
+    branches:
+      - 'master'
 
 env:
   APPLICATION_ENV: 'development'
@@ -16,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['7.4', '8.0']
+        php-version: ['7.4', '7.3']
     steps:
       - name: Checkout
         uses: actions/checkout@v1
@@ -53,9 +54,6 @@ jobs:
       - name: CodeStyle checks
         run: composer cs-check
 
-      - name: Codecept run
-        run: composer test
-
   prefer-lowest:
     runs-on: ubuntu-18.04
     strategy:
@@ -91,8 +89,8 @@ jobs:
 
       - name: Composer prefer-lowest
         run: |
-            composer require --dev dereuromark/composer-prefer-lowest
-            composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction
+          composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction
+          composer require --dev dereuromark/composer-prefer-lowest
 
       - name: Check PHP for syntax errors
         run: find ./src -path src -prune -o -type f -name '*.php' -print0 | xargs -0 -n1 -P4 php -l -n | (! grep -v "No syntax errors detected" )
