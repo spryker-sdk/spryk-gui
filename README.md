@@ -1,5 +1,5 @@
 # SprykGui Module
-[![Build Status](https://api.travis-ci.org/spryker-sdk/spryk-gui.svg?branch=master)](https://travis-ci.org/spryker-sdk/spryk-gui)
+[![Build Status](https://github.com/spryker-sdk/spryk-gui/workflows/CI/badge.svg?branch=master)](https://github.com/spryker-sdk/spryk-gui/actions?query=workflow%3ACI+branch%3Amaster)
 [![Minimum PHP Version](http://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg)](https://php.net/)
 [![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
 
