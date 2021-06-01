@@ -7,7 +7,7 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business;
 
-use Generated\Shared\Transfer\AccessibleTransferCollection;
+use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\ModuleFilterTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
@@ -64,7 +64,7 @@ interface SprykGuiFacadeInterface
     public function runSpryk(string $sprykName, array $sprykArguments): string;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with TransferObjects.
      * - Each TransferObject contains information about a found module.
      *
@@ -77,7 +77,7 @@ interface SprykGuiFacadeInterface
     public function getModules(?ModuleFilterTransfer $moduleFilterTransfer = null): array;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with TransferObjects.
      * - Each TransferObject contains information about a organization.
      *
@@ -88,19 +88,19 @@ interface SprykGuiFacadeInterface
     public function getOrganizations(): OrganizationCollectionTransfer;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with all TransferObjects which are accessible by a given module.
      *
      * @api
      *
      * @param string $module
      *
-     * @return \Generated\Shared\Transfer\AccessibleTransferCollection
+     * @return \Generated\Shared\Transfer\AccessibleTransferCollectionTransfer
      */
-    public function getAccessibleTransfers(string $module): AccessibleTransferCollection;
+    public function getAccessibleTransfers(string $module): AccessibleTransferCollectionTransfer;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with all methods and their return type.
      *
      * @api
@@ -167,7 +167,7 @@ interface SprykGuiFacadeInterface
     public function getSprykDefinition(string $sprykName, ?string $sprykMode = null): array;
 
     /**
-     * Specification
+     * Specification:
      * - Returns organization collection by development mode.
      *
      * @api

@@ -59,7 +59,7 @@ class NewModuleType extends AbstractType
                 return $organizationTransfer->getName();
             },
             'choice_value' => 'name',
-            'placeholder' => '',
+            'placeholder' => '-select-',
         ]);
     }
 }

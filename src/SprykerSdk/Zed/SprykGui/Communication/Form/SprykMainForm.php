@@ -9,7 +9,6 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
-use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleChoiceType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\NewModuleType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @method \SprykerSdk\Zed\SprykGui\Communication\SprykGuiCommunicationFactory getFactory()
  * @method \SprykerSdk\Zed\SprykGui\SprykGuiConfig getConfig()
  */
-class SprykMainForm extends AbstractType
+class SprykMainForm extends BaseSprykForm
 {
     protected const SPRYK = 'spryk';
     protected const MODULE = 'module';
@@ -61,7 +60,11 @@ class SprykMainForm extends AbstractType
         $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
         if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::TYPE])) {
+            $filteredArguments = $this->getRelevantArguments($sprykDefinition['arguments']);
+
             $builder->add(static::MODULE, NewModuleType::class, ['sprykDefinition' => $sprykDefinition]);
+            $this->addArgumentsToForm($builder, $filteredArguments, $options);
+
             $this->addRunSprykButton($builder);
             $this->addCreateTemplateButton($builder);
 
@@ -115,11 +118,8 @@ class SprykMainForm extends AbstractType
                     )->getForm();
 
                 $form->add($sprykDetailsForm);
-
                 $this->addRunSprykButton($form);
                 $this->addCreateTemplateButton($form);
-
-                return;
             }
         });
     }

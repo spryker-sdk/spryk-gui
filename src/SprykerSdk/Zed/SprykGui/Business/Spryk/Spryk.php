@@ -88,6 +88,9 @@ class Spryk implements SprykInterface
         $normalizedFormData = (new FormDataNormalizer())->normalizeFormData($formData);
         $commandLine = $this->getCommandLine($sprykName, $normalizedFormData);
         $process = $this->getProcess($commandLine);
+        $process->setEnv([
+            'DEVELOPMENT_CONSOLE_COMMANDS' => true,
+        ]);
         $process->run();
 
         if ($process->isSuccessful()) {
@@ -108,7 +111,7 @@ class Spryk implements SprykInterface
             return Process::fromShellCommandline($commandLine, APPLICATION_ROOT_DIR);
         }
 
-        return new Process($commandLine, APPLICATION_ROOT_DIR);
+        return new Process(explode(' ', $commandLine), APPLICATION_ROOT_DIR);
     }
 
     /**
