@@ -32,7 +32,7 @@ class BaseSprykForm extends AbstractType
 
         foreach ($arguments as $argumentName => $argumentDefinition) {
             if (
-                in_array($argumentName, ['module', 'dependentModule', 'organization'])
+                in_array($argumentName, ['module', 'dependentModule', 'organization'], true)
                 || !$this->isUserInputRequired($argumentDefinition)
             ) {
                 continue;
