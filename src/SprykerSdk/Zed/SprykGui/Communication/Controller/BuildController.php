@@ -20,11 +20,50 @@ class BuildController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return mixed[]|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction(Request $request): array
+    public function indexAction(Request $request)
     {
         $sprykDefinitionTransfer = $this->createSprykDefinitionTransfer($request);
+
+        $preBuildForm = $this->getFactory()
+            ->createPreBuildForm($sprykDefinitionTransfer)
+            ->handleRequest($request);
+
+        if ($preBuildForm->isSubmitted() && $preBuildForm->isValid()) {
+            return $this->redirectResponse(
+                sprintf(
+                    '/spryk-gui/build/build?spryk=%s&mode=%s&enterModuleManually=%s',
+                    $sprykDefinitionTransfer->getName(),
+                    $preBuildForm->get('mode')->getData(),
+                    $preBuildForm->get('enterModuleManually')->getData(),
+                )
+            );
+        }
+
+        return $this->viewResponse([
+            'sprykName' => $sprykDefinitionTransfer->getName(),
+            'form' => $preBuildForm->createView(),
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return mixed[]|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function buildAction(Request $request)
+    {
+        $sprykDefinitionTransfer = $this->createSprykDefinitionTransfer($request);
+
+        if ($sprykDefinitionTransfer->getEnterModuleManually() === null || $sprykDefinitionTransfer->getMode() === null) {
+            return $this->redirectResponse(
+                sprintf(
+                    '/spryk-gui/build?spryk=%s',
+                    $sprykDefinitionTransfer->getName(),
+                )
+            );
+        }
 
         $sprykForm = $this->getFactory()
             ->getSprykMainForm($sprykDefinitionTransfer)
@@ -48,6 +87,7 @@ class BuildController extends AbstractController
         }
 
         return $this->viewResponse([
+            'sprykName' => $sprykDefinitionTransfer->getName(),
             'form' => $sprykForm->createView(),
             'messages' => (isset($messages)) ? $messages : [],
         ]);
@@ -74,6 +114,7 @@ class BuildController extends AbstractController
         if ($sprykForm->has('run') && $this->getClickableByName($sprykForm, 'run')->isClicked()) {
             return true;
         }
+
         if ($sprykForm->has('create') && $this->getClickableByName($sprykForm, 'create')->isClicked()) {
             return true;
         }
@@ -88,11 +129,11 @@ class BuildController extends AbstractController
      */
     protected function createSprykDefinitionTransfer(Request $request): SprykDefinitionTransfer
     {
-        $spryk = $request->query->get('spryk');
-        $mode = $request->query->get('mode');
+        $enterModuleManually = (bool)$request->query->get('enterModuleManually');
 
-        $sprykDefinitionTransfer = new SprykDefinitionTransfer();
-
-        return $sprykDefinitionTransfer->setName($spryk)->setMode($mode);
+        return (new SprykDefinitionTransfer())
+            ->setName($request->query->get('spryk'))
+            ->setMode($request->query->get('mode'))
+            ->setEnterModuleManually($enterModuleManually);
     }
 }

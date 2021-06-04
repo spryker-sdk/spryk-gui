@@ -12,6 +12,9 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 
 class SprykGuiConfig extends AbstractBundleConfig
 {
+    protected const SPRYK_APPLICATION_NAME_TOP_LEVEL = 'Top Level Spryks';
+    protected const SPRYK_APPLICATION_NAME_COMMON = 'Common';
+
     /**
      * @api
      *
@@ -42,5 +45,44 @@ class SprykGuiConfig extends AbstractBundleConfig
     public function isSprykWebInterfaceEnabled(): bool
     {
         return APPLICATION_ENV !== 'production';
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getTopLevelSprykApplicationName(): string
+    {
+        return static::SPRYK_APPLICATION_NAME_TOP_LEVEL;
+    }
+
+    /**
+     * @api
+     *
+     * @return string
+     */
+    public function getCommonSprykApplicationName(): string
+    {
+        return static::SPRYK_APPLICATION_NAME_COMMON;
+    }
+
+    /**
+     * @api
+     *
+     * @return string[]
+     */
+    public function getApplicationNames(): array
+    {
+        return [
+            static::SPRYK_APPLICATION_NAME_TOP_LEVEL,
+            'Zed',
+            'Client',
+            'Yves',
+            'Shared',
+            'Service',
+            'Glue',
+            static::SPRYK_APPLICATION_NAME_COMMON,
+        ];
     }
 }

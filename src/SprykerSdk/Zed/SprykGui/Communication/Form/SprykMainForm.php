@@ -9,6 +9,7 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
+use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleChoiceType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\NewModuleType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -23,9 +24,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @method \SprykerSdk\Zed\SprykGui\Communication\SprykGuiCommunicationFactory getFactory()
  * @method \SprykerSdk\Zed\SprykGui\SprykGuiConfig getConfig()
  */
-class SprykMainForm extends BaseSprykForm
+class SprykMainForm extends AbstractType
 {
-    protected const SPRYK = 'spryk';
+    public const OPTION_SPRYK = 'spryk';
+    public const OPTION_ENTER_MODULE_MANUALLY = 'enterModuleManually';
+
     protected const MODULE = 'module';
     protected const DEPENDENT_MODULE = 'dependentModule';
     protected const ARGUMENTS = 'arguments';
@@ -40,13 +43,14 @@ class SprykMainForm extends BaseSprykForm
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
-            static::SPRYK,
+            static::OPTION_SPRYK,
+            static::OPTION_ENTER_MODULE_MANUALLY,
         ]);
     }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param mixed[] $options
      *
      * @return void
      */
@@ -54,29 +58,12 @@ class SprykMainForm extends BaseSprykForm
     {
         $typeToAddListenerTo = static::MODULE;
 
-        $spryk = $options[static::SPRYK];
+        $spryk = $options[static::OPTION_SPRYK];
 
         $mode = $builder->getData()['mode'] ?? null;
         $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
-        if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::TYPE])) {
-            $filteredArguments = $this->getRelevantArguments($sprykDefinition['arguments']);
-
-            $builder->add(static::MODULE, NewModuleType::class, ['sprykDefinition' => $sprykDefinition]);
-            $this->addArgumentsToForm($builder, $filteredArguments, $options);
-
-            $this->addRunSprykButton($builder);
-            $this->addCreateTemplateButton($builder);
-
-            return;
-        }
-
-        $moduleOptions = [];
-        if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER])) {
-            $moduleOptions[static::MODULE_FILTER] = $sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER];
-        }
-
-        $builder->add(static::MODULE, ModuleChoiceType::class, $moduleOptions);
+        $this->addModuleField($builder, $options, $sprykDefinition);
 
         if (array_key_exists(static::DEPENDENT_MODULE, $sprykDefinition[static::ARGUMENTS])) {
             $dependentModuleOptions = [];
@@ -94,7 +81,7 @@ class SprykMainForm extends BaseSprykForm
             $form = $event->getForm()->getParent();
             $moduleTransfer = $this->getModuleTransferFromForm($form);
 
-            if ($moduleTransfer->getName() && ($moduleTransfer->getOrganization() && $moduleTransfer->getOrganization()->getName())) {
+            if ($moduleTransfer->getName()) {
                 $form->remove('next');
 
                 if ($form->has(static::DEPENDENT_MODULE)) {
@@ -105,7 +92,7 @@ class SprykMainForm extends BaseSprykForm
                 }
 
                 $sprykDefinitionTransfer = new SprykDefinitionTransfer();
-                $sprykDefinitionTransfer->setName($options[static::SPRYK])
+                $sprykDefinitionTransfer->setName($options[static::OPTION_SPRYK])
                     ->setMode($sprykDefinition['mode']);
 
                 $sprykDataProvider = $this->getFactory()->createSprykFormDataProvider();
@@ -122,6 +109,29 @@ class SprykMainForm extends BaseSprykForm
                 $this->addCreateTemplateButton($form);
             }
         });
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param mixed[] $options
+     * @param mixed[] $sprykDefinition
+     *
+     * @return void
+     */
+    protected function addModuleField(FormBuilderInterface $builder, array $options, array $sprykDefinition): void
+    {
+        if ($options[static::OPTION_ENTER_MODULE_MANUALLY]) {
+            $builder->add(static::MODULE, NewModuleType::class);
+
+            return;
+        }
+
+        $moduleOptions = [];
+        if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER])) {
+            $moduleOptions[static::MODULE_FILTER] = $sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER];
+        }
+
+        $builder->add(static::MODULE, ModuleChoiceType::class, $moduleOptions);
     }
 
     /**

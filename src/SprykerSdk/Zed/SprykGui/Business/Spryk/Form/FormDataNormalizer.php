@@ -34,12 +34,14 @@ class FormDataNormalizer implements FormDataNormalizerInterface
      */
     protected function normalizeFormDataRecursive(array $data, array $normalizedData): array
     {
-        foreach ($data as $key => $value) {
-            if ($key === 'organization' && $value instanceof OrganizationTransfer) {
-                $normalizedData['organization'] = $value->getName();
-                $normalizedData['rootPath'] = $value->getRootPath();
-            }
+        $organizationTransfer = $this->findOrganizationTransfer($data);
 
+        if ($organizationTransfer) {
+            $normalizedData['organization'] = $organizationTransfer->getName();
+            $normalizedData['rootPath'] = $organizationTransfer->getRootPath();
+        }
+
+        foreach ($data as $key => $value) {
             if ($key === 'spryk' || isset($normalizedData[$key])) {
                 continue;
             }
@@ -80,6 +82,28 @@ class FormDataNormalizer implements FormDataNormalizerInterface
         }
 
         return $normalizedData;
+    }
+
+    /**
+     * @param mixed[] $data
+     *
+     * @return \Generated\Shared\Transfer\OrganizationTransfer|null
+     */
+    protected function findOrganizationTransfer(array $data): ?OrganizationTransfer
+    {
+        if (isset($data['organization']) && $data['organization'] instanceof OrganizationTransfer) {
+            return $data['organization'];
+        }
+
+        if (
+            isset($data['module'])
+            && $data['module'] instanceof ModuleTransfer
+            && $data['module']->getOrganization() instanceof OrganizationTransfer
+        ) {
+            return $data['module']->getOrganization();
+        }
+
+        return null;
     }
 
     /**

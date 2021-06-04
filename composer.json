@@ -6,7 +6,7 @@
     "require": {
         "php": ">=7.3",
         "roave/better-reflection": "^4.3.0",
-        "spryker-sdk/spryk": "^0.2.6",
+        "spryker-sdk/spryk": "^0.3.0",
         "spryker/development": "^3.12.0",
         "spryker/graph": "^3.0.0",
         "spryker/kernel": "^3.30.0",

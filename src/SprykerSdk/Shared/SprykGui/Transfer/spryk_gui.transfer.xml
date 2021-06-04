@@ -96,6 +96,7 @@
 
     <transfer name="SprykDefinition">
         <property name="name" type="string"/>
+        <property name="enterModuleManually" type="bool"/>
         <property name="mode" type="string"/>
         <property name="organization" type="string"/>
     </transfer>

@@ -53,7 +53,8 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
     {
         return new Spryk(
             $this->getSprykFacade(),
-            $this->createGraphBuilder()
+            $this->createGraphBuilder(),
+            $this->getConfig()
         );
     }
 

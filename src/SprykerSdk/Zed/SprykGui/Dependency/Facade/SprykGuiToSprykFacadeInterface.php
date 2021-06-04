@@ -10,9 +10,11 @@ namespace SprykerSdk\Zed\SprykGui\Dependency\Facade;
 interface SprykGuiToSprykFacadeInterface
 {
     /**
+     * @param int|null $level
+     *
      * @return array
      */
-    public function getSprykDefinitions(): array;
+    public function getSprykDefinitions(?int $level = null): array;
 
     /**
      * @param string $sprykName
