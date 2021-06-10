@@ -306,7 +306,7 @@ class Spryk implements SprykInterface
      *
      * @return array
      */
-    protected function filterSprykArguments(array $sprykDefinition, array $formData)
+    protected function filterSprykArguments(array $sprykDefinition, array $formData): array
     {
         $sprykArguments = [];
 
@@ -341,7 +341,7 @@ class Spryk implements SprykInterface
      *
      * @return string
      */
-    protected function buildFromArgument(ArgumentTransfer $argumentTransfer)
+    protected function buildFromArgument(ArgumentTransfer $argumentTransfer): string
     {
         $pattern = '%s %s';
         if ($argumentTransfer->getIsOptional()) {

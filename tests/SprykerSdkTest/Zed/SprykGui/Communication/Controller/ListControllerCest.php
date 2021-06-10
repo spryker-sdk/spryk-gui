@@ -27,7 +27,7 @@ class ListControllerCest
      *
      * @return void
      */
-    public function listSpryks(SprykGuiCommunicationTester $i)
+    public function listSpryks(SprykGuiCommunicationTester $i): void
     {
         $i->amOnPage('/spryk-gui/list');
         $i->seeResponseCodeIs(200);

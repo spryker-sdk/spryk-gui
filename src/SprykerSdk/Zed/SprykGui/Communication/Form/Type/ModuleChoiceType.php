@@ -35,7 +35,7 @@ class ModuleChoiceType extends AbstractType
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefault(static::MODULE_FILTER, []);
 
