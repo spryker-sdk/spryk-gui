@@ -28,7 +28,7 @@ class GraphController extends AbstractController
 
         $response = $this->getFacade()->drawSpryk($spryk);
 
-        $callback = function () use ($response) {
+        $callback = function () use ($response): void {
             echo $response;
         };
 

@@ -113,7 +113,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
      *
      * @return array
      */
-    protected function normalizeArgumentCollection(string $argumentName, ArgumentCollectionTransfer $argumentCollectionTransfer, array $normalizedData)
+    protected function normalizeArgumentCollection(string $argumentName, ArgumentCollectionTransfer $argumentCollectionTransfer, array $normalizedData): array
     {
         $arguments = [];
         $methods = [];
@@ -136,7 +136,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
      *
      * @return string
      */
-    protected function buildFromArgument(ArgumentTransfer $argumentTransfer)
+    protected function buildFromArgument(ArgumentTransfer $argumentTransfer): string
     {
         $pattern = '%s %s';
         if ($argumentTransfer->getIsOptional()) {

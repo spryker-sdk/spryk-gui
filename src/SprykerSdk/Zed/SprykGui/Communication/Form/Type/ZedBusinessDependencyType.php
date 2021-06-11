@@ -35,7 +35,7 @@ class ZedBusinessDependencyType extends AbstractType
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
             static::MODULE,
@@ -53,7 +53,7 @@ class ZedBusinessDependencyType extends AbstractType
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $moduleTransfer = $this->getModuleTransfer($options);
         $className = sprintf('\%1$s\Zed\%2$s\Business\%2$sBusinessFactory', $moduleTransfer->getOrganization()->getName(), $moduleTransfer->getName());
@@ -81,7 +81,7 @@ class ZedBusinessDependencyType extends AbstractType
 
         $builder->get('arguments')->addEventListener(
             FormEvents::SUBMIT,
-            function (FormEvent $event) {
+            function (FormEvent $event): void {
                 $argumentCollectionTransfer = new ArgumentCollectionTransfer();
 
                 foreach ($event->getData() as $argumentInformation) {
