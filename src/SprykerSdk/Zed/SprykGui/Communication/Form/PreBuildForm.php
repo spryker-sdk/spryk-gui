@@ -77,7 +77,7 @@ class PreBuildForm extends AbstractType
         $builder->add(static::FIELD_ENTER_MODULE_MANUALLY, ChoiceType::class, [
             'choices' => [
                 'Choose existing' => false,
-                'Type module name' => true,
+                'Enter name manually' => true,
             ],
             'label' => 'How do you want to enter the name of the module?',
         ]);

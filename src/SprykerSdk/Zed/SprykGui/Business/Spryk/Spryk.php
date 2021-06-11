@@ -148,14 +148,14 @@ class Spryk implements SprykInterface
      */
     protected function organizeSprykDefinitions(array $sprykDefinitions): array
     {
-        $applicationNamespaces = $this->sprykGuiConfig->getApplicationNames();
+        $applicationNamespaces = $this->sprykGuiConfig->getSprykCategoryNames();
         $organized = array_combine(
             $applicationNamespaces,
             array_fill(0, count($applicationNamespaces), [])
         );
 
         foreach ($sprykDefinitions as $sprykName => $sprykDefinition) {
-            $application = $this->getApplication($sprykName, $sprykDefinition);
+            $application = $this->getSprykCategories($sprykName, $sprykDefinition);
             $organized[$application][$sprykName] = [
                 'humanized' => $this->createHumanizeFilter()->filter($sprykName),
                 'description' => $sprykDefinition['description'],
@@ -174,20 +174,20 @@ class Spryk implements SprykInterface
      *
      * @return string
      */
-    protected function getApplication(string $sprykName, array $sprykDefinition): string
+    protected function getSprykCategories(string $sprykName, array $sprykDefinition): string
     {
         if ($sprykDefinition['level'] === static::SPRYK_LEVEL_TOP) {
-            return $this->sprykGuiConfig->getTopLevelSprykApplicationName();
+            return $this->sprykGuiConfig->getTopLevelSprykCategoryName();
         }
 
         $humanizedSprykName = $this->createHumanizeFilter()->filter($sprykName);
         $humanizedSprykNameFragments = explode(' ', $humanizedSprykName);
 
-        if (in_array($humanizedSprykNameFragments[1], $this->sprykGuiConfig->getApplicationNames())) {
+        if (in_array($humanizedSprykNameFragments[1], $this->sprykGuiConfig->getSprykCategoryNames())) {
             return $humanizedSprykNameFragments[1];
         }
 
-        return $this->sprykGuiConfig->getCommonSprykApplicationName();
+        return $this->sprykGuiConfig->getCommonSprykCategoryName();
     }
 
     /**

@@ -12,8 +12,8 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 
 class SprykGuiConfig extends AbstractBundleConfig
 {
-    protected const SPRYK_APPLICATION_NAME_TOP_LEVEL = 'Top Level Spryks';
-    protected const SPRYK_APPLICATION_NAME_COMMON = 'Common';
+    protected const SPRYK_CATEGORY_NAME_TOP_LEVEL = 'Top Level Spryks';
+    protected const SPRYK_CATEGORY_NAME_COMMON = 'Common';
 
     /**
      * @api
@@ -52,9 +52,9 @@ class SprykGuiConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getTopLevelSprykApplicationName(): string
+    public function getTopLevelSprykCategoryName(): string
     {
-        return static::SPRYK_APPLICATION_NAME_TOP_LEVEL;
+        return static::SPRYK_CATEGORY_NAME_TOP_LEVEL;
     }
 
     /**
@@ -62,9 +62,9 @@ class SprykGuiConfig extends AbstractBundleConfig
      *
      * @return string
      */
-    public function getCommonSprykApplicationName(): string
+    public function getCommonSprykCategoryName(): string
     {
-        return static::SPRYK_APPLICATION_NAME_COMMON;
+        return static::SPRYK_CATEGORY_NAME_COMMON;
     }
 
     /**
@@ -72,17 +72,17 @@ class SprykGuiConfig extends AbstractBundleConfig
      *
      * @return string[]
      */
-    public function getApplicationNames(): array
+    public function getSprykCategoryNames(): array
     {
         return [
-            static::SPRYK_APPLICATION_NAME_TOP_LEVEL,
+            static::SPRYK_CATEGORY_NAME_TOP_LEVEL,
             'Zed',
             'Client',
             'Yves',
             'Shared',
             'Service',
             'Glue',
-            static::SPRYK_APPLICATION_NAME_COMMON,
+            static::SPRYK_CATEGORY_NAME_COMMON,
         ];
     }
 }
