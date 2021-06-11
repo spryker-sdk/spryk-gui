@@ -72,7 +72,7 @@ class SprykGuiConfig extends AbstractBundleConfig
      *
      * @return string[]
      */
-    public function getSprykCategoryNames(): array
+    public function getSprykCategories(): array
     {
         return [
             static::SPRYK_CATEGORY_NAME_TOP_LEVEL,

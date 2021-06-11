@@ -148,21 +148,21 @@ class Spryk implements SprykInterface
      */
     protected function organizeSprykDefinitions(array $sprykDefinitions): array
     {
-        $applicationNamespaces = $this->sprykGuiConfig->getSprykCategoryNames();
+        $sprykCategories = $this->sprykGuiConfig->getSprykCategories();
         $organized = array_combine(
-            $applicationNamespaces,
-            array_fill(0, count($applicationNamespaces), [])
+            $sprykCategories,
+            array_fill(0, count($sprykCategories), [])
         );
 
         foreach ($sprykDefinitions as $sprykName => $sprykDefinition) {
-            $application = $this->getSprykCategories($sprykName, $sprykDefinition);
-            $organized[$application][$sprykName] = [
+            $sprykCategory = $this->getSprykCategory($sprykName, $sprykDefinition);
+            $organized[$sprykCategory][$sprykName] = [
                 'humanized' => $this->createHumanizeFilter()->filter($sprykName),
                 'description' => $sprykDefinition['description'],
                 'priority' => isset($sprykDefinition['priority']) ? $sprykDefinition['priority'] : '',
             ];
 
-            ksort($organized[$application]);
+            ksort($organized[$sprykCategory]);
         }
 
         return array_filter($organized);
@@ -174,7 +174,7 @@ class Spryk implements SprykInterface
      *
      * @return string
      */
-    protected function getSprykCategories(string $sprykName, array $sprykDefinition): string
+    protected function getSprykCategory(string $sprykName, array $sprykDefinition): string
     {
         if ($sprykDefinition['level'] === static::SPRYK_LEVEL_TOP) {
             return $this->sprykGuiConfig->getTopLevelSprykCategoryName();
@@ -183,7 +183,7 @@ class Spryk implements SprykInterface
         $humanizedSprykName = $this->createHumanizeFilter()->filter($sprykName);
         $humanizedSprykNameFragments = explode(' ', $humanizedSprykName);
 
-        if (in_array($humanizedSprykNameFragments[1], $this->sprykGuiConfig->getSprykCategoryNames())) {
+        if (in_array($humanizedSprykNameFragments[1], $this->sprykGuiConfig->getSprykCategories())) {
             return $humanizedSprykNameFragments[1];
         }
 
