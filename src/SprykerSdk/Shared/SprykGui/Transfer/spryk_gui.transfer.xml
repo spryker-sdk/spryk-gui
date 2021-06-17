@@ -8,6 +8,7 @@
         <property name="organization" type="Organization"/>
         <property name="application" type="Application"/>
         <property name="layer" type="Layer"/>
+        <property name="path" type="string"/>
         <property name="options" type="Options"/>
         <property name="dependentModule" type="Module"/>
     </transfer>
@@ -26,6 +27,7 @@
 
     <transfer name="Organization">
         <property name="name" type="string"/>
+        <property name="isProject" type="bool"/>
         <property name="rootPath" type="string"/>
     </transfer>
 

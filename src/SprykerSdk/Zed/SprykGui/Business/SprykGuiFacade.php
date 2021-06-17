@@ -94,6 +94,22 @@ class SprykGuiFacade extends AbstractFacade implements SprykGuiFacadeInterface
      *
      * @api
      *
+     * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
+     *
+     * @return \Generated\Shared\Transfer\ModuleTransfer|null
+     */
+    public function findModule(ModuleTransfer $moduleTransfer): ?ModuleTransfer
+    {
+        return $this->getFactory()
+            ->createModuleFinder()
+            ->findModule($moduleTransfer);
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
      */
     public function getOrganizations(): OrganizationCollectionTransfer

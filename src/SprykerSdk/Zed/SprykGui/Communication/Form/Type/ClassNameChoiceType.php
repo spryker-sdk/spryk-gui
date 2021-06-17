@@ -9,6 +9,7 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form\Type;
 
 use Generated\Shared\Transfer\ModuleTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerSdk\Zed\SprykGui\Communication\Form\SprykDetailsForm;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +35,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ClassNameChoiceType extends AbstractType
 {
-    protected const MODULE = 'module';
+    protected const OPTION_MODULE = SprykDetailsForm::OPTION_MODULE;
+    protected const OPTION_EXISTING_MODULE = SprykDetailsForm::OPTION_EXISTING_MODULE;
     protected const SPRYK = 'spryk';
     protected const CHOICE_LOADER = 'choiceLoader';
 
@@ -46,7 +48,8 @@ class ClassNameChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
-            static::MODULE,
+            static::OPTION_MODULE,
+            static::OPTION_EXISTING_MODULE,
             static::SPRYK,
             static::CHOICE_LOADER,
         ]);
@@ -75,7 +78,14 @@ class ClassNameChoiceType extends AbstractType
      */
     protected function getModuleTransfer(Options $options): ModuleTransfer
     {
-        return $options[static::MODULE];
+        $moduleTransfer = $options[static::OPTION_MODULE];
+        $existingModuleTransfer = $options[static::OPTION_EXISTING_MODULE];
+
+        if ($existingModuleTransfer) {
+            $moduleTransfer->setPath($existingModuleTransfer->getPath());
+        }
+
+        return $moduleTransfer;
     }
 
     /**

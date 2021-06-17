@@ -33,4 +33,14 @@ class SprykGuiToDevelopmentFacadeBridge implements SprykGuiToDevelopmentFacadeIn
     {
         return $this->developmentFacade->getModules($moduleFilterTransfer);
     }
+
+    /**
+     * @param \Generated\Shared\Transfer\ModuleFilterTransfer|null $moduleFilterTransfer
+     *
+     * @return \Generated\Shared\Transfer\ModuleTransfer[]
+     */
+    public function getProjectModules(?ModuleFilterTransfer $moduleFilterTransfer = null): array
+    {
+        return $this->developmentFacade->getProjectModules($moduleFilterTransfer);
+    }
 }

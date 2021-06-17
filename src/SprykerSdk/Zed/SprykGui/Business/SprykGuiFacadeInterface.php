@@ -78,6 +78,19 @@ interface SprykGuiFacadeInterface
 
     /**
      * Specification:
+     * - Returns an existing module found by given ModuleTransfer data.
+     * - Returns NULL if there is no such module.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
+     *
+     * @return \Generated\Shared\Transfer\ModuleTransfer|null
+     */
+    public function findModule(ModuleTransfer $moduleTransfer): ?ModuleTransfer;
+
+    /**
+     * Specification:
      * - Returns a list with TransferObjects.
      * - Each TransferObject contains information about a organization.
      *

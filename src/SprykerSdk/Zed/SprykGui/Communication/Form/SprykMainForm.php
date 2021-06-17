@@ -10,8 +10,8 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleAndOrganizationType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleChoiceType;
-use SprykerSdk\Zed\SprykGui\Communication\Form\Type\NewModuleType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -63,7 +63,7 @@ class SprykMainForm extends AbstractType
         $mode = $builder->getData()['mode'] ?? null;
         $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
-        $this->addModuleField($builder, $options, $sprykDefinition);
+        $this->addModuleAndOrganization($builder, $options, $sprykDefinition);
 
         if (array_key_exists(static::DEPENDENT_MODULE, $sprykDefinition[static::ARGUMENTS])) {
             $dependentModuleOptions = [];
@@ -81,7 +81,7 @@ class SprykMainForm extends AbstractType
             $form = $event->getForm()->getParent();
             $moduleTransfer = $this->getModuleTransferFromForm($form);
 
-            if ($moduleTransfer->getName()) {
+            if ($moduleTransfer->getName() && ($moduleTransfer->getOrganization() && $moduleTransfer->getOrganization()->getName())) {
                 $form->remove('next');
 
                 if ($form->has(static::DEPENDENT_MODULE)) {
@@ -118,20 +118,15 @@ class SprykMainForm extends AbstractType
      *
      * @return void
      */
-    protected function addModuleField(FormBuilderInterface $builder, array $options, array $sprykDefinition): void
+    protected function addModuleAndOrganization(FormBuilderInterface $builder, array $options, array $sprykDefinition): void
     {
-        if ($options[static::OPTION_ENTER_MODULE_MANUALLY]) {
-            $builder->add(static::MODULE, NewModuleType::class);
+        $moduleAndOrganizationTypeOptions = [
+            ModuleAndOrganizationType::OPTION_MODE_FILTER => $sprykDefinition['mode'] ?? null,
+            ModuleAndOrganizationType::OPTION_MODULE_FILTER => $sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER] ?? null,
+            ModuleAndOrganizationType::OPTION_ENTER_MODULE_MANUALLY => $options[static::OPTION_ENTER_MODULE_MANUALLY],
+        ];
 
-            return;
-        }
-
-        $moduleOptions = [];
-        if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER])) {
-            $moduleOptions[static::MODULE_FILTER] = $sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER];
-        }
-
-        $builder->add(static::MODULE, ModuleChoiceType::class, $moduleOptions);
+        $builder->add(static::MODULE, ModuleAndOrganizationType::class, $moduleAndOrganizationTypeOptions);
     }
 
     /**

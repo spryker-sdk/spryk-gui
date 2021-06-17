@@ -12,6 +12,7 @@ use Generated\Shared\Transfer\LayerTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
 use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
+use SprykerSdk\Zed\SprykGui\Communication\Form\SprykDetailsForm;
 use SprykerSdk\Zed\SprykGui\Communication\Form\SprykMainForm;
 
 class SprykDataProvider
@@ -50,7 +51,8 @@ class SprykDataProvider
         }
 
         if ($sprykDefinitionTransfer->getName() && $moduleTransfer) {
-            $options['module'] = $moduleTransfer;
+            $options[SprykDetailsForm::OPTION_MODULE] = $moduleTransfer;
+            $options[SprykDetailsForm::OPTION_EXISTING_MODULE] = $this->sprykGuiFacade->findModule($moduleTransfer);
             $options += $this->getOptionsBySprykDefinition($sprykDefinitionTransfer, $moduleTransfer);
         }
 

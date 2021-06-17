@@ -7,11 +7,10 @@
 
 namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 
-use Generated\Shared\Transfer\OrganizationTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ArgumentCollectionType;
+use SprykerSdk\Zed\SprykGui\Communication\Form\Type\MethodNameChoiceType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\OutputChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,8 +23,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SprykDetailsForm extends AbstractType
 {
-    protected const SPRYK = 'spryk';
-    protected const MODULE = 'module';
+    public const OPTION_MODULE = 'module';
+    public const OPTION_EXISTING_MODULE = 'existingModule';
+
+    protected const OPTION_SPRYK = 'spryk';
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -35,15 +36,15 @@ class SprykDetailsForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
-            static::SPRYK,
-            static::MODULE,
+            static::OPTION_SPRYK,
+            static::OPTION_MODULE,
+            static::OPTION_EXISTING_MODULE,
         ]);
 
         $resolver->setDefaults([
             'classNameChoices' => [],
             'outputChoices' => [],
             'argumentChoices' => [],
-            'organizationChoices' => [],
         ]);
     }
 
@@ -56,34 +57,11 @@ class SprykDetailsForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $mode = $builder->getData()['mode'] ?? null;
-        $sprykDefinition = $this->getFacade()->getSprykDefinition($options[static::SPRYK], $mode);
+        $sprykDefinition = $this->getFacade()->getSprykDefinition($options[static::OPTION_SPRYK], $mode);
 
         $filteredArguments = $this->getRelevantArguments($sprykDefinition['arguments']);
 
-        $this->addOrganizationChoice($builder, $sprykDefinition);
         $this->addArgumentsToForm($builder, $filteredArguments, $options);
-    }
-
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $sprykDefinition
-     *
-     * @return void
-     */
-    protected function addOrganizationChoice(FormBuilderInterface $builder, array $sprykDefinition): void
-    {
-        $organizationCollection = isset($sprykDefinition['mode'])
-            ? $this->getFacade()->getOrganizationsByMode($sprykDefinition['mode'])->getOrganizations()
-            : $this->getFacade()->getOrganizations()->getOrganizations();
-
-        $builder->add('organization', ChoiceType::class, [
-            'choices' => $organizationCollection,
-            'choice_label' => function (OrganizationTransfer $organizationTransfer) {
-                return $organizationTransfer->getName();
-            },
-            'choice_value' => 'name',
-            'placeholder' => '-select-',
-        ]);
     }
 
     /**
@@ -148,19 +126,7 @@ class SprykDetailsForm extends AbstractType
         ?array $argumentDefinition = null
     ): array {
         if (isset($argumentDefinition['type'])) {
-            $typeOptions = $this->getFormTypeOptions($options, $argumentDefinition);
-
-            if (isset($argumentDefinition['isOptional'])) {
-                $typeOptions['required'] = false;
-            }
-
-            $formTypeName = sprintf(
-                '%s%s%s',
-                'SprykerSdk\\Zed\\SprykGui\\Communication\\Form\\Type\\',
-                $argumentDefinition['type'],
-                'Type'
-            );
-            $builder->add($argumentName, $formTypeName, $typeOptions);
+            $this->buildTypedArgumentForm($builder, $argumentName, $options, $argumentDefinition);
 
             return $options;
         }
@@ -186,6 +152,62 @@ class SprykDetailsForm extends AbstractType
         $builder->add($argumentName, $type, $typeOptions);
 
         return $options;
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param string $argumentName
+     * @param mixed[] $options
+     * @param mixed[] $argumentDefinition
+     *
+     * @return void
+     */
+    protected function buildTypedArgumentForm(
+        FormBuilderInterface $builder,
+        string $argumentName,
+        array $options,
+        array $argumentDefinition
+    ): void {
+        $typeOptions = $this->getFormTypeOptions($options, $argumentDefinition);
+        $generalOptions = [];
+
+        if (isset($argumentDefinition['isOptional'])) {
+            $generalOptions['required'] = false;
+        }
+
+        $formTypeName = sprintf(
+            '%s%s%s',
+            'SprykerSdk\\Zed\\SprykGui\\Communication\\Form\\Type\\',
+            $argumentDefinition['type'],
+            'Type'
+        );
+
+        if (!$this->getIsFormTypeCanBeRendered($formTypeName, $options)) {
+            $builder->add($argumentName, TextType::class, $generalOptions);
+
+            return;
+        }
+
+        $builder->add($argumentName, $formTypeName, $generalOptions + $typeOptions);
+    }
+
+    /**
+     * @param string $formTypeClassName
+     * @param array $options
+     *
+     * @return bool
+     */
+    protected function getIsFormTypeCanBeRendered(string $formTypeClassName, array $options): bool
+    {
+        if ($options[static::OPTION_EXISTING_MODULE]) {
+            return true;
+        }
+
+        if (in_array($formTypeClassName, [MethodNameChoiceType::class], true)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

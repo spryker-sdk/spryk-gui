@@ -58,7 +58,7 @@ class ZedCommunicationControllerChoiceLoader implements ChoiceLoaderInterface
     {
         $controllerDirectory = sprintf(
             '%1$ssrc/%2$s/Zed/%3$s/Communication/Controller/',
-            $moduleTransfer->getOrganization()->getRootPath(),
+            $moduleTransfer->getPath(),
             $moduleTransfer->getOrganization()->getName(),
             $moduleTransfer->getName()
         );
