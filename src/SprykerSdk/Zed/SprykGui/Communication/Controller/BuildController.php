@@ -72,14 +72,15 @@ class BuildController extends AbstractController
         $canRunBuild = $this->canRunBuild($sprykForm);
         if ($sprykForm->isSubmitted() && $canRunBuild && $sprykForm->isValid()) {
             $formData = $sprykForm->getData();
+            $sprykName = (string)$request->query->get('spryk');
 
             if ($this->getClickableByName($sprykForm, 'create')->isClicked()) {
                 return $this->viewResponse(
-                    $this->getFacade()->buildSprykView($request->query->get('spryk'), $formData)
+                    $this->getFacade()->buildSprykView($sprykName, $formData)
                 );
             }
 
-            $runResult = $this->getFacade()->runSpryk($request->query->get('spryk'), $formData);
+            $runResult = $this->getFacade()->runSpryk($sprykName, $formData);
             if ($runResult) {
                 $this->addSuccessMessage(sprintf('Spryk "%s" executed successfully.', $request->query->get('spryk')));
                 $messages = explode("\n", rtrim($runResult, "\n"));
@@ -97,11 +98,14 @@ class BuildController extends AbstractController
      * @param \Symfony\Component\Form\FormInterface $sprykForm
      * @param string $buttonName
      *
-     * @return \Symfony\Component\Form\ClickableInterface|\Symfony\Component\Form\FormInterface
+     * @return \Symfony\Component\Form\ClickableInterface
      */
     protected function getClickableByName(FormInterface $sprykForm, string $buttonName)
     {
-        return $sprykForm->get($buttonName);
+        /** @var \Symfony\Component\Form\ClickableInterface $button */
+        $button = $sprykForm->get($buttonName);
+
+        return $button;
     }
 
     /**
@@ -132,8 +136,8 @@ class BuildController extends AbstractController
         $enterModuleManually = (bool)$request->query->get('enterModuleManually');
 
         return (new SprykDefinitionTransfer())
-            ->setName($request->query->get('spryk'))
-            ->setMode($request->query->get('mode'))
+            ->setName((string)$request->query->get('spryk'))
+            ->setMode((string)$request->query->get('mode'))
             ->setEnterModuleManually($enterModuleManually);
     }
 }

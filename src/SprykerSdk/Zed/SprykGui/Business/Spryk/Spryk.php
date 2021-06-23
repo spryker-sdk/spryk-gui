@@ -154,6 +154,10 @@ class Spryk implements SprykInterface
             array_fill(0, count($sprykCategories), [])
         );
 
+        if (!$organized) {
+            return [];
+        }
+
         foreach ($sprykDefinitions as $sprykName => $sprykDefinition) {
             $sprykCategory = $this->getSprykCategory($sprykName, $sprykDefinition);
             $organized[$sprykCategory][$sprykName] = [

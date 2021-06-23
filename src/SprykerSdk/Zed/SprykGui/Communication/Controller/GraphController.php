@@ -24,6 +24,7 @@ class GraphController extends AbstractController
      */
     public function indexAction(Request $request): StreamedResponse
     {
+        /** @var string $spryk */
         $spryk = $request->query->get('spryk');
 
         $response = $this->getFacade()->drawSpryk($spryk);
