@@ -15,13 +15,6 @@ interface SprykInterface
     public function getSprykDefinitions(): array;
 
     /**
-     * @param string $spryk
-     *
-     * @return array
-     */
-    public function getSprykDefinitionByName(string $spryk): array;
-
-    /**
      * @param string $sprykName
      * @param array $sprykArguments
      *

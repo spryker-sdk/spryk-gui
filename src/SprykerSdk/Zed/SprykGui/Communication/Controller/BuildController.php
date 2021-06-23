@@ -8,6 +8,8 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
+use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -100,7 +102,7 @@ class BuildController extends AbstractController
      *
      * @return \Symfony\Component\Form\ClickableInterface
      */
-    protected function getClickableByName(FormInterface $sprykForm, string $buttonName)
+    protected function getClickableByName(FormInterface $sprykForm, string $buttonName): ClickableInterface
     {
         /** @var \Symfony\Component\Form\ClickableInterface $button */
         $button = $sprykForm->get($buttonName);
@@ -134,10 +136,12 @@ class BuildController extends AbstractController
     protected function createSprykDefinitionTransfer(Request $request): SprykDefinitionTransfer
     {
         $enterModuleManually = (bool)$request->query->get('enterModuleManually');
+        /** @var string|null $mode */
+        $mode = $request->query->get('mode');
 
         return (new SprykDefinitionTransfer())
             ->setName((string)$request->query->get('spryk'))
-            ->setMode((string)$request->query->get('mode'))
+            ->setMode($mode)
             ->setEnterModuleManually($enterModuleManually);
     }
 }

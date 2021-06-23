@@ -64,18 +64,6 @@ class Spryk implements SprykInterface
     }
 
     /**
-     * @param string $spryk
-     *
-     * @return array
-     */
-    public function getSprykDefinitionByName(string $spryk): array
-    {
-        $sprykDefinitions = $this->sprykFacade->getSprykDefinitions();
-
-        return $sprykDefinitions[$spryk];
-    }
-
-    /**
      * @param string $sprykName
      * @param array $formData
      *
@@ -246,8 +234,7 @@ class Spryk implements SprykInterface
             $commandLineArguments['mode'] = $formData['mode'];
         }
 
-        $sprykDefinition = $this->getSprykDefinitionByName($sprykName);
-
+        $sprykDefinition = $this->sprykFacade->getSprykDefinition($sprykName);
         $filteredSprykArguments = $this->filterSprykArguments($sprykDefinition, $formData);
 
         foreach ($filteredSprykArguments as $argumentName => $argumentDefinition) {

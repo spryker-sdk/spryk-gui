@@ -38,18 +38,6 @@ class SprykGuiConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @deprecated Method will be removed without replacement.
-     *
-     * @return bool
-     */
-    public function isSprykWebInterfaceEnabled(): bool
-    {
-        return APPLICATION_ENV !== 'production';
-    }
-
-    /**
-     * @api
-     *
      * @return string
      */
     public function getTopLevelSprykCategoryName(): string
