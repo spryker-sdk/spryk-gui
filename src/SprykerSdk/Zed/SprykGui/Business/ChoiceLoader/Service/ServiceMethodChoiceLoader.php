@@ -22,7 +22,11 @@ class ServiceMethodChoiceLoader extends AbstractMethodChoiceLoader
     {
         $dependentModule = $moduleTransfer->getDependentModule();
 
-        return sprintf('Spryker\\Service\\%1$s\\%1$sService', $dependentModule->getName());
+        return sprintf(
+            '%1$s\\Service\\%2$s\\%2$sService',
+            $dependentModule->getOrganization()->getName(),
+            $dependentModule->getName()
+        );
     }
 
     /**

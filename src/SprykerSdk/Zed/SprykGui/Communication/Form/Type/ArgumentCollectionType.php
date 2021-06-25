@@ -30,7 +30,7 @@ class ArgumentCollectionType extends AbstractType
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
             static::ARGUMENT_CHOICES,
@@ -59,11 +59,11 @@ class ArgumentCollectionType extends AbstractType
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->addEventListener(
             FormEvents::SUBMIT,
-            function (FormEvent $event) {
+            function (FormEvent $event): void {
                 $argumentCollectionTransfer = new ArgumentCollectionTransfer();
                 foreach ($this->getArgumentsFromEvent($event) as $argumentTransfer) {
                     $innerArgumentTransfer = $argumentTransfer->getInnerArgument();

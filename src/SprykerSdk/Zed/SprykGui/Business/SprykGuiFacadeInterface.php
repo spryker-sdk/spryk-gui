@@ -7,7 +7,7 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business;
 
-use Generated\Shared\Transfer\AccessibleTransferCollection;
+use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\ModuleFilterTransfer;
 use Generated\Shared\Transfer\ModuleTransfer;
@@ -64,7 +64,7 @@ interface SprykGuiFacadeInterface
     public function runSpryk(string $sprykName, array $sprykArguments): string;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with TransferObjects.
      * - Each TransferObject contains information about a found module.
      *
@@ -77,7 +77,20 @@ interface SprykGuiFacadeInterface
     public function getModules(?ModuleFilterTransfer $moduleFilterTransfer = null): array;
 
     /**
-     * Specification
+     * Specification:
+     * - Returns an existing module found by given ModuleTransfer data.
+     * - Returns NULL if there is no such module.
+     *
+     * @api
+     *
+     * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
+     *
+     * @return \Generated\Shared\Transfer\ModuleTransfer|null
+     */
+    public function findModule(ModuleTransfer $moduleTransfer): ?ModuleTransfer;
+
+    /**
+     * Specification:
      * - Returns a list with TransferObjects.
      * - Each TransferObject contains information about a organization.
      *
@@ -88,19 +101,19 @@ interface SprykGuiFacadeInterface
     public function getOrganizations(): OrganizationCollectionTransfer;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with all TransferObjects which are accessible by a given module.
      *
      * @api
      *
      * @param string $module
      *
-     * @return \Generated\Shared\Transfer\AccessibleTransferCollection
+     * @return \Generated\Shared\Transfer\AccessibleTransferCollectionTransfer
      */
-    public function getAccessibleTransfers(string $module): AccessibleTransferCollection;
+    public function getAccessibleTransfers(string $module): AccessibleTransferCollectionTransfer;
 
     /**
-     * Specification
+     * Specification:
      * - Returns a list with all methods and their return type.
      *
      * @api
@@ -110,20 +123,6 @@ interface SprykGuiFacadeInterface
      * @return \Generated\Shared\Transfer\ClassInformationTransfer
      */
     public function getFactoryInformation(string $className): ClassInformationTransfer;
-
-    /**
-     * @api
-     *
-     * @deprecated Use `SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface::getSprykDefinition()` instead.
-     *
-     * Specification:
-     * - Returns an array with the Spryk definition.
-     *
-     * @param string $spryk
-     *
-     * @return array
-     */
-    public function getSprykDefinitionByName(string $spryk): array;
 
     /**
      * Specification:
@@ -167,7 +166,7 @@ interface SprykGuiFacadeInterface
     public function getSprykDefinition(string $sprykName, ?string $sprykMode = null): array;
 
     /**
-     * Specification
+     * Specification:
      * - Returns organization collection by development mode.
      *
      * @api

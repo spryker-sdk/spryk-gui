@@ -43,7 +43,7 @@ class SprykGuiBusinessTester extends Actor
      *
      * @return void
      */
-    public function assertCommandLine(array $sprykView)
+    public function assertCommandLine(array $sprykView): void
     {
         $this->assertArrayHasKey('commandLine', $sprykView);
 
@@ -56,7 +56,7 @@ class SprykGuiBusinessTester extends Actor
      *
      * @return void
      */
-    public function assertJiraTemplate(array $sprykView)
+    public function assertJiraTemplate(array $sprykView): void
     {
         $this->assertArrayHasKey('jiraTemplate', $sprykView);
 

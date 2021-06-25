@@ -7,11 +7,11 @@
 
 namespace SprykerSdk\Zed\SprykGui\Communication;
 
-use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
+use SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider\PreBuildDataProvider;
 use SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider\SprykDataProvider;
-use SprykerSdk\Zed\SprykGui\Communication\Form\SprykDetailsForm;
+use SprykerSdk\Zed\SprykGui\Communication\Form\PreBuildForm;
 use SprykerSdk\Zed\SprykGui\Communication\Form\SprykMainForm;
 use SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeInterface;
 use SprykerSdk\Zed\SprykGui\SprykGuiDependencyProvider;
@@ -31,6 +31,14 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
         return new SprykDataProvider(
             $this->getFacade()
         );
+    }
+
+    /**
+     * @return \SprykerSdk\Zed\SprykGui\Communication\Form\DataProvider\PreBuildDataProvider
+     */
+    public function createPreBuildDataProvider(): PreBuildDataProvider
+    {
+        return new PreBuildDataProvider($this->getFacade());
     }
 
     /**
@@ -56,20 +64,15 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
     }
 
     /**
-     * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
-     * @param string $spryk
+     * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      *
      * @return \Symfony\Component\Form\FormInterface
      */
-    public function getSprykDetailsForm(ModuleTransfer $moduleTransfer, string $spryk): FormInterface
+    public function createPreBuildForm(SprykDefinitionTransfer $sprykDefinitionTransfer): FormInterface
     {
         return $this->getFormFactory()->create(
-            SprykDetailsForm::class,
-            $this->createSprykFormDataProvider()->getData($spryk, $moduleTransfer),
-            [
-            //                'module' => $moduleTransfer,
-                'spryk' => $spryk,
-            ]
+            PreBuildForm::class,
+            $this->createPreBuildDataProvider()->getData($sprykDefinitionTransfer)
         );
     }
 }

@@ -107,7 +107,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
      *
      * @return bool
      */
-    protected function shouldIgnore(ReflectionMethod $method)
+    protected function shouldIgnore(ReflectionMethod $method): bool
     {
         if (in_array($method->getName(), $this->methodsToFilter)) {
             return true;

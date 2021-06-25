@@ -8,6 +8,8 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Controller;
 
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
+use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
+use Symfony\Component\Form\ClickableInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,11 +22,50 @@ class BuildController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return array
+     * @return mixed[]|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction(Request $request): array
+    public function indexAction(Request $request)
     {
         $sprykDefinitionTransfer = $this->createSprykDefinitionTransfer($request);
+
+        $preBuildForm = $this->getFactory()
+            ->createPreBuildForm($sprykDefinitionTransfer)
+            ->handleRequest($request);
+
+        if ($preBuildForm->isSubmitted() && $preBuildForm->isValid()) {
+            return $this->redirectResponse(
+                sprintf(
+                    '/spryk-gui/build/build?spryk=%s&mode=%s&enterModuleManually=%s',
+                    $sprykDefinitionTransfer->getName(),
+                    $preBuildForm->get('mode')->getData(),
+                    $preBuildForm->get('enterModuleManually')->getData(),
+                )
+            );
+        }
+
+        return $this->viewResponse([
+            'sprykName' => $sprykDefinitionTransfer->getName(),
+            'form' => $preBuildForm->createView(),
+        ]);
+    }
+
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @return mixed[]|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function buildAction(Request $request)
+    {
+        $sprykDefinitionTransfer = $this->createSprykDefinitionTransfer($request);
+
+        if ($sprykDefinitionTransfer->getEnterModuleManually() === null || $sprykDefinitionTransfer->getMode() === null) {
+            return $this->redirectResponse(
+                sprintf(
+                    '/spryk-gui/build?spryk=%s',
+                    $sprykDefinitionTransfer->getName(),
+                )
+            );
+        }
 
         $sprykForm = $this->getFactory()
             ->getSprykMainForm($sprykDefinitionTransfer)
@@ -33,14 +74,15 @@ class BuildController extends AbstractController
         $canRunBuild = $this->canRunBuild($sprykForm);
         if ($sprykForm->isSubmitted() && $canRunBuild && $sprykForm->isValid()) {
             $formData = $sprykForm->getData();
+            $sprykName = (string)$request->query->get('spryk');
 
             if ($this->getClickableByName($sprykForm, 'create')->isClicked()) {
                 return $this->viewResponse(
-                    $this->getFacade()->buildSprykView($request->query->get('spryk'), $formData)
+                    $this->getFacade()->buildSprykView($sprykName, $formData)
                 );
             }
 
-            $runResult = $this->getFacade()->runSpryk($request->query->get('spryk'), $formData);
+            $runResult = $this->getFacade()->runSpryk($sprykName, $formData);
             if ($runResult) {
                 $this->addSuccessMessage(sprintf('Spryk "%s" executed successfully.', $request->query->get('spryk')));
                 $messages = explode("\n", rtrim($runResult, "\n"));
@@ -48,6 +90,7 @@ class BuildController extends AbstractController
         }
 
         return $this->viewResponse([
+            'sprykName' => $sprykDefinitionTransfer->getName(),
             'form' => $sprykForm->createView(),
             'messages' => (isset($messages)) ? $messages : [],
         ]);
@@ -57,11 +100,14 @@ class BuildController extends AbstractController
      * @param \Symfony\Component\Form\FormInterface $sprykForm
      * @param string $buttonName
      *
-     * @return \Symfony\Component\Form\ClickableInterface|\Symfony\Component\Form\FormInterface
+     * @return \Symfony\Component\Form\ClickableInterface
      */
-    protected function getClickableByName(FormInterface $sprykForm, string $buttonName)
+    protected function getClickableByName(FormInterface $sprykForm, string $buttonName): ClickableInterface
     {
-        return $sprykForm->get($buttonName);
+        /** @var \Symfony\Component\Form\ClickableInterface $button */
+        $button = $sprykForm->get($buttonName);
+
+        return $button;
     }
 
     /**
@@ -74,6 +120,7 @@ class BuildController extends AbstractController
         if ($sprykForm->has('run') && $this->getClickableByName($sprykForm, 'run')->isClicked()) {
             return true;
         }
+
         if ($sprykForm->has('create') && $this->getClickableByName($sprykForm, 'create')->isClicked()) {
             return true;
         }
@@ -88,11 +135,13 @@ class BuildController extends AbstractController
      */
     protected function createSprykDefinitionTransfer(Request $request): SprykDefinitionTransfer
     {
-        $spryk = $request->query->get('spryk');
+        $enterModuleManually = (bool)$request->query->get('enterModuleManually');
+        /** @var string|null $mode */
         $mode = $request->query->get('mode');
 
-        $sprykDefinitionTransfer = new SprykDefinitionTransfer();
-
-        return $sprykDefinitionTransfer->setName($spryk)->setMode($mode);
+        return (new SprykDefinitionTransfer())
+            ->setName((string)$request->query->get('spryk'))
+            ->setMode($mode)
+            ->setEnterModuleManually($enterModuleManually);
     }
 }

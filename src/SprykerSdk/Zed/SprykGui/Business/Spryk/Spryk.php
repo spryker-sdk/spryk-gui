@@ -13,10 +13,16 @@ use Laminas\Filter\Word\CamelCaseToSeparator;
 use SprykerSdk\Zed\SprykGui\Business\Graph\GraphBuilderInterface;
 use SprykerSdk\Zed\SprykGui\Business\Spryk\Form\FormDataNormalizer;
 use SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeInterface;
+use SprykerSdk\Zed\SprykGui\SprykGuiConfig;
 use Symfony\Component\Process\Process;
 
 class Spryk implements SprykInterface
 {
+    /**
+     * @uses \SprykerSdk\Spryk\SprykConfig::SPRYK_LEVEL_1
+     */
+    protected const SPRYK_LEVEL_TOP = 1;
+
     /**
      * @var \SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeInterface
      */
@@ -28,13 +34,23 @@ class Spryk implements SprykInterface
     protected $graphBuilder;
 
     /**
+     * @var \SprykerSdk\Zed\SprykGui\SprykGuiConfig
+     */
+    protected $sprykGuiConfig;
+
+    /**
      * @param \SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeInterface $sprykFacade
      * @param \SprykerSdk\Zed\SprykGui\Business\Graph\GraphBuilderInterface $graphBuilder
+     * @param \SprykerSdk\Zed\SprykGui\SprykGuiConfig $sprykGuiConfig
      */
-    public function __construct(SprykGuiToSprykFacadeInterface $sprykFacade, GraphBuilderInterface $graphBuilder)
-    {
+    public function __construct(
+        SprykGuiToSprykFacadeInterface $sprykFacade,
+        GraphBuilderInterface $graphBuilder,
+        SprykGuiConfig $sprykGuiConfig
+    ) {
         $this->sprykFacade = $sprykFacade;
         $this->graphBuilder = $graphBuilder;
+        $this->sprykGuiConfig = $sprykGuiConfig;
     }
 
     /**
@@ -45,18 +61,6 @@ class Spryk implements SprykInterface
         return $this->organizeSprykDefinitions(
             $this->sprykFacade->getSprykDefinitions()
         );
-    }
-
-    /**
-     * @param string $spryk
-     *
-     * @return array
-     */
-    public function getSprykDefinitionByName(string $spryk): array
-    {
-        $sprykDefinitions = $this->sprykFacade->getSprykDefinitions();
-
-        return $sprykDefinitions[$spryk];
     }
 
     /**
@@ -72,6 +76,7 @@ class Spryk implements SprykInterface
         $jiraTemplate = $this->getJiraTemplate($sprykName, $commandLine, $normalizedFormData);
 
         return [
+            'sprykName' => $sprykName,
             'commandLine' => $commandLine,
             'jiraTemplate' => $jiraTemplate,
         ];
@@ -88,6 +93,9 @@ class Spryk implements SprykInterface
         $normalizedFormData = (new FormDataNormalizer())->normalizeFormData($formData);
         $commandLine = $this->getCommandLine($sprykName, $normalizedFormData);
         $process = $this->getProcess($commandLine);
+        $process->setEnv([
+            'DEVELOPMENT_CONSOLE_COMMANDS' => true,
+        ]);
         $process->run();
 
         if ($process->isSuccessful()) {
@@ -108,7 +116,7 @@ class Spryk implements SprykInterface
             return Process::fromShellCommandline($commandLine, APPLICATION_ROOT_DIR);
         }
 
-        return new Process($commandLine, APPLICATION_ROOT_DIR);
+        return new Process(explode(' ', $commandLine), APPLICATION_ROOT_DIR);
     }
 
     /**
@@ -128,41 +136,50 @@ class Spryk implements SprykInterface
      */
     protected function organizeSprykDefinitions(array $sprykDefinitions): array
     {
-        $organized = [];
+        $sprykCategories = $this->sprykGuiConfig->getSprykCategories();
+        $organized = array_combine(
+            $sprykCategories,
+            array_fill(0, count($sprykCategories), [])
+        );
+
+        if (!$organized) {
+            return [];
+        }
 
         foreach ($sprykDefinitions as $sprykName => $sprykDefinition) {
-            $application = $this->getApplicationBySprykName($sprykName);
-            if (!isset($organized[$application])) {
-                $organized[$application] = [];
-            }
-            $organized[$application][$sprykName] = [
+            $sprykCategory = $this->getSprykCategory($sprykName, $sprykDefinition);
+            $organized[$sprykCategory][$sprykName] = [
                 'humanized' => $this->createHumanizeFilter()->filter($sprykName),
                 'description' => $sprykDefinition['description'],
                 'priority' => isset($sprykDefinition['priority']) ? $sprykDefinition['priority'] : '',
             ];
 
-            ksort($organized[$application]);
+            ksort($organized[$sprykCategory]);
         }
 
-        return $organized;
+        return array_filter($organized);
     }
 
     /**
      * @param string $sprykName
+     * @param mixed[] $sprykDefinition
      *
      * @return string
      */
-    protected function getApplicationBySprykName(string $sprykName): string
+    protected function getSprykCategory(string $sprykName, array $sprykDefinition): string
     {
+        if ($sprykDefinition['level'] === static::SPRYK_LEVEL_TOP) {
+            return $this->sprykGuiConfig->getTopLevelSprykCategoryName();
+        }
+
         $humanizedSprykName = $this->createHumanizeFilter()->filter($sprykName);
         $humanizedSprykNameFragments = explode(' ', $humanizedSprykName);
-        $applications = ['Client', 'Shared', 'Yves', 'Zed', 'Service', 'Glue'];
 
-        if (in_array($humanizedSprykNameFragments[1], $applications)) {
+        if (in_array($humanizedSprykNameFragments[1], $this->sprykGuiConfig->getSprykCategories())) {
             return $humanizedSprykNameFragments[1];
         }
 
-        return 'Common';
+        return $this->sprykGuiConfig->getCommonSprykCategoryName();
     }
 
     /**
@@ -209,15 +226,24 @@ class Spryk implements SprykInterface
     {
         $commandLineArguments = [];
 
-        $sprykDefinition = $this->getSprykDefinitionByName($sprykName);
+        if (isset($formData['organization'])) {
+            $commandLineArguments['organization'] = $formData['organization'];
+        }
 
+        if (isset($formData['mode'])) {
+            $commandLineArguments['mode'] = $formData['mode'];
+        }
+
+        $sprykDefinition = $this->sprykFacade->getSprykDefinition($sprykName);
         $filteredSprykArguments = $this->filterSprykArguments($sprykDefinition, $formData);
 
         foreach ($filteredSprykArguments as $argumentName => $argumentDefinition) {
             $userInput = $this->getUserInputForArgument($argumentName, $formData);
+
             if (isset($argumentDefinition['multiline'])) {
                 $userInput = $this->getMultilineConsoleArgument($userInput);
             }
+
             if (isset($argumentDefinition['isMultiple'])) {
                 if ($argumentName === 'constructorArguments') {
                     $commandLineArguments['constructorArguments'] = $userInput;
@@ -271,7 +297,7 @@ class Spryk implements SprykInterface
      *
      * @return array
      */
-    protected function filterSprykArguments(array $sprykDefinition, array $formData)
+    protected function filterSprykArguments(array $sprykDefinition, array $formData): array
     {
         $sprykArguments = [];
 
@@ -306,7 +332,7 @@ class Spryk implements SprykInterface
      *
      * @return string
      */
-    protected function buildFromArgument(ArgumentTransfer $argumentTransfer)
+    protected function buildFromArgument(ArgumentTransfer $argumentTransfer): string
     {
         $pattern = '%s %s';
         if ($argumentTransfer->getIsOptional()) {

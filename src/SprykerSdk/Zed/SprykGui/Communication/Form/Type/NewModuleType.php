@@ -8,9 +8,7 @@
 namespace SprykerSdk\Zed\SprykGui\Communication\Form\Type;
 
 use Generated\Shared\Transfer\ModuleTransfer;
-use Generated\Shared\Transfer\OrganizationTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,19 +20,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class NewModuleType extends AbstractType
 {
-    protected const SPRYK_DEFINITION = 'sprykDefinition';
-
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
      *
      * @return void
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setRequired([
-            static::SPRYK_DEFINITION,
-        ]);
-
         $resolver->setDefaults([
             'data_class' => ModuleTransfer::class,
         ]);
@@ -48,18 +40,6 @@ class NewModuleType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $organizationCollection = isset($options['sprykDefinition']['mode'])
-            ? $this->getFacade()->getOrganizationsByMode($options['sprykDefinition']['mode'])->getOrganizations()
-            : $this->getFacade()->getOrganizations()->getOrganizations();
-
         $builder->add('name', TextType::class);
-        $builder->add('organization', ChoiceType::class, [
-            'choices' => $organizationCollection,
-            'choice_label' => function (OrganizationTransfer $organizationTransfer) {
-                return $organizationTransfer->getName();
-            },
-            'choice_value' => 'name',
-            'placeholder' => '',
-        ]);
     }
 }

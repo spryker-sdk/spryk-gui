@@ -27,7 +27,7 @@ class BuildControllerCest
      *
      * @return void
      */
-    public function openBuildSpryk(SprykGuiCommunicationTester $i)
+    public function openBuildSpryk(SprykGuiCommunicationTester $i): void
     {
         $i->amOnPage('/spryk-gui/build?spryk=AddZedBusinessFacadeMethod');
         $i->seeResponseCodeIs(200);
@@ -40,7 +40,7 @@ class BuildControllerCest
      *
      * @return void
      */
-    public function createSpryk(SprykGuiCommunicationTester $i)
+    public function createSpryk(SprykGuiCommunicationTester $i): void
     {
         $i->amOnPage('/spryk-gui/build?spryk=AddZedBusinessFacadeMethod');
         $i->seeResponseCodeIs(200);

@@ -23,11 +23,13 @@ class SprykGuiToSprykFacadeBridge implements SprykGuiToSprykFacadeInterface
     }
 
     /**
+     * @param int|null $level
+     *
      * @return array
      */
-    public function getSprykDefinitions(): array
+    public function getSprykDefinitions(?int $level = null): array
     {
-        return $this->sprykFacade->getSprykDefinitions();
+        return $this->sprykFacade->getSprykDefinitions($level);
     }
 
     /**

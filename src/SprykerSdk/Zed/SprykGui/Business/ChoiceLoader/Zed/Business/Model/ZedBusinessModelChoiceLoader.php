@@ -58,7 +58,7 @@ class ZedBusinessModelChoiceLoader implements ChoiceLoaderInterface
     {
         $moduleBusinessDirectory = sprintf(
             '%1$ssrc/%2$s/Zed/%3$s/Business/',
-            $moduleTransfer->getOrganization()->getRootPath(),
+            $moduleTransfer->getPath(),
             $moduleTransfer->getOrganization()->getName(),
             $moduleTransfer->getName()
         );

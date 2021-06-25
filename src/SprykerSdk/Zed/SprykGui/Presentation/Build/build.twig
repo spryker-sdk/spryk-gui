@@ -1,0 +1,33 @@
+{% extends '@Gui/Layout/layout.twig' %}
+
+{% set page_title = 'Build Spryk "' ~ sprykName ~ '"' %}
+{% block head_title page_title %}
+{% block section_title page_title %}
+
+{% block action %}
+    {{ backActionButton(url('/spryk-gui/build', {'spryk': sprykName}), 'Change mode/module') }}
+{% endblock %}
+
+{% block content %}
+
+    {% if messages is defined and messages is not empty %}
+        <div class="alert alert-info">
+            {% for message in messages %}
+                {{ message }}<br />
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if form is defined %}
+        {{ form(form) }}
+    {% else %}
+        <h3>Jira Template</h3>
+        <p><pre>
+            {{ jiraTemplate }}
+        </pre></p>
+    {% endif %}
+{% endblock %}
+
+{% block footer_js %}
+    {{ parent() }}
+    <script src="{{ assetsPath('js/spryker-zed-spryk-gui-main.js') }}"></script>
+{% endblock %}

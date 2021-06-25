@@ -34,12 +34,14 @@ class FormDataNormalizer implements FormDataNormalizerInterface
      */
     protected function normalizeFormDataRecursive(array $data, array $normalizedData): array
     {
-        foreach ($data as $key => $value) {
-            if ($key === 'organization' && $value instanceof OrganizationTransfer) {
-                $normalizedData['organization'] = $value->getName();
-                $normalizedData['rootPath'] = $value->getRootPath();
-            }
+        $organizationTransfer = $this->findOrganizationTransfer($data);
 
+        if ($organizationTransfer) {
+            $normalizedData['organization'] = $organizationTransfer->getName();
+            $normalizedData['rootPath'] = $organizationTransfer->getRootPath();
+        }
+
+        foreach ($data as $key => $value) {
             if ($key === 'spryk' || isset($normalizedData[$key])) {
                 continue;
             }
@@ -71,6 +73,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
             }
 
             if ($value instanceof ArgumentCollectionTransfer) {
+                /** @var string $key */
                 $normalizedData = $this->normalizeArgumentCollection($key, $value, $normalizedData);
 
                 continue;
@@ -83,13 +86,35 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     }
 
     /**
+     * @param mixed[] $data
+     *
+     * @return \Generated\Shared\Transfer\OrganizationTransfer|null
+     */
+    protected function findOrganizationTransfer(array $data): ?OrganizationTransfer
+    {
+        if (isset($data['organization']) && $data['organization'] instanceof OrganizationTransfer) {
+            return $data['organization'];
+        }
+
+        if (
+            isset($data['module'])
+            && $data['module'] instanceof ModuleTransfer
+            && $data['module']->getOrganization() instanceof OrganizationTransfer
+        ) {
+            return $data['module']->getOrganization();
+        }
+
+        return null;
+    }
+
+    /**
      * @param string $argumentName
      * @param \Generated\Shared\Transfer\ArgumentCollectionTransfer $argumentCollectionTransfer
      * @param array $normalizedData
      *
      * @return array
      */
-    protected function normalizeArgumentCollection(string $argumentName, ArgumentCollectionTransfer $argumentCollectionTransfer, array $normalizedData)
+    protected function normalizeArgumentCollection(string $argumentName, ArgumentCollectionTransfer $argumentCollectionTransfer, array $normalizedData): array
     {
         $arguments = [];
         $methods = [];
@@ -112,7 +137,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
      *
      * @return string
      */
-    protected function buildFromArgument(ArgumentTransfer $argumentTransfer)
+    protected function buildFromArgument(ArgumentTransfer $argumentTransfer): string
     {
         $pattern = '%s %s';
         if ($argumentTransfer->getIsOptional()) {

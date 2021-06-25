@@ -14,7 +14,7 @@ use Generated\Shared\Transfer\ModuleTransfer;
  * @method \SprykerSdk\Zed\SprykGui\SprykGuiConfig getConfig()
  * @method \SprykerSdk\Zed\SprykGui\Communication\SprykGuiCommunicationFactory getFactory()
  */
-class ZedBusinessDependencyType extends AbstractFactoryConstructorType
+class GlueProcessorDependencyType extends AbstractFactoryConstructorType
 {
     /**
      * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
@@ -24,7 +24,7 @@ class ZedBusinessDependencyType extends AbstractFactoryConstructorType
     protected function getClassName(ModuleTransfer $moduleTransfer): string
     {
         return sprintf(
-            '\%1$s\Zed\%2$s\Business\%2$s%3$s',
+            '\%1$s\Glue\%2$s\%2$s%3$s',
             $moduleTransfer->getOrganization()->getName(),
             $moduleTransfer->getName(),
             $this->getFactoryNamePostfix()
@@ -36,6 +36,6 @@ class ZedBusinessDependencyType extends AbstractFactoryConstructorType
      */
     protected function getFactoryNamePostfix(): string
     {
-        return 'BusinessFactory';
+        return 'Factory';
     }
 }

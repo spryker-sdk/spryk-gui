@@ -10,8 +10,8 @@ namespace SprykerSdk\Zed\SprykGui\Communication\Form;
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\SprykDefinitionTransfer;
 use Spryker\Zed\Kernel\Communication\Form\AbstractType;
+use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleAndOrganizationType;
 use SprykerSdk\Zed\SprykGui\Communication\Form\Type\ModuleChoiceType;
-use SprykerSdk\Zed\SprykGui\Communication\Form\Type\NewModuleType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -26,7 +26,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SprykMainForm extends AbstractType
 {
-    protected const SPRYK = 'spryk';
+    public const OPTION_SPRYK = 'spryk';
+    public const OPTION_ENTER_MODULE_MANUALLY = 'enterModuleManually';
+
     protected const MODULE = 'module';
     protected const DEPENDENT_MODULE = 'dependentModule';
     protected const ARGUMENTS = 'arguments';
@@ -41,39 +43,27 @@ class SprykMainForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired([
-            static::SPRYK,
+            static::OPTION_SPRYK,
+            static::OPTION_ENTER_MODULE_MANUALLY,
         ]);
     }
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param mixed[] $options
      *
      * @return void
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $typeToAddListenerTo = static::MODULE;
 
-        $spryk = $options[static::SPRYK];
+        $spryk = $options[static::OPTION_SPRYK];
 
         $mode = $builder->getData()['mode'] ?? null;
         $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
-        if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::TYPE])) {
-            $builder->add(static::MODULE, NewModuleType::class, ['sprykDefinition' => $sprykDefinition]);
-            $this->addRunSprykButton($builder);
-            $this->addCreateTemplateButton($builder);
-
-            return;
-        }
-
-        $moduleOptions = [];
-        if (isset($sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER])) {
-            $moduleOptions[static::MODULE_FILTER] = $sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER];
-        }
-
-        $builder->add(static::MODULE, ModuleChoiceType::class, $moduleOptions);
+        $this->addModuleAndOrganization($builder, $options, $sprykDefinition);
 
         if (array_key_exists(static::DEPENDENT_MODULE, $sprykDefinition[static::ARGUMENTS])) {
             $dependentModuleOptions = [];
@@ -87,7 +77,7 @@ class SprykMainForm extends AbstractType
 
         $this->addNextButton($builder);
 
-        $builder->get($typeToAddListenerTo)->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($options, $builder, $sprykDefinition) {
+        $builder->get($typeToAddListenerTo)->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($options, $builder, $sprykDefinition): void {
             $form = $event->getForm()->getParent();
             $moduleTransfer = $this->getModuleTransferFromForm($form);
 
@@ -102,7 +92,7 @@ class SprykMainForm extends AbstractType
                 }
 
                 $sprykDefinitionTransfer = new SprykDefinitionTransfer();
-                $sprykDefinitionTransfer->setName($options[static::SPRYK])
+                $sprykDefinitionTransfer->setName($options[static::OPTION_SPRYK])
                     ->setMode($sprykDefinition['mode']);
 
                 $sprykDataProvider = $this->getFactory()->createSprykFormDataProvider();
@@ -115,13 +105,28 @@ class SprykMainForm extends AbstractType
                     )->getForm();
 
                 $form->add($sprykDetailsForm);
-
                 $this->addRunSprykButton($form);
                 $this->addCreateTemplateButton($form);
-
-                return;
             }
         });
+    }
+
+    /**
+     * @param \Symfony\Component\Form\FormBuilderInterface $builder
+     * @param mixed[] $options
+     * @param mixed[] $sprykDefinition
+     *
+     * @return void
+     */
+    protected function addModuleAndOrganization(FormBuilderInterface $builder, array $options, array $sprykDefinition): void
+    {
+        $moduleAndOrganizationTypeOptions = [
+            ModuleAndOrganizationType::OPTION_MODE_FILTER => $sprykDefinition['mode'] ?? null,
+            ModuleAndOrganizationType::OPTION_MODULE_FILTER => $sprykDefinition[static::ARGUMENTS][static::MODULE][static::MODULE_FILTER] ?? null,
+            ModuleAndOrganizationType::OPTION_ENTER_MODULE_MANUALLY => $options[static::OPTION_ENTER_MODULE_MANUALLY],
+        ];
+
+        $builder->add(static::MODULE, ModuleAndOrganizationType::class, $moduleAndOrganizationTypeOptions);
     }
 
     /**

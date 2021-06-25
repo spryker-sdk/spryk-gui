@@ -36,30 +36,11 @@ class OrganizationFinder implements OrganizationFinderInterface
     }
 
     /**
-     * @var array
-     */
-    protected $organizationDefinition = [
-        'Spryker' => 'spryker/spryker/',
-        'SprykerEco' => 'spryker-eco/',
-        'SprykerShop' => 'spryker/spryker-shop/',
-    ];
-
-    /**
      * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
      */
     public function findOrganizations(): OrganizationCollectionTransfer
     {
-        $organizationCollectionTransfer = new OrganizationCollectionTransfer();
-
-        foreach ($this->organizationDefinition as $organizationName => $subDirectory) {
-            $organizationTransfer = new OrganizationTransfer();
-            $organizationTransfer->setName($organizationName)
-                ->setRootPath(APPLICATION_ROOT_DIR . '/vendor/' . $subDirectory);
-
-            $organizationCollectionTransfer->addOrganization($organizationTransfer);
-        }
-
-        return $organizationCollectionTransfer;
+        return $this->getOrganizationCollectionTransfer($this->coreOrganizationList, false);
     }
 
     /**
@@ -69,15 +50,30 @@ class OrganizationFinder implements OrganizationFinderInterface
      */
     public function findOrganizationsByMode(string $mode): OrganizationCollectionTransfer
     {
-        $organizationNamespaces = $mode === static::NAME_DEVELOPMENT_LAYER_PROJECT
+        $isProjectDevelopmentLayer = $mode === static::NAME_DEVELOPMENT_LAYER_PROJECT;
+        $organizationNamespaces = $isProjectDevelopmentLayer
             ? $this->projectOrganizationList
             : $this->coreOrganizationList;
 
+        return $this->getOrganizationCollectionTransfer($organizationNamespaces, $isProjectDevelopmentLayer);
+    }
+
+    /**
+     * @param array $organizationNamespaces
+     * @param bool $isProjectDevelopmentLayer
+     *
+     * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer
+     */
+    protected function getOrganizationCollectionTransfer(
+        array $organizationNamespaces,
+        bool $isProjectDevelopmentLayer
+    ): OrganizationCollectionTransfer {
         $organizationCollectionTransfer = new OrganizationCollectionTransfer();
 
         foreach ($organizationNamespaces as $organizationName) {
-            $organizationTransfer = new OrganizationTransfer();
-            $organizationTransfer->setName($organizationName);
+            $organizationTransfer = (new OrganizationTransfer())
+                ->setIsProject($isProjectDevelopmentLayer)
+                ->setName($organizationName);
 
             $organizationCollectionTransfer->addOrganization($organizationTransfer);
         }
