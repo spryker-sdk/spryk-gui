@@ -25,7 +25,8 @@
         "spryker/testify": "*",
         "spryker/twig": "*",
         "spryker/validator": "*",
-        "spryker/zed-navigation": "*"
+        "spryker/zed-navigation": "*",
+        "phpstan/phpstan": "^0.12.0"
     },
     "autoload": {
         "psr-4": {
@@ -41,7 +42,8 @@
     "prefer-stable": true,
     "scripts": {
         "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
-        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/"
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
+        "stan": "phpstan analyse src/"
     },
     "extra": {
         "branch-alias": {

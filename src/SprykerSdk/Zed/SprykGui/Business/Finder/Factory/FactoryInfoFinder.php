@@ -10,10 +10,10 @@ namespace SprykerSdk\Zed\SprykGui\Business\Finder\Factory;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\MethodInformationTransfer;
 use Generated\Shared\Transfer\ReturnTypeTransfer;
-use Roave\BetterReflection\BetterReflection;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflector\Exception\IdentifierNotFound;
+use PHPStan\BetterReflection\BetterReflection;
+use PHPStan\BetterReflection\Reflection\ReflectionClass;
+use PHPStan\BetterReflection\Reflection\ReflectionMethod;
+use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
 
 class FactoryInfoFinder implements FactoryInfoFinderInterface
 {
@@ -103,7 +103,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     }
 
     /**
-     * @param \Roave\BetterReflection\Reflection\ReflectionMethod $method
+     * @param \PHPStan\BetterReflection\Reflection\ReflectionMethod $method
      *
      * @return bool
      */
@@ -117,7 +117,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     }
 
     /**
-     * @param \Roave\BetterReflection\Reflection\ReflectionMethod $method
+     * @param \PHPStan\BetterReflection\Reflection\ReflectionMethod $method
      *
      * @return \Generated\Shared\Transfer\ReturnTypeTransfer
      */
@@ -146,7 +146,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     /**
      * @param string $className
      *
-     * @return \Roave\BetterReflection\Reflection\Reflection|\Roave\BetterReflection\Reflection\ReflectionClass
+     * @return \PHPStan\BetterReflection\Reflection\Reflection|\PHPStan\BetterReflection\Reflection\ReflectionClass
      */
     protected function getReflectedClass(string $className)
     {

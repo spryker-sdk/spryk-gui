@@ -1,5 +1,10 @@
 parameters:
+    level: 1
+
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
+
     bootstrapFiles:
-            - %rootDir%/../../../phpstan-bootstrap.php
+        - %rootDir%/../../../phpstan-bootstrap.php
+
+    reportUnmatchedIgnoredErrors: false
