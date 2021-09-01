@@ -6,7 +6,7 @@
     "require": {
         "php": ">=7.3",
         "ondrejmirtes/better-reflection": "^4.3.0",
-        "spryker-sdk/spryk": "dev-bugfix/te-9771-php8 as 0.3.0",
+        "spryker-sdk/spryk": "dev-bugfix/te-9771-php8 as 0.3.1",
         "spryker/development": "^3.12.0",
         "spryker/graph": "^3.0.0",
         "spryker/kernel": "^3.30.0",
