@@ -43,7 +43,8 @@
     "scripts": {
         "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
         "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
-        "stan": "phpstan analyse src/"
+        "stan": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/codecept run"
     },
     "extra": {
         "branch-alias": {

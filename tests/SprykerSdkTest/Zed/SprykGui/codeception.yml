@@ -22,9 +22,12 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     coreNamespaces:
-                        - SprykerShop
                         - Spryker
                         - SprykerSdk
+                - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
+                    isolated: true
+                    schemaDirectories:
+                        - ../../src/*/Shared/*/Transfer/
 
     Communication:
         path: Communication/
@@ -36,11 +39,14 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     coreNamespaces:
-                        - SprykerShop
                         - Spryker
                         - SprykerSdk
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
                 - \SprykerTest\Shared\Propel\Helper\TransactionHelper
+                - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
+                    isolated: true
+                    schemaDirectories:
+                        - ../../src/*/Shared/*/Transfer/
                 - \SprykerTest\Zed\ZedNavigation\Helper\BreadcrumbHelper
                 - \SprykerTest\Shared\Application\Helper\ZedHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper

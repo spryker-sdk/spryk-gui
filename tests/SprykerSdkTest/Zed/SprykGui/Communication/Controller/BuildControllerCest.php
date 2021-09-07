@@ -7,6 +7,7 @@
 
 namespace SprykerSdkTest\Zed\SprykGui\Communication\Controller;
 
+use Codeception\Extension\Phantoman;
 use SprykerSdkTest\Zed\SprykGui\SprykGuiCommunicationTester;
 
 /**

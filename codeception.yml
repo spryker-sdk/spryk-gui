@@ -11,7 +11,7 @@ paths:
     support: tests/_support
     envs: tests/_envs
 settings:
-    bootstrap: _bootstrap.php
+    bootstrap: bootstrap.php
     suite_class: \PHPUnit\Framework\TestCase
     colors: true
     memory_limit: 1024M
@@ -20,9 +20,3 @@ coverage:
     enabled: true
     whitelist: { include: ['src/*'] }
 
-extensions:
-    enabled:
-        - Codeception\Extension\Phantoman
-    config:
-        Codeception\Extension\Phantoman:
-            suites: ['Communication']
