@@ -28,6 +28,7 @@ suites:
                     isolated: true
                     schemaDirectories:
                         - ../../src/*/Shared/*/Transfer/
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
 
     Communication:
         path: Communication/

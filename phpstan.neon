@@ -1,5 +1,7 @@
 parameters:
     level: 8
+    paths:
+        - src/
 
     checkGenericClassInNonGenericObjectType: false
     checkMissingIterableValueType: false
@@ -12,3 +14,7 @@ parameters:
     treatPhpDocTypesAsCertain: false
 
     reportUnmatchedIgnoredErrors: false
+
+    ignoreErrors:
+        - '#Call to method development\(\) on an unknown class .+AutoCompletion#'
+
