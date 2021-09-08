@@ -1,27 +1,14 @@
 <?php
 
 if (!defined('APPLICATION_ROOT_DIR')) {
-    define('APPLICATION_ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR);
+    define('APPLICATION_ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'app');
 }
 if (!defined('APPLICATION_STORE')) {
     define('APPLICATION_STORE', 'DE');
 }
+if (!defined('APPLICATION_ENV')) {
+    define('APPLICATION_ENV', 'dev');
+}
 
-spl_autoload_register(function ($className) {
-    if (strrpos($className, 'Transfer') === false) {
-        return false;
-    }
-
-    $classNameParts = explode('\\', $className);
-
-    $transferFileName = implode(DIRECTORY_SEPARATOR, $classNameParts) . '.php';
-    $transferFilePath = APPLICATION_ROOT_DIR . 'src' . DIRECTORY_SEPARATOR . $transferFileName;
-
-    if (!file_exists($transferFilePath)) {
-        return false;
-    }
-
-    require_once $transferFilePath;
-
-    return true;
-});
+$config = \Spryker\Shared\Config\Config::getInstance();
+$config->init();
