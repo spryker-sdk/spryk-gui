@@ -2,7 +2,6 @@
 
 define('APPLICATION_ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR);
 define('APPLICATION_STORE', 'DE');
-define('PROJECT_NAMESPACES', 'Pyz');
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 require_once(__DIR__ . '/../vendor/codeception/codeception/autoload.php');

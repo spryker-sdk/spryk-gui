@@ -28,6 +28,9 @@ suites:
                     isolated: true
                     schemaDirectories:
                         - ../../src/*/Shared/*/Transfer/
+                - \SprykerTest\Zed\Form\Helper\FormHelper:
+                    formPlugins:
+                        - \Spryker\Zed\Http\Communication\Plugin\Form\HttpFoundationFormPlugin
 
     Communication:
         path: Communication/
@@ -58,7 +61,6 @@ suites:
                 - \SprykerTest\Zed\Form\Helper\FormHelper:
                       formPlugins:
                           - \Spryker\Zed\Validator\Communication\Plugin\Form\ValidatorFormPlugin
-                          - \Spryker\Zed\Http\Communication\Plugin\Form\HttpFoundationFormPlugin
                 - \SprykerTest\Zed\EventDispatcher\Helper\EventDispatcherHelper
                 - \SprykerTest\Zed\Twig\Helper\TwigHelper:
                       twigPlugins:
