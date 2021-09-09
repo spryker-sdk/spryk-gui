@@ -34,7 +34,7 @@ class ZedBusinessModelChoiceLoader implements ChoiceLoaderInterface
             $relativeClassName = str_replace(['/', '.php'], ['\\', ''], $fileInfo->getRelativePathname());
             $className = sprintf(
                 '%s\\Zed\\%s\\Business\\%s',
-                $moduleTransfer->getOrganization()->getName(),
+                $moduleTransfer->getOrganizationOrFail()->getName(),
                 $moduleTransfer->getName(),
                 $relativeClassName
             );
@@ -59,7 +59,7 @@ class ZedBusinessModelChoiceLoader implements ChoiceLoaderInterface
         $moduleBusinessDirectory = sprintf(
             '%1$ssrc/%2$s/Zed/%3$s/Business/',
             $moduleTransfer->getPath(),
-            $moduleTransfer->getOrganization()->getName(),
+            $moduleTransfer->getOrganizationOrFail()->getName(),
             $moduleTransfer->getName()
         );
 

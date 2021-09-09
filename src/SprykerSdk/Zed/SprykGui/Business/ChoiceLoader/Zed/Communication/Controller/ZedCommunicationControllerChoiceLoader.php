@@ -34,7 +34,7 @@ class ZedCommunicationControllerChoiceLoader implements ChoiceLoaderInterface
             $relativeClassName = str_replace(['/', '.php'], ['\\', ''], $fileInfo->getRelativePathname());
             $className = sprintf(
                 '%s\\Zed\\%s\\Communication\\Controller\\%s',
-                $moduleTransfer->getOrganization()->getName(),
+                $moduleTransfer->getOrganizationOrFail()->getName(),
                 $moduleTransfer->getName(),
                 $relativeClassName
             );
@@ -59,7 +59,7 @@ class ZedCommunicationControllerChoiceLoader implements ChoiceLoaderInterface
         $controllerDirectory = sprintf(
             '%1$ssrc/%2$s/Zed/%3$s/Communication/Controller/',
             $moduleTransfer->getPath(),
-            $moduleTransfer->getOrganization()->getName(),
+            $moduleTransfer->getOrganizationOrFail()->getName(),
             $moduleTransfer->getName()
         );
 

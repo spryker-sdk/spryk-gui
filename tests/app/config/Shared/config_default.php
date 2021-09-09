@@ -89,6 +89,9 @@ $config[KernelConstants::CORE_NAMESPACES] = [
 // TODO: move more here...
 $config['PROPEL'] = [
     'database' => getenv('SPRYKER_DB_DATABASE'),
+    'paths' => [
+        'loaderScriptDir' => ''
+    ],
 ];
 
 $config[PropelConstants::ZED_DB_ENGINE]
