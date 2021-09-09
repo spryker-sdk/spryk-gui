@@ -26,6 +26,7 @@
         "spryker/propel": "*",
         "spryker/router": "*",
         "spryker/testify": "*",
+        "spryker/translator": "^1.8",
         "spryker/twig": "*",
         "spryker/validator": "*",
         "spryker/zed-navigation": "*"

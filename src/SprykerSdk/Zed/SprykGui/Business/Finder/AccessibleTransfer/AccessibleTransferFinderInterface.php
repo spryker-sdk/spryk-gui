@@ -7,14 +7,14 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business\Finder\AccessibleTransfer;
 
-use Generated\Shared\Transfer\AccessibleTransferCollectionTransfer;
+use Generated\Shared\Transfer\AccessibleClassNameCollectionTransfer;
 
 interface AccessibleTransferFinderInterface
 {
     /**
      * @param string $module
      *
-     * @return \Generated\Shared\Transfer\AccessibleTransferCollectionTransfer
+     * @return \Generated\Shared\Transfer\AccessibleClassNameCollectionTransfer
      */
-    public function findAccessibleTransfers(string $module): AccessibleTransferCollectionTransfer;
+    public function findAccessibleTransfers(string $module): AccessibleClassNameCollectionTransfer;
 }
