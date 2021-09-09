@@ -28,9 +28,7 @@ suites:
                     isolated: true
                     schemaDirectories:
                         - ../../src/*/Shared/*/Transfer/
-                - \SprykerTest\Zed\Form\Helper\FormHelper:
-                    formPlugins:
-                        - \Spryker\Zed\Http\Communication\Plugin\Form\HttpFoundationFormPlugin
+                - \SprykerTest\Shared\Testify\Helper\DependencyHelper
 
     Communication:
         path: Communication/
