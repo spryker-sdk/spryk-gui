@@ -35,7 +35,7 @@ class SprykGuiFacadeTest extends Unit
     public function testGetSprykDefinitionsReturnsListOfSpryks(): void
     {
         $sprykDefinitions = $this->tester->getSprykGuiFacade()->getSprykDefinitions();
-        $this->assertInternalType('array', $sprykDefinitions);
+        $this->assertIsArray($sprykDefinitions);
     }
 
     /**
@@ -54,7 +54,7 @@ class SprykGuiFacadeTest extends Unit
 
         $userInput = [
             'module' => $moduleTransfer,
-            'method' => 'addFooBar',
+            'facadeMethod' => 'addFooBar',
             'input' => 'string $fooBar',
             'output' => 'bool',
             'comment' => "Specification:\r\n- Line one.\r\n- Line two.",
