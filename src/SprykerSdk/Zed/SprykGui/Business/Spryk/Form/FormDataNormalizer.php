@@ -121,8 +121,8 @@ class FormDataNormalizer implements FormDataNormalizerInterface
 
         foreach ($argumentCollectionTransfer->getArguments() as $argumentTransfer) {
             $arguments[] = $this->buildFromArgument($argumentTransfer);
-            if ($argumentTransfer->getArgumentMeta() && $argumentTransfer->getArgumentMeta()->getMethod()) {
-                $methods[] = $argumentTransfer->getArgumentMeta()->getMethod();
+            if ($argumentTransfer->getArgumentMeta() && $argumentTransfer->getArgumentMetaOrFail()->getMethod()) {
+                $methods[] = $argumentTransfer->getArgumentMetaOrFail()->getMethod();
             }
         }
 

@@ -33,7 +33,7 @@ class SprykMainForm extends AbstractType
     protected const DEPENDENT_MODULE = 'dependentModule';
     protected const ARGUMENTS = 'arguments';
     protected const TYPE = 'type';
-    protected const MODULE_FILTER = 'moduleFilter';
+    protected const MODULE_FILTER = "moduleFilter";
 
     /**
      * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
@@ -68,7 +68,7 @@ class SprykMainForm extends AbstractType
         if (array_key_exists(static::DEPENDENT_MODULE, $sprykDefinition[static::ARGUMENTS])) {
             $dependentModuleOptions = [];
             if (isset($sprykDefinition[static::ARGUMENTS][static::DEPENDENT_MODULE][static::MODULE_FILTER])) {
-                $dependentModuleOptions[static::MODULE_FILTER] = $sprykDefinition[static::ARGUMENTS][static::DEPENDENT_MODULE][static::MODULE_FILTER];
+                $dependentModuleOptions[strval(static::MODULE_FILTER)] = $sprykDefinition[static::ARGUMENTS][static::DEPENDENT_MODULE][static::MODULE_FILTER];
             }
             $builder->add(static::DEPENDENT_MODULE, ModuleChoiceType::class, $dependentModuleOptions);
 

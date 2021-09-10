@@ -68,7 +68,7 @@ class SprykDataProvider
     protected function getOptionsBySprykDefinition(SprykDefinitionTransfer $sprykDefinitionTransfer, ModuleTransfer $moduleTransfer): array
     {
         $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
-            $sprykDefinitionTransfer->getName(),
+            $sprykDefinitionTransfer->getNameOrFail(),
             $sprykDefinitionTransfer->getMode()
         );
 
@@ -84,17 +84,17 @@ class SprykDataProvider
         }
 
         $moduleTransfer = $this->sprykGuiFacade->buildOptions($moduleTransfer);
-        $optionTransfer = $moduleTransfer->requireOptions()->getOptions();
+        $optionTransfer = $moduleTransfer->requireOptions()->getOptionsOrFail();
 
         $sprykOptions = [];
 
         if (array_key_exists('input', $sprykDefinition['arguments']) || array_key_exists('constructorArguments', $sprykDefinition['arguments'])) {
-            $argumentCollectionTransfer = $optionTransfer->getArgumentCollection();
+            $argumentCollectionTransfer = $optionTransfer->getArgumentCollectionOrFail();
             $sprykOptions['argumentChoices'] = $argumentCollectionTransfer->getArguments();
         }
 
         if (array_key_exists('output', $sprykDefinition['arguments'])) {
-            $returnTypeCollectionTransfer = $optionTransfer->getReturnTypeCollection();
+            $returnTypeCollectionTransfer = $optionTransfer->getReturnTypeCollectionOrFail();
             $sprykOptions['outputChoices'] = $returnTypeCollectionTransfer->getReturnTypes();
         }
 
@@ -131,7 +131,7 @@ class SprykDataProvider
     protected function addSprykDefinitionDefaultData(array $formData, SprykDefinitionTransfer $sprykDefinitionTransfer): array
     {
         $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
-            $sprykDefinitionTransfer->getName(),
+            $sprykDefinitionTransfer->getNameOrFail(),
             $sprykDefinitionTransfer->getMode()
         );
 

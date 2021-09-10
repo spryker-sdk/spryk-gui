@@ -124,9 +124,9 @@ class SprykGuiFacade extends AbstractFacade implements SprykGuiFacadeInterface
      *
      * @param string $module
      *
-     * @return \Generated\Shared\Transfer\AccessibleTransferCollectionTransfer
+     * @return \Generated\Shared\Transfer\AccessibleClassNameCollectionTransfer
      */
-    public function getAccessibleTransfers(string $module): AccessibleTransferCollectionTransfer
+    public function getAccessibleTransfers(string $module): AccessibleClassNameCollectionTransfer
     {
         return $this->getFactory()->createAccessibleTransferFinder()->findAccessibleTransfers($module);
     }

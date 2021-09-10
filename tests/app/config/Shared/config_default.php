@@ -92,6 +92,7 @@ $config['PROPEL'] = [
     'paths' => [
         'loaderScriptDir' => ''
     ],
+    'dsn' => '',
 ];
 
 $config[PropelConstants::ZED_DB_ENGINE]
