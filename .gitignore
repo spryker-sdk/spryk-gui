@@ -30,9 +30,12 @@ src/*/Zed/*/Static/Assets/sprite
 src/*/Zed/*/Persistence/Propel/Base/*
 src/*/Zed/*/Persistence/Propel/Map/*
 
+src/Generated/*
+src/Spryker/Shared/Testify/Transfer/*
+
 # tests
-tests/app/src/Generated/
-tests/app/src/Spryker/
+config/Shared/config_local.php
+config/Shared/stores.php
 tests/**/_generated/
 tests/_output/*
 !tests/_output/.gitkeep

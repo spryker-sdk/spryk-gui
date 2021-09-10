@@ -30,7 +30,7 @@ class BuildController extends AbstractController
 
         $preBuildForm = $this->getFactory()
             ->createPreBuildForm($sprykDefinitionTransfer)
-            ->handleRequest($request);
+            ->handleRequest();
 
         if ($preBuildForm->isSubmitted() && $preBuildForm->isValid()) {
             return $this->redirectResponse(

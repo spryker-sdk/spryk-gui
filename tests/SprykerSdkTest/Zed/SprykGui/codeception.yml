@@ -21,13 +21,16 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                    projectNamespaces:
+                        - SprykerSdk
                     coreNamespaces:
                         - Spryker
                         - SprykerSdk
                 - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
                     isolated: true
                     schemaDirectories:
-                        - ../../src/*/Shared/*/Transfer/
+                        - /src/*/Shared/*/Transfer/
+                        - /vendor/spryker/*/src/Spryker/Shared/*/Transfer/
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
 
     Communication:
@@ -39,15 +42,17 @@ suites:
                 - \SprykerTest\Shared\Testify\Helper\Environment
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
+                    projectNamespaces:
+                        - SprykerSdk
                     coreNamespaces:
                         - Spryker
                         - SprykerSdk
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
-                - \SprykerTest\Shared\Propel\Helper\TransactionHelper
                 - \SprykerTest\Shared\Transfer\Helper\TransferGenerateHelper:
                     isolated: true
                     schemaDirectories:
-                        - ../../src/*/Shared/*/Transfer/
+                        - /src/*/Shared/*/Transfer/
+                        - /vendor/spryker/*/src/Spryker/Shared/*/Transfer/
                 - \SprykerTest\Zed\ZedNavigation\Helper\BreadcrumbHelper
                 - \SprykerTest\Shared\Application\Helper\ZedHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
@@ -61,9 +66,8 @@ suites:
                           - \Spryker\Zed\Validator\Communication\Plugin\Form\ValidatorFormPlugin
                 - \SprykerTest\Zed\EventDispatcher\Helper\EventDispatcherHelper
                 - \SprykerTest\Zed\Twig\Helper\TwigHelper:
-                      twigPlugins:
-                          - \Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin
-                          - \Spryker\Zed\ZedNavigation\Communication\Plugin\Twig\ZedNavigationTwigPlugin
+                    projectTemplatePath:
+                        - /src/*/Zed/*/Presentation/
                 - \SprykerTest\Zed\Gui\Helper\GuiTwigPluginHelper
                 - \SprykerTest\Zed\Router\Helper\RouterHelper:
                       routerPlugins:
