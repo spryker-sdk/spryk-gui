@@ -22,7 +22,7 @@
         "spryker/container": "*",
         "spryker/event-dispatcher": "*",
         "spryker/form": "*",
-        "spryker/gui": "*",
+        "spryker/gui": "^3.40",
         "spryker/http": "^1.5",
         "spryker/propel": "*",
         "spryker/router": "*",

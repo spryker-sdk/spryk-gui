@@ -67,7 +67,10 @@ suites:
                 - \SprykerTest\Zed\EventDispatcher\Helper\EventDispatcherHelper
                 - \SprykerTest\Zed\Twig\Helper\TwigHelper:
                     projectTemplatePath:
-                        - /src/*/Zed/*/Presentation/
+                        - /src/*/Zed/*/Presentation
+                        - /vendor/spryker/*/src/Spryker/Zed/*/Presentation
+                    twigPlugins:
+                        - \Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin
                 - \SprykerTest\Zed\Gui\Helper\GuiTwigPluginHelper
                 - \SprykerTest\Zed\Router\Helper\RouterHelper:
                       routerPlugins:

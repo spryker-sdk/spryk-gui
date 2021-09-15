@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('APPLICATION_ROOT_DIR')) {
-    define('APPLICATION_ROOT_DIR', __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR);
+    define('APPLICATION_ROOT_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR);
 }
 
 if (!defined('APPLICATION_VENDOR_DIR')) {
