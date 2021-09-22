@@ -34,8 +34,7 @@ src/Generated/*
 src/Spryker/Shared/Testify/Transfer/*
 
 # tests
-config/Shared/config_local.php
-config/Shared/stores.php
+tests/app
 tests/**/_generated/
 tests/_output/*
 !tests/_output/.gitkeep
