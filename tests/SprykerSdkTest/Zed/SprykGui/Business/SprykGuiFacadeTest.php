@@ -45,7 +45,7 @@ class SprykGuiFacadeTest extends Unit
     {
         $organizationTransfer = new OrganizationTransfer();
         $organizationTransfer->setName('Spryker')
-            ->setRootPath(APPLICATION_ROOT_DIR . '/vendor/spryker/spryker/Bundles/%module%/');
+            ->setRootPath(APPLICATION_ROOT_DIR . '/data/%module%/');
 
         $moduleTransfer = new ModuleTransfer();
         $moduleTransfer
