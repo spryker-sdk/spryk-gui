@@ -18,7 +18,8 @@ suites:
         modules:
             enabled:
                 - Asserts
-                - \SprykerTest\Shared\Testify\Helper\Environment
+                - \SprykerTest\Shared\Testify\Helper\Environment:
+                    isolated: true
                 - \SprykerTest\Shared\Testify\Helper\ConfigHelper
                 - \SprykerTest\Shared\Testify\Helper\LocatorHelper:
                     projectNamespaces:
@@ -30,7 +31,6 @@ suites:
                     isolated: true
                     schemaDirectories:
                         - /src/*/Shared/*/Transfer/
-                        - /vendor/spryker/*/src/Spryker/Shared/*/Transfer/
                 - \SprykerTest\Shared\Testify\Helper\DependencyHelper
 
     Communication:
@@ -52,7 +52,6 @@ suites:
                     isolated: true
                     schemaDirectories:
                         - /src/*/Shared/*/Transfer/
-                        - /vendor/spryker/*/src/Spryker/Shared/*/Transfer/
                 - \SprykerTest\Zed\ZedNavigation\Helper\BreadcrumbHelper
                 - \SprykerTest\Shared\Application\Helper\ZedHelper
                 - \SprykerTest\Zed\Testify\Helper\Business\BusinessHelper
@@ -68,7 +67,6 @@ suites:
                 - \SprykerTest\Zed\Twig\Helper\TwigHelper:
                     projectTemplatePath:
                         - /src/*/Zed/*/Presentation
-                        - /vendor/spryker/*/src/Spryker/Zed/*/Presentation
                     twigPlugins:
                         - \Spryker\Zed\Translator\Communication\Plugin\Twig\TranslatorTwigPlugin
                 - \SprykerTest\Zed\Gui\Helper\GuiTwigPluginHelper
