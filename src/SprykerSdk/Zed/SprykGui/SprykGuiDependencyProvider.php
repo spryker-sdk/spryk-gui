@@ -19,8 +19,17 @@ use SprykerSdk\Zed\SprykGui\Dependency\Facade\SprykGuiToSprykFacadeBridge;
  */
 class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
 {
+    /**
+     * @var string
+     */
     public const SPRYK_FACADE = 'SPRYK_FACADE';
+    /**
+     * @var string
+     */
     public const DEVELOPMENT_FACADE = 'DEVELOPMENT_FACADE';
+    /**
+     * @var string
+     */
     public const PLUGIN_GRAPH = 'PLUGIN_GRAPH';
 
     /**

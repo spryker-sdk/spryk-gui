@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ArgumentType extends AbstractType
 {
+    /**
+     * @var string
+     */
     public const ARGUMENT_CHOICES = 'argumentChoices';
 
     /**

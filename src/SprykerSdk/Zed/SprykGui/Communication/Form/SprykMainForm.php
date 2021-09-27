@@ -26,13 +26,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SprykMainForm extends AbstractType
 {
+    /**
+     * @var string
+     */
     public const OPTION_SPRYK = 'spryk';
+    /**
+     * @var string
+     */
     public const OPTION_ENTER_MODULE_MANUALLY = 'enterModuleManually';
 
+    /**
+     * @var string
+     */
     protected const MODULE = 'module';
+    /**
+     * @var string
+     */
     protected const DEPENDENT_MODULE = 'dependentModule';
+    /**
+     * @var string
+     */
     protected const ARGUMENTS = 'arguments';
+    /**
+     * @var string
+     */
     protected const TYPE = 'type';
+    /**
+     * @var string
+     */
     protected const MODULE_FILTER = 'moduleFilter';
 
     /**

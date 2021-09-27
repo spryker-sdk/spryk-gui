@@ -12,7 +12,13 @@ use Generated\Shared\Transfer\OrganizationTransfer;
 
 class OrganizationFinder implements OrganizationFinderInterface
 {
+    /**
+     * @var string
+     */
     protected const NAME_DEVELOPMENT_LAYER_CORE = 'core';
+    /**
+     * @var string
+     */
     protected const NAME_DEVELOPMENT_LAYER_PROJECT = 'project';
 
     /**
