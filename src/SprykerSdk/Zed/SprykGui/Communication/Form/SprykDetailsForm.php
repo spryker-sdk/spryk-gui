@@ -23,9 +23,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SprykDetailsForm extends AbstractType
 {
+    /**
+     * @var string
+     */
     public const OPTION_MODULE = 'module';
+    /**
+     * @var string
+     */
     public const OPTION_EXISTING_MODULE = 'existingModule';
 
+    /**
+     * @var string
+     */
     protected const OPTION_SPRYK = 'spryk';
 
     /**

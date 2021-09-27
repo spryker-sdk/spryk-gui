@@ -27,7 +27,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class AbstractFactoryConstructorType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected const MODULE = 'module';
+    /**
+     * @var string
+     */
     protected const SPRYK = 'spryk';
 
     /**

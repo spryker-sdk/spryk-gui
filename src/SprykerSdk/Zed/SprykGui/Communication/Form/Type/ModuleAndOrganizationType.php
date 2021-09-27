@@ -25,12 +25,30 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ModuleAndOrganizationType extends AbstractType
 {
+    /**
+     * @var string
+     */
     public const OPTION_MODE_FILTER = 'modeFilter';
+    /**
+     * @var string
+     */
     public const OPTION_MODULE_FILTER = 'moduleFilter';
+    /**
+     * @var string
+     */
     public const OPTION_ENTER_MODULE_MANUALLY = 'enterModuleManually';
 
+    /**
+     * @var string
+     */
     protected const MODULE_FILTER_KEY_ORGANIZATION = 'organization';
+    /**
+     * @var string
+     */
     protected const MODULE_FILTER_KEY_APPLICATION = 'application';
+    /**
+     * @var string
+     */
     protected const MODULE_FILTER_KEY_MODULE = 'module';
 
     /**

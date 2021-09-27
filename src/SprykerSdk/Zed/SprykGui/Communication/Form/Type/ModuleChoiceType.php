@@ -25,9 +25,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ModuleChoiceType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected const ORGANIZATION = 'organization';
+    /**
+     * @var string
+     */
     protected const APPLICATION = 'application';
+    /**
+     * @var string
+     */
     protected const MODULE = 'module';
+    /**
+     * @var string
+     */
     protected const MODULE_FILTER = 'moduleFilter';
 
     /**

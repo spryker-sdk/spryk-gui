@@ -12,7 +12,13 @@ use Spryker\Zed\Kernel\AbstractBundleConfig;
 
 class SprykGuiConfig extends AbstractBundleConfig
 {
+    /**
+     * @var string
+     */
     protected const SPRYK_CATEGORY_NAME_TOP_LEVEL = 'Top Level Spryks';
+    /**
+     * @var string
+     */
     protected const SPRYK_CATEGORY_NAME_COMMON = 'Common';
 
     /**

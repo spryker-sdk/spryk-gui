@@ -34,7 +34,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class MethodNameChoiceType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected const MODULE = 'module';
+    /**
+     * @var string
+     */
     protected const CHOICE_LOADER = 'choiceLoader';
 
     /**
