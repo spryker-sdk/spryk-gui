@@ -1,10 +1,13 @@
 <?php
+
+use Spryker\Shared\Config\Config;
+
 if (!defined('MODULE_ROOT_DIR')) {
     define('MODULE_ROOT_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..') . DIRECTORY_SEPARATOR);
 }
 
 if (!defined('APPLICATION_ROOT_DIR')) {
-    define('APPLICATION_ROOT_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR);
+    define('APPLICATION_ROOT_DIR', realpath(__DIR__ . DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR);
 }
 
 if (!defined('APPLICATION_VENDOR_DIR')) {
@@ -20,12 +23,12 @@ if (!defined('APPLICATION_ENV')) {
 }
 
 // Copy config files
-$configSharedTargetDirectory = APPLICATION_ROOT_DIR . 'config' . DIRECTORY_SEPARATOR . 'Shared'  . DIRECTORY_SEPARATOR;
+$configSharedTargetDirectory = APPLICATION_ROOT_DIR . 'config' . DIRECTORY_SEPARATOR . 'Shared' . DIRECTORY_SEPARATOR;
 if (!is_dir($configSharedTargetDirectory)) {
     mkdir($configSharedTargetDirectory, 0777, true);
 }
 
-$configZedTargetDirectory = APPLICATION_ROOT_DIR . 'config' . DIRECTORY_SEPARATOR . 'Zed'  . DIRECTORY_SEPARATOR;
+$configZedTargetDirectory = APPLICATION_ROOT_DIR . 'config' . DIRECTORY_SEPARATOR . 'Zed' . DIRECTORY_SEPARATOR;
 if (!is_dir($configZedTargetDirectory)) {
     mkdir($configZedTargetDirectory, 0777, true);
 }
@@ -37,5 +40,5 @@ copy($configSourceDirectory . 'default_store.php', $configSharedTargetDirectory 
 copy($configSourceDirectory . 'stores.php', $configSharedTargetDirectory . 'stores.php');
 copy(MODULE_ROOT_DIR . 'src/SprykerSdk/Zed/SprykGui/Communication/navigation.xml', $configZedTargetDirectory . 'navigation.xml');
 
-$config = \Spryker\Shared\Config\Config::getInstance();
+$config = Config::getInstance();
 $config->init();

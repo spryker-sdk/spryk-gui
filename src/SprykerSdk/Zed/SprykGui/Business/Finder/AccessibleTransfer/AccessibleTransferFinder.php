@@ -26,7 +26,6 @@ class AccessibleTransferFinder implements AccessibleTransferFinderInterface
 
         $finder->in(APPLICATION_ROOT_DIR . DIRECTORY_SEPARATOR . 'src/Generated/Shared/Transfer/')->contains('/@module(?:[\sA-Za-z|]*)(' . $module . ')/');
         foreach ($finder as $fileInfo) {
-            ;
             $transferClassName = $this->getTransferClassName($fileInfo);
             $transferClassNameCollection->addTransferClassName($transferClassName);
         }
