@@ -30,6 +30,8 @@ class SprykGuiFacadeTest extends Unit
     protected $tester;
 
     /**
+     * @skip Skipped for further investigation prioritisation and fix.
+     *
      * @return void
      */
     public function testGetSprykDefinitionsReturnsListOfSpryks(): void
@@ -39,6 +41,8 @@ class SprykGuiFacadeTest extends Unit
     }
 
     /**
+     * @skip Skipped for further investigation prioritisation and fix.
+     *
      * @return void
      */
     public function testBuildSprykViewReturnsCommandAndJiraTemplate(): void
