@@ -11,7 +11,8 @@
         "spryker/graph": "^3.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/laminas": "^1.0.0",
-        "spryker/symfony": "^3.5.0"
+        "spryker/symfony": "^3.5.0",
+        "spryker/transfer": "^3.25.0"
     },
     "require-dev": {
         "codeception/module-asserts": "^1.3",
@@ -22,12 +23,12 @@
         "spryker/container": "*",
         "spryker/event-dispatcher": "*",
         "spryker/form": "*",
-        "spryker/gui": "^3.40",
-        "spryker/http": "^1.5",
+        "spryker/gui": "^3.40.0",
+        "spryker/http": "^1.5.0",
         "spryker/propel": "*",
         "spryker/router": "*",
         "spryker/testify": "*",
-        "spryker/translator": "^1.8",
+        "spryker/translator": "^1.8.0",
         "spryker/twig": "*",
         "spryker/validator": "*",
         "spryker/zed-navigation": "*"
