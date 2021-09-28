@@ -27,7 +27,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class AbstractFactoryConstructorType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected const MODULE = 'module';
+    /**
+     * @var string
+     */
     protected const SPRYK = 'spryk';
 
     /**
@@ -49,7 +55,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -127,12 +133,12 @@ abstract class AbstractFactoryConstructorType extends AbstractType
             $argumentTransfer = new ArgumentTransfer();
             $argumentTransfer->setName(sprintf(
                 '%s (%s%s::%s())',
-                $methodTransfer->getReturnType()->getName(),
+                $methodTransfer->getReturnTypeOrFail()->getName(),
                 $moduleTransfer->getName(),
                 $this->getFactoryNamePostfix(),
                 $methodTransfer->getName()
             ));
-            $argumentTransfer->setType($methodTransfer->getReturnType()->getType());
+            $argumentTransfer->setType($methodTransfer->getReturnTypeOrFail()->getType());
             $argumentTransfer->setVariable($this->getVariableProposal($methodTransfer));
 
             $argumentTransfer->setArgumentMeta($argumentMetaTransfer);
@@ -143,7 +149,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
     }
 
     /**
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Generated\Shared\Transfer\ModuleTransfer
      */
@@ -159,7 +165,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
      */
     protected function getVariableProposal(MethodInformationTransfer $methodTransfer): string
     {
-        $typeFragments = explode('\\', $methodTransfer->getReturnType()->getName());
+        $typeFragments = explode('\\', $methodTransfer->getReturnTypeOrFail()->getNameOrFail());
         $classOrInterfaceName = array_pop($typeFragments);
         $classOrInterfaceName = str_replace('Interface', '', $classOrInterfaceName);
 

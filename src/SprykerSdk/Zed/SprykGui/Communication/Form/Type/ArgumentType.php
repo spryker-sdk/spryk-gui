@@ -22,6 +22,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ArgumentType extends AbstractType
 {
+    /**
+     * @var string
+     */
     public const ARGUMENT_CHOICES = 'argumentChoices';
 
     /**
@@ -42,7 +45,7 @@ class ArgumentType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */

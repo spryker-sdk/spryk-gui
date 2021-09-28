@@ -10,10 +10,10 @@ namespace SprykerSdk\Zed\SprykGui\Business\Finder\Factory;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\MethodInformationTransfer;
 use Generated\Shared\Transfer\ReturnTypeTransfer;
-use Roave\BetterReflection\BetterReflection;
-use Roave\BetterReflection\Reflection\ReflectionClass;
-use Roave\BetterReflection\Reflection\ReflectionMethod;
-use Roave\BetterReflection\Reflector\Exception\IdentifierNotFound;
+use PHPStan\BetterReflection\BetterReflection;
+use PHPStan\BetterReflection\Reflection\ReflectionClass;
+use PHPStan\BetterReflection\Reflection\ReflectionMethod;
+use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
 
 class FactoryInfoFinder implements FactoryInfoFinderInterface
 {
@@ -103,7 +103,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     }
 
     /**
-     * @param \Roave\BetterReflection\Reflection\ReflectionMethod $method
+     * @param \PHPStan\BetterReflection\Reflection\ReflectionMethod $method
      *
      * @return bool
      */
@@ -117,7 +117,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     }
 
     /**
-     * @param \Roave\BetterReflection\Reflection\ReflectionMethod $method
+     * @param \PHPStan\BetterReflection\Reflection\ReflectionMethod $method
      *
      * @return \Generated\Shared\Transfer\ReturnTypeTransfer
      */
@@ -127,26 +127,48 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
         $returnTypeTransfer->setIsPhpSeven($method->hasReturnType());
 
         if ($method->hasReturnType()) {
-            $returnTypeTransfer->setType($method->getReturnType());
+            $returnTypeTransfer->setType((string)$method->getReturnType());
 
             return $returnTypeTransfer;
         }
 
-        $returnTypes = $method->getDocBlockReturnTypes();
-        $returnStrings = [];
-        foreach ($returnTypes as $returnType) {
-            $returnStrings[] = $returnType->__toString();
-        }
+        $returnTypeFromDocBlock = $this->getReturnTypeFromDocBlock($method);
 
-        $returnTypeTransfer->setType(implode('|', $returnStrings));
+        if ($returnTypeFromDocBlock) {
+            $returnTypeTransfer->setType($returnTypeFromDocBlock);
+        }
 
         return $returnTypeTransfer;
     }
 
     /**
+     * @param \PHPStan\BetterReflection\Reflection\ReflectionMethod $method
+     *
+     * @return string|null
+     */
+    protected function getReturnTypeFromDocBlock(ReflectionMethod $method): ?string
+    {
+        $docBlock = $method->getAst()->getDocComment();
+
+        if (!$docBlock) {
+            return null;
+        }
+
+        preg_match('/(@return\s+)(\S+)/', $docBlock, $matches);
+
+        if (!$matches) {
+            return null;
+        }
+
+        $returnTypes = $matches[2];
+
+        return trim($returnTypes);
+    }
+
+    /**
      * @param string $className
      *
-     * @return \Roave\BetterReflection\Reflection\Reflection|\Roave\BetterReflection\Reflection\ReflectionClass
+     * @return \PHPStan\BetterReflection\Reflection\Reflection|\PHPStan\BetterReflection\Reflection\ReflectionClass
      */
     protected function getReflectedClass(string $className)
     {

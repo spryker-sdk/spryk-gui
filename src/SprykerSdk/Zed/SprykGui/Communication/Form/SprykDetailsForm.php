@@ -23,9 +23,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class SprykDetailsForm extends AbstractType
 {
+    /**
+     * @var string
+     */
     public const OPTION_MODULE = 'module';
+    /**
+     * @var string
+     */
     public const OPTION_EXISTING_MODULE = 'existingModule';
 
+    /**
+     * @var string
+     */
     protected const OPTION_SPRYK = 'spryk';
 
     /**
@@ -50,7 +59,7 @@ class SprykDetailsForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -65,9 +74,9 @@ class SprykDetailsForm extends AbstractType
     }
 
     /**
-     * @param mixed[] $arguments
+     * @param array<string, mixed> $arguments
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     protected function getRelevantArguments(array $arguments): array
     {
@@ -88,7 +97,7 @@ class SprykDetailsForm extends AbstractType
     }
 
     /**
-     * @param mixed[]|null $argumentDefinition
+     * @param array<string, mixed>|null $argumentDefinition
      *
      * @return bool
      */
@@ -99,8 +108,8 @@ class SprykDetailsForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param mixed[] $arguments
-     * @param mixed[] $options
+     * @param array<string, mixed> $arguments
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -114,10 +123,10 @@ class SprykDetailsForm extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param string $argumentName
-     * @param mixed[] $options
-     * @param mixed[]|null $argumentDefinition
+     * @param array<string, mixed> $options
+     * @param array<string, mixed>|null $argumentDefinition
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     protected function addArgumentToForm(
         FormBuilderInterface $builder,
@@ -157,8 +166,8 @@ class SprykDetailsForm extends AbstractType
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
      * @param string $argumentName
-     * @param mixed[] $options
-     * @param mixed[] $argumentDefinition
+     * @param array<string, mixed> $options
+     * @param array<string, mixed> $argumentDefinition
      *
      * @return void
      */
@@ -193,7 +202,7 @@ class SprykDetailsForm extends AbstractType
 
     /**
      * @param string $formTypeClassName
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return bool
      */
@@ -211,10 +220,10 @@ class SprykDetailsForm extends AbstractType
     }
 
     /**
-     * @param mixed[] $options
-     * @param mixed[] $argumentDefinition
+     * @param array<string, mixed> $options
+     * @param array<string, mixed> $argumentDefinition
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     protected function getFormTypeOptions(array $options, array $argumentDefinition): array
     {
@@ -224,7 +233,9 @@ class SprykDetailsForm extends AbstractType
 
         $typeOptions = [];
 
-        foreach ($argumentDefinition['typeOptions'] as $typeOptionName) {
+        /** @var array<string> $typeOptionNames */
+        $typeOptionNames = $argumentDefinition['typeOptions'];
+        foreach ($typeOptionNames as $typeOptionName) {
             if (isset($argumentDefinition[$typeOptionName])) {
                 $typeOptions[$typeOptionName] = $argumentDefinition[$typeOptionName];
             }
@@ -238,7 +249,7 @@ class SprykDetailsForm extends AbstractType
     }
 
     /**
-     * @param mixed[]|null $argumentDefinition
+     * @param array<string, mixed>|null $argumentDefinition
      *
      * @return string
      */
@@ -253,9 +264,9 @@ class SprykDetailsForm extends AbstractType
 
     /**
      * @param string $argumentName
-     * @param mixed[]|null $argumentDefinition
+     * @param array<string, mixed>|null $argumentDefinition
      *
-     * @return mixed[]
+     * @return array<string, mixed>
      */
     protected function getTypeOptions(string $argumentName, ?array $argumentDefinition = null): array
     {

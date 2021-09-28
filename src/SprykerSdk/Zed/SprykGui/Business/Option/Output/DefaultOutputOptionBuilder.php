@@ -43,14 +43,14 @@ class DefaultOutputOptionBuilder implements OptionBuilderInterface
      */
     public function build(ModuleTransfer $moduleTransfer): ModuleTransfer
     {
-        $optionsTransfer = $moduleTransfer->requireOptions()->getOptions();
+        $optionsTransfer = $moduleTransfer->requireOptions()->getOptionsOrFail();
         $returnTypeCollectionTransfer = $optionsTransfer->getReturnTypeCollection();
 
         if (!$returnTypeCollectionTransfer) {
             $returnTypeCollectionTransfer = new ReturnTypeCollectionTransfer();
         }
 
-        $accessibleTransferCollection = $this->accessibleTransferFinder->findAccessibleTransfers($moduleTransfer->getName());
+        $accessibleTransferCollection = $this->accessibleTransferFinder->findAccessibleTransfers($moduleTransfer->getNameOrFail());
 
         foreach ($accessibleTransferCollection->getTransferClassNames() as $transferClassName) {
             $classNameFragments = explode('\\', $transferClassName);

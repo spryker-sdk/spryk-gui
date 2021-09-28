@@ -25,9 +25,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ModuleChoiceType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected const ORGANIZATION = 'organization';
+    /**
+     * @var string
+     */
     protected const APPLICATION = 'application';
+    /**
+     * @var string
+     */
     protected const MODULE = 'module';
+    /**
+     * @var string
+     */
     protected const MODULE_FILTER = 'moduleFilter';
 
     /**
@@ -54,7 +66,7 @@ class ModuleChoiceType extends AbstractType
                 return $moduleTransfer->getName();
             },
             'group_by' => function (ModuleTransfer $moduleTransfer) {
-                return $moduleTransfer->getOrganization()->getName();
+                return $moduleTransfer->getOrganizationOrFail()->getName();
             },
             'data_class' => ModuleTransfer::class,
             'placeholder' => 'Select a module',
@@ -70,7 +82,7 @@ class ModuleChoiceType extends AbstractType
     }
 
     /**
-     * @param array $moduleFilter
+     * @param array<string, mixed> $moduleFilter
      *
      * @return \Generated\Shared\Transfer\ModuleTransfer[]
      */

@@ -4,28 +4,35 @@
     "description": "SprykGui module",
     "license": "proprietary",
     "require": {
+        "ondrejmirtes/better-reflection": "^4.3.0",
         "php": ">=7.3",
-        "roave/better-reflection": "^4.3.0",
-        "spryker-sdk/spryk": "^0.3.0",
+        "spryker-sdk/spryk": "^0.3.1",
         "spryker/development": "^3.12.0",
         "spryker/graph": "^3.0.0",
         "spryker/kernel": "^3.30.0",
         "spryker/laminas": "^1.0.0",
-        "spryker/symfony": "^3.5.0"
+        "spryker/symfony": "^3.5.0",
+        "spryker/transfer": "^3.25.0"
     },
     "require-dev": {
-        "spryker/application": "*",
+        "codeception/module-asserts": "^1.3",
+        "codeception/module-phpbrowser": "^1.0",
+        "phpstan/phpstan": "^0.12.0",
+        "spryker/application": "^3.28.0",
         "spryker/code-sniffer": "*",
-        "spryker/container": "*",
-        "spryker/event-dispatcher": "*",
-        "spryker/form": "*",
-        "spryker/gui": "*",
-        "spryker/propel": "*",
-        "spryker/router": "*",
-        "spryker/testify": "*",
-        "spryker/twig": "*",
-        "spryker/validator": "*",
-        "spryker/zed-navigation": "*"
+        "spryker/config": "^3.5.0",
+        "spryker/container": "^1.4.2",
+        "spryker/event-dispatcher": "^1.2.0",
+        "spryker/form": "^1.0.0",
+        "spryker/gui": "^3.40.0",
+        "spryker/http": "^1.5.0",
+        "spryker/propel": "^3.30.0",
+        "spryker/router": "^1.12.0",
+        "spryker/testify": "^3.40.0",
+        "spryker/translator": "^1.8.0",
+        "spryker/twig": "^3.13.0",
+        "spryker/validator": "^1.1.0",
+        "spryker/zed-navigation": "^1.5.0"
     },
     "autoload": {
         "psr-4": {
@@ -34,14 +41,19 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SprykerSdkTest\\": "tests/SprykerSdkTest/"
+            "SprykerSdkTest\\": "tests/SprykerSdkTest/",
+            "SprykerGuiTest\\": "tests/_data/"
         }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
-        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/"
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml --ignore=/tests/app/,/tests/_data/ src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml --ignore=/tests/app/,/tests/_data/ src/ tests/",
+        "stan": "phpstan analyse",
+        "test": "codecept run -x Communication",
+        "lowest": "validate-prefer-lowest -m",
+        "lowest-setup": "composer update --prefer-lowest --prefer-stable --prefer-dist --no-interaction && cp composer.json composer.backup && composer require --dev dereuromark/composer-prefer-lowest && mv composer.backup composer.json"
     },
     "extra": {
         "branch-alias": {

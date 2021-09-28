@@ -43,8 +43,8 @@
         <property name="name" type="string"/>
     </transfer>
 
-    <transfer name="AccessibleTransferCollection">
-        <property name="transferClassNames" type="array" singular="transferClassName"/>
+    <transfer name="AccessibleClassNameCollection">
+        <property name="transferClassNames" type="string[]" singular="transferClassName"/>
     </transfer>
 
     <transfer name="ClassInformation">

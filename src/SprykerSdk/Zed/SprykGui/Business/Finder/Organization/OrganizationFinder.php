@@ -12,22 +12,28 @@ use Generated\Shared\Transfer\OrganizationTransfer;
 
 class OrganizationFinder implements OrganizationFinderInterface
 {
+    /**
+     * @var string
+     */
     protected const NAME_DEVELOPMENT_LAYER_CORE = 'core';
+    /**
+     * @var string
+     */
     protected const NAME_DEVELOPMENT_LAYER_PROJECT = 'project';
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $coreOrganizationList;
 
     /**
-     * @var array
+     * @var array<string>
      */
     protected $projectOrganizationList;
 
     /**
-     * @param array $coreOrganizationList
-     * @param array $projectOrganizationList
+     * @param array<string> $coreOrganizationList
+     * @param array<string> $projectOrganizationList
      */
     public function __construct(array $coreOrganizationList, array $projectOrganizationList)
     {
@@ -59,7 +65,7 @@ class OrganizationFinder implements OrganizationFinderInterface
     }
 
     /**
-     * @param array $organizationNamespaces
+     * @param array<string> $organizationNamespaces
      * @param bool $isProjectDevelopmentLayer
      *
      * @return \Generated\Shared\Transfer\OrganizationCollectionTransfer

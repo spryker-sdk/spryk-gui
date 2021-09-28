@@ -29,7 +29,7 @@ class ZedFacadeMethodChoiceLoader extends AbstractMethodChoiceLoader
      */
     protected function getClassName(ModuleTransfer $moduleTransfer): string
     {
-        $dependentModule = $moduleTransfer->getDependentModule();
+        $dependentModule = $moduleTransfer->getDependentModuleOrFail();
 
         return sprintf('Spryker\\Zed\\%1$s\\Business\\%1$sFacade', $dependentModule->getName());
     }
@@ -52,6 +52,6 @@ class ZedFacadeMethodChoiceLoader extends AbstractMethodChoiceLoader
      */
     protected function buildChoiceLabel(ModuleTransfer $moduleTransfer, ReflectionMethod $reflectionMethod): string
     {
-        return sprintf('%sFacade::%s()', $moduleTransfer->getDependentModule()->getName(), $reflectionMethod->getName());
+        return sprintf('%sFacade::%s()', $moduleTransfer->getDependentModuleOrFail()->getName(), $reflectionMethod->getName());
     }
 }

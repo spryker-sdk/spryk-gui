@@ -25,7 +25,7 @@ class ZedBusinessDependencyType extends AbstractFactoryConstructorType
     {
         return sprintf(
             '\%1$s\Zed\%2$s\Business\%2$s%3$s',
-            $moduleTransfer->getOrganization()->getName(),
+            $moduleTransfer->getOrganizationOrFail()->getName(),
             $moduleTransfer->getName(),
             $this->getFactoryNamePostfix()
         );

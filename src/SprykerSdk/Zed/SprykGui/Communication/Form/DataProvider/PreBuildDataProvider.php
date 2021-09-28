@@ -34,7 +34,7 @@ class PreBuildDataProvider
     public function getData(SprykDefinitionTransfer $sprykDefinitionTransfer): array
     {
         $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
-            $sprykDefinitionTransfer->getName(),
+            $sprykDefinitionTransfer->getNameOrFail(),
             $sprykDefinitionTransfer->getMode()
         );
 

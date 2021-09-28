@@ -20,12 +20,12 @@ class ServiceMethodChoiceLoader extends AbstractMethodChoiceLoader
      */
     protected function getClassName(ModuleTransfer $moduleTransfer): string
     {
-        $dependentModule = $moduleTransfer->getDependentModule();
+        $dependentModule = $moduleTransfer->getDependentModuleOrFail();
 
         return sprintf(
             '%1$s\\Service\\%2$s\\%2$sService',
-            $dependentModule->getOrganization()->getName(),
-            $dependentModule->getName()
+            $dependentModule->getOrganizationOrFail()->getNameOrFail(),
+            $dependentModule->getNameOrFail()
         );
     }
 
@@ -47,6 +47,6 @@ class ServiceMethodChoiceLoader extends AbstractMethodChoiceLoader
      */
     protected function buildChoiceLabel(ModuleTransfer $moduleTransfer, ReflectionMethod $reflectionMethod): string
     {
-        return sprintf('%sService::%s()', $moduleTransfer->getDependentModule()->getName(), $reflectionMethod->getName());
+        return sprintf('%sService::%s()', $moduleTransfer->getDependentModuleOrFail()->getName(), $reflectionMethod->getName());
     }
 }

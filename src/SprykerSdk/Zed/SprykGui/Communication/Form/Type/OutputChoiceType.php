@@ -19,6 +19,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class OutputChoiceType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected const OUTPUT_CHOICES = 'outputChoices';
 
     /**

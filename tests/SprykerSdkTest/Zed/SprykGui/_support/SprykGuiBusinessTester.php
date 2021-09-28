@@ -8,6 +8,8 @@
 namespace SprykerSdkTest\Zed\SprykGui;
 
 use Codeception\Actor;
+use Generated\Shared\Transfer\ClassInformationTransfer;
+use Generated\Shared\Transfer\MethodInformationTransfer;
 use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
 
 /**
@@ -47,7 +49,7 @@ class SprykGuiBusinessTester extends Actor
     {
         $this->assertArrayHasKey('commandLine', $sprykView);
 
-        $expectedCommandLine = 'vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --method=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n';
+        $expectedCommandLine = 'vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --organization=\'Spryker\' --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --facadeMethod=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n';
         $this->assertSame($expectedCommandLine, $sprykView['commandLine']);
     }
 
@@ -62,19 +64,20 @@ class SprykGuiBusinessTester extends Actor
 
         $expectedJiraTemplate = '
 {code:title=AddZedBusinessFacadeMethod|theme=Midnight|linenumbers=true|collapse=true}
-vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --method=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n
+vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --organization=\'Spryker\' --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --facadeMethod=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n
+
+"organization"
+// Spryker
 
 "module"
 // FooBar
-
-"organization"
 
 "comment"
 // Specification:
 // - Line one.
 // - Line two.
 
-"method"
+"facadeMethod"
 // addFooBar
 
 "input"
@@ -85,5 +88,49 @@ vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --module=\'FooBar\' --c
 
 {code}';
         $this->assertSame($expectedJiraTemplate, $sprykView['jiraTemplate']);
+    }
+
+    /**
+     * @param string $expectedMethodName
+     * @param string $expectedReturnType
+     * @param \Generated\Shared\Transfer\ClassInformationTransfer $classInformationTransfer
+     *
+     * @return void
+     */
+    public function classInformationHasMethodWithReturnType(
+        string $expectedMethodName,
+        string $expectedReturnType,
+        ClassInformationTransfer $classInformationTransfer
+    ): void {
+        $methodInformationTransfer = $this->getMethodInformationTransferByMethodName($expectedMethodName, $classInformationTransfer);
+        $this->assertInstanceOf(MethodInformationTransfer::class, $methodInformationTransfer, sprintf('Method with name "%s" not found.', $expectedMethodName));
+
+        $this->assertSame($methodInformationTransfer->getReturnType()->getType(), $expectedReturnType, sprintf(
+            'Method "%s" does not have the expected return type "%s" found "%s"',
+            $expectedMethodName,
+            $expectedReturnType,
+            $methodInformationTransfer->getReturnType()->getType()
+        ));
+    }
+
+    /**
+     * @param string $methodName
+     * @param \Generated\Shared\Transfer\ClassInformationTransfer $classInformationTransfer
+     *
+     * @return \Generated\Shared\Transfer\MethodInformationTransfer|null
+     */
+    protected function getMethodInformationTransferByMethodName(
+        string $methodName,
+        ClassInformationTransfer $classInformationTransfer
+    ): ?MethodInformationTransfer {
+        foreach ($classInformationTransfer->getMethods() as $methodInformationTransfer) {
+            if ($methodInformationTransfer->getName() !== $methodName) {
+                continue;
+            }
+
+            return $methodInformationTransfer;
+        }
+
+        return null;
     }
 }
