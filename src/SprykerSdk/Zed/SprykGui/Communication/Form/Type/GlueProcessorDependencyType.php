@@ -25,7 +25,7 @@ class GlueProcessorDependencyType extends AbstractFactoryConstructorType
     {
         return sprintf(
             '\%1$s\Glue\%2$s\%2$s%3$s',
-            $moduleTransfer->getOrganization()->getName(),
+            $moduleTransfer->getOrganizationOrFail()->getName(),
             $moduleTransfer->getName(),
             $this->getFactoryNamePostfix()
         );

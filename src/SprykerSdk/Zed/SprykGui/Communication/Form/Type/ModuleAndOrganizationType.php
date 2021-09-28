@@ -106,7 +106,7 @@ class ModuleAndOrganizationType extends AbstractType
 
         foreach ($modules as $module) {
             $choices[] = $module->getName();
-            $organizationToModuleMap[$module->getName()] = $module->getOrganization()->getName();
+            $organizationToModuleMap[$module->getName()] = $module->getOrganizationOrFail()->getName();
         }
 
         $builder->add('name', ChoiceType::class, [
