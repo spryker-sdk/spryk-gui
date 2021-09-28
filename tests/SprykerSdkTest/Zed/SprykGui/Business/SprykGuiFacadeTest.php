@@ -10,6 +10,7 @@ namespace SprykerSdkTest\Zed\SprykGui\Business;
 use Codeception\Test\Unit;
 use Generated\Shared\Transfer\ModuleTransfer;
 use Generated\Shared\Transfer\OrganizationTransfer;
+use SprykerGuiTest\FactoryStub;
 
 /**
  * Auto-generated group annotations
@@ -66,5 +67,41 @@ class SprykGuiFacadeTest extends Unit
         $sprykView = $this->tester->getSprykGuiFacade()->buildSprykView('AddZedBusinessFacadeMethod', $userInput);
         $this->tester->assertCommandLine($sprykView);
         $this->tester->assertJiraTemplate($sprykView);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetFactoryInformationFindsSingleReturnTypeFromDocblock(): void
+    {
+        // Act
+        $classInformationTransfer = $this->tester->getSprykGuiFacade()->getFactoryInformation(FactoryStub::class);
+
+        // Assert
+        $this->tester->classInformationHasMethodWithReturnType('methodWithOneDocBlockReturnType', 'void', $classInformationTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetFactoryInformationFindsPipedReturnTypeFromDocblock(): void
+    {
+        // Act
+        $classInformationTransfer = $this->tester->getSprykGuiFacade()->getFactoryInformation(FactoryStub::class);
+
+        // Assert
+        $this->tester->classInformationHasMethodWithReturnType('methodWithPipedDocBlockReturnTypes', 'int|string', $classInformationTransfer);
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetFactoryInformationFindsReturnType(): void
+    {
+        // Act
+        $classInformationTransfer = $this->tester->getSprykGuiFacade()->getFactoryInformation(FactoryStub::class);
+
+        // Assert
+        $this->tester->classInformationHasMethodWithReturnType('methodWithReturnType', 'void', $classInformationTransfer);
     }
 }

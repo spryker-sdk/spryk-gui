@@ -8,6 +8,8 @@
 namespace SprykerSdkTest\Zed\SprykGui;
 
 use Codeception\Actor;
+use Generated\Shared\Transfer\ClassInformationTransfer;
+use Generated\Shared\Transfer\MethodInformationTransfer;
 use SprykerSdk\Zed\SprykGui\Business\SprykGuiFacadeInterface;
 
 /**
@@ -86,5 +88,49 @@ vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --organization=\'Spryke
 
 {code}';
         $this->assertSame($expectedJiraTemplate, $sprykView['jiraTemplate']);
+    }
+
+    /**
+     * @param string $expectedMethodName
+     * @param string $expectedReturnType
+     * @param \Generated\Shared\Transfer\ClassInformationTransfer $classInformationTransfer
+     *
+     * @return void
+     */
+    public function classInformationHasMethodWithReturnType(
+        string $expectedMethodName,
+        string $expectedReturnType,
+        ClassInformationTransfer $classInformationTransfer
+    ): void {
+        $methodInformationTransfer = $this->getMethodInformationTransferByMethodName($expectedMethodName, $classInformationTransfer);
+        $this->assertInstanceOf(MethodInformationTransfer::class, $methodInformationTransfer, sprintf('Method with name "%s" not found.', $expectedMethodName));
+
+        $this->assertSame($methodInformationTransfer->getReturnType()->getType(), $expectedReturnType, sprintf(
+            'Method "%s" does not have the expected return type "%s" found "%s"',
+            $expectedMethodName,
+            $expectedReturnType,
+            $methodInformationTransfer->getReturnType()->getType()
+        ));
+    }
+
+    /**
+     * @param string $methodName
+     * @param \Generated\Shared\Transfer\ClassInformationTransfer $classInformationTransfer
+     *
+     * @return \Generated\Shared\Transfer\MethodInformationTransfer|null
+     */
+    protected function getMethodInformationTransferByMethodName(
+        string $methodName,
+        ClassInformationTransfer $classInformationTransfer
+    ): ?MethodInformationTransfer {
+        foreach ($classInformationTransfer->getMethods() as $methodInformationTransfer) {
+            if ($methodInformationTransfer->getName() !== $methodName) {
+                continue;
+            }
+
+            return $methodInformationTransfer;
+        }
+
+        return null;
     }
 }

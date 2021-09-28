@@ -127,20 +127,40 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
         $returnTypeTransfer->setIsPhpSeven($method->hasReturnType());
 
         if ($method->hasReturnType()) {
-            $returnTypeTransfer->setType($method->getReturnType());
+            $returnTypeTransfer->setType((string)$method->getReturnType());
 
             return $returnTypeTransfer;
         }
 
-        $returnTypes = $method->getDocBlockReturnTypes();
-        $returnStrings = [];
-        foreach ($returnTypes as $returnType) {
-            $returnStrings[] = $returnType->__toString();
+        $returnTypeFromDocBlock = $this->getReturnTypeFromDocBlock($method);
+
+        if ($returnTypeFromDocBlock) {
+            $returnTypeTransfer->setType($returnTypeFromDocBlock);
         }
 
-        $returnTypeTransfer->setType(implode('|', $returnStrings));
-
         return $returnTypeTransfer;
+    }
+
+    /**
+     * @return string|null
+     */
+    protected function getReturnTypeFromDocBlock(ReflectionMethod $method): ?string
+    {
+        $docBlock = $method->getAst()->getDocComment();
+
+        if (!$docBlock) {
+            return null;
+        }
+
+        preg_match('/(@return\s+)(\S+)/', $docBlock, $matches);
+
+        if (!$matches) {
+            return null;
+        }
+
+        $returnTypes = array_pop($matches);
+
+        return trim($returnTypes);
     }
 
     /**
