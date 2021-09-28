@@ -160,7 +160,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
             return null;
         }
 
-        $returnTypes = $matches[0];
+        $returnTypes = $matches[2];
 
         return trim($returnTypes);
     }
