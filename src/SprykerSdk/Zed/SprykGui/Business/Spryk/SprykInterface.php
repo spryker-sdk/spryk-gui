@@ -20,7 +20,7 @@ interface SprykInterface
      *
      * @return array<string, mixed>
      */
-    public function buildSprykView(string $sprykName, array $sprykArguments);
+    public function buildSprykView(string $sprykName, array $sprykArguments): array;
 
     /**
      * @param string $sprykName

@@ -21,6 +21,7 @@ class FactoryStub
      */
     public function methodWithPipedDocBlockReturnTypes()
     {
+        return '';
     }
 
     /**

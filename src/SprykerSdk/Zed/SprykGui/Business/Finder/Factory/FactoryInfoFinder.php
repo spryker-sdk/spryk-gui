@@ -142,6 +142,8 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     }
 
     /**
+     * @param \PHPStan\BetterReflection\Reflection\ReflectionMethod $method
+     *
      * @return string|null
      */
     protected function getReturnTypeFromDocBlock(ReflectionMethod $method): ?string
@@ -158,7 +160,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
             return null;
         }
 
-        $returnTypes = array_pop($matches);
+        $returnTypes = $matches[0];
 
         return trim($returnTypes);
     }
