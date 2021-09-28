@@ -71,7 +71,7 @@ class SprykMainForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param mixed[] $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -81,6 +81,7 @@ class SprykMainForm extends AbstractType
 
         $spryk = $options[static::OPTION_SPRYK];
 
+        /** @var \Symfony\Component\Form\FormBuilderInterface $builder */
         $mode = $builder->getData()['mode'] ?? null;
         $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
@@ -99,10 +100,11 @@ class SprykMainForm extends AbstractType
         $this->addNextButton($builder);
 
         $builder->get($typeToAddListenerTo)->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($options, $builder, $sprykDefinition): void {
+            /** @var \Symfony\Component\Form\FormInterface $form */
             $form = $event->getForm()->getParent();
             $moduleTransfer = $this->getModuleTransferFromForm($form);
 
-            if ($moduleTransfer->getName() && ($moduleTransfer->getOrganization() && $moduleTransfer->getOrganization()->getName())) {
+            if ($moduleTransfer->getName() && ($moduleTransfer->getOrganization() && $moduleTransfer->getOrganizationOrFail()->getName())) {
                 $form->remove('next');
 
                 if ($form->has(static::DEPENDENT_MODULE)) {
@@ -134,8 +136,8 @@ class SprykMainForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param mixed[] $options
-     * @param mixed[] $sprykDefinition
+     * @param array<string, mixed> $options
+     * @param array<string, mixed> $sprykDefinition
      *
      * @return void
      */

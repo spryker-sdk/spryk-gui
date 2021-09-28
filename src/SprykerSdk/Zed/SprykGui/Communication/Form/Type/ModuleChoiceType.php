@@ -66,7 +66,7 @@ class ModuleChoiceType extends AbstractType
                 return $moduleTransfer->getName();
             },
             'group_by' => function (ModuleTransfer $moduleTransfer) {
-                return $moduleTransfer->getOrganization()->getName();
+                return $moduleTransfer->getOrganizationOrFail()->getName();
             },
             'data_class' => ModuleTransfer::class,
             'placeholder' => 'Select a module',
@@ -82,7 +82,7 @@ class ModuleChoiceType extends AbstractType
     }
 
     /**
-     * @param array $moduleFilter
+     * @param array<string, mixed> $moduleFilter
      *
      * @return \Generated\Shared\Transfer\ModuleTransfer[]
      */

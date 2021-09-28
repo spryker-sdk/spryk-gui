@@ -47,7 +47,7 @@ class SprykGuiBusinessTester extends Actor
     {
         $this->assertArrayHasKey('commandLine', $sprykView);
 
-        $expectedCommandLine = 'vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --method=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n';
+        $expectedCommandLine = 'vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --organization=\'Spryker\' --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --facadeMethod=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n';
         $this->assertSame($expectedCommandLine, $sprykView['commandLine']);
     }
 
@@ -62,19 +62,20 @@ class SprykGuiBusinessTester extends Actor
 
         $expectedJiraTemplate = '
 {code:title=AddZedBusinessFacadeMethod|theme=Midnight|linenumbers=true|collapse=true}
-vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --method=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n
+vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --organization=\'Spryker\' --module=\'FooBar\' --comment=\'Specification:\' --comment=\'- Line one.\' --comment=\'- Line two.\' --facadeMethod=\'addFooBar\' --input=\'string $fooBar\' --output=\'bool\' -n
+
+"organization"
+// Spryker
 
 "module"
 // FooBar
-
-"organization"
 
 "comment"
 // Specification:
 // - Line one.
 // - Line two.
 
-"method"
+"facadeMethod"
 // addFooBar
 
 "input"

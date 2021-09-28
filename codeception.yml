@@ -4,6 +4,8 @@ actor: Tester
 include:
     - tests/SprykerSdkTest/Zed/SprykGui
 
+bootstrap: bootstrap.php
+
 paths:
     tests: tests
     log: tests/_output
@@ -11,7 +13,6 @@ paths:
     support: tests/_support
     envs: tests/_envs
 settings:
-    bootstrap: _bootstrap.php
     suite_class: \PHPUnit\Framework\TestCase
     colors: true
     memory_limit: 1024M
@@ -19,10 +20,3 @@ settings:
 coverage:
     enabled: true
     whitelist: { include: ['src/*'] }
-
-extensions:
-    enabled:
-        - Codeception\Extension\Phantoman
-    config:
-        Codeception\Extension\Phantoman:
-            suites: ['Communication']

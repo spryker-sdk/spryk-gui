@@ -20,7 +20,7 @@ class ClientMethodChoiceLoader extends AbstractMethodChoiceLoader
      */
     protected function getClassName(ModuleTransfer $moduleTransfer): string
     {
-        $dependentModule = $moduleTransfer->getDependentModule();
+        $dependentModule = $moduleTransfer->getDependentModuleOrFail();
 
         return sprintf('Spryker\\Client\\%1$s\\%1$sClient', $dependentModule->getName());
     }
@@ -43,6 +43,6 @@ class ClientMethodChoiceLoader extends AbstractMethodChoiceLoader
      */
     protected function buildChoiceLabel(ModuleTransfer $moduleTransfer, ReflectionMethod $reflectionMethod): string
     {
-        return sprintf('%sClient::%s()', $moduleTransfer->getDependentModule()->getName(), $reflectionMethod->getName());
+        return sprintf('%sClient::%s()', $moduleTransfer->getDependentModuleOrFail()->getName(), $reflectionMethod->getName());
     }
 }

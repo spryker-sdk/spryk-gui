@@ -10,9 +10,9 @@ namespace SprykerSdk\Zed\SprykGui\Business\Spryk\Form;
 interface FormDataNormalizerInterface
 {
     /**
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function normalizeFormData(array $formData): array;
 }

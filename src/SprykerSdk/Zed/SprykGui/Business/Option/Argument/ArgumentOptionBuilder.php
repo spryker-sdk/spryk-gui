@@ -43,13 +43,13 @@ class ArgumentOptionBuilder implements OptionBuilderInterface
      */
     public function build(ModuleTransfer $moduleTransfer): ModuleTransfer
     {
-        $optionsTransfer = $moduleTransfer->requireOptions()->getOptions();
+        $optionsTransfer = $moduleTransfer->requireOptions()->getOptionsOrFail();
         $argumentCollectionTransfer = $optionsTransfer->getArgumentCollection();
         if (!$argumentCollectionTransfer) {
             $argumentCollectionTransfer = new ArgumentCollectionTransfer();
         }
 
-        $accessibleTransferCollection = $this->accessibleTransferFinder->findAccessibleTransfers($moduleTransfer->getName());
+        $accessibleTransferCollection = $this->accessibleTransferFinder->findAccessibleTransfers($moduleTransfer->getNameOrFail());
         foreach ($accessibleTransferCollection->getTransferClassNames() as $transferClassName) {
             $classNameFragments = explode('\\', $transferClassName);
             $classNameShort = array_pop($classNameFragments);

@@ -3,5 +3,8 @@
   },
   "exclude": {
     "SprykFacade": "Spryk Module not finalized."
+  },
+  "include-dev": {
+    "codeception/module-asserts": "A Codeception module containing various assertions."
   }
 }

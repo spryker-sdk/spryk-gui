@@ -14,16 +14,20 @@
         "spryker/symfony": "^3.5.0"
     },
     "require-dev": {
+        "codeception/module-asserts": "^1.3",
+        "codeception/module-phpbrowser": "^1.0",
         "phpstan/phpstan": "^0.12.0",
         "spryker/application": "*",
         "spryker/code-sniffer": "*",
         "spryker/container": "*",
         "spryker/event-dispatcher": "*",
         "spryker/form": "*",
-        "spryker/gui": "*",
+        "spryker/gui": "^3.40",
+        "spryker/http": "^1.5",
         "spryker/propel": "*",
         "spryker/router": "*",
         "spryker/testify": "*",
+        "spryker/translator": "^1.8",
         "spryker/twig": "*",
         "spryker/validator": "*",
         "spryker/zed-navigation": "*"
@@ -41,9 +45,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
-        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
-        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml src/ tests/",
-        "stan": "phpstan analyse src/"
+        "cs-check": "phpcs -p -s --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml --ignore=/tests/app/ src/ tests/",
+        "cs-fix": "phpcbf -p --standard=vendor/spryker/code-sniffer/SprykerStrict/ruleset.xml --ignore=/tests/app/ src/ tests/",
+        "stan": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/codecept run -x Communication"
     },
     "extra": {
         "branch-alias": {

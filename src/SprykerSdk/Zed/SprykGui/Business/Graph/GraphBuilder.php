@@ -50,9 +50,9 @@ class GraphBuilder implements GraphBuilderInterface
     }
 
     /**
-     * @param array $sprykDefinitions
+     * @param array<string, array> $sprykDefinitions
      * @param string $sprykName
-     * @param array $existingSpryks
+     * @param array<string> $existingSpryks
      *
      * @return void
      */
