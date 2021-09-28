@@ -26,7 +26,7 @@
         "spryker/form": "^1.0.0",
         "spryker/gui": "^3.40.0",
         "spryker/http": "^1.5.0",
-        "spryker/propel": "^3.30",
+        "spryker/propel": "^3.30.0",
         "spryker/router": "^1.12.0",
         "spryker/testify": "^3.40.0",
         "spryker/translator": "^1.8.0",
