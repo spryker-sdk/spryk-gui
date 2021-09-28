@@ -82,7 +82,7 @@ class ModuleChoiceType extends AbstractType
     }
 
     /**
-     * @param array $moduleFilter
+     * @param array<string, mixed> $moduleFilter
      *
      * @return \Generated\Shared\Transfer\ModuleTransfer[]
      */

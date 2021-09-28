@@ -17,9 +17,9 @@ use Generated\Shared\Transfer\ReturnTypeTransfer;
 class FormDataNormalizer implements FormDataNormalizerInterface
 {
     /**
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function normalizeFormData(array $formData): array
     {
@@ -27,8 +27,8 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     }
 
     /**
-     * @param array $data
-     * @param array $normalizedData
+     * @param array<string, mixed> $data
+     * @param array<string, mixed> $normalizedData
      *
      * @return array
      */
@@ -86,7 +86,7 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     }
 
     /**
-     * @param mixed[] $data
+     * @param array<string, mixed> $data
      *
      * @return \Generated\Shared\Transfer\OrganizationTransfer|null
      */
@@ -110,9 +110,9 @@ class FormDataNormalizer implements FormDataNormalizerInterface
     /**
      * @param string $argumentName
      * @param \Generated\Shared\Transfer\ArgumentCollectionTransfer $argumentCollectionTransfer
-     * @param array $normalizedData
+     * @param array<string, mixed> $normalizedData
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function normalizeArgumentCollection(string $argumentName, ArgumentCollectionTransfer $argumentCollectionTransfer, array $normalizedData): array
     {

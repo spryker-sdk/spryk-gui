@@ -69,7 +69,7 @@ class ModuleAndOrganizationType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -87,7 +87,7 @@ class ModuleAndOrganizationType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param mixed[] $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -125,7 +125,7 @@ class ModuleAndOrganizationType extends AbstractType
     }
 
     /**
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \ArrayObject|\Generated\Shared\Transfer\OrganizationTransfer[]
      */
@@ -143,7 +143,7 @@ class ModuleAndOrganizationType extends AbstractType
     }
 
     /**
-     * @param array $moduleFilter
+     * @param array<string, mixed> $moduleFilter
      *
      * @return \Generated\Shared\Transfer\ModuleTransfer[]
      */

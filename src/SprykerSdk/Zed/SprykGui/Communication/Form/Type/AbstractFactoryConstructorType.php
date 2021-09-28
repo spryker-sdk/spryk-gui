@@ -55,7 +55,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -149,7 +149,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
     }
 
     /**
-     * @param array $options
+     * @param array<string, mixed> $options
      *
      * @return \Generated\Shared\Transfer\ModuleTransfer
      */

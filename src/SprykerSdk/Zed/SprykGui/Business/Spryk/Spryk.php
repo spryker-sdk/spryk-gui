@@ -66,9 +66,9 @@ class Spryk implements SprykInterface
 
     /**
      * @param string $sprykName
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function buildSprykView(string $sprykName, array $formData): array
     {
@@ -85,7 +85,7 @@ class Spryk implements SprykInterface
 
     /**
      * @param string $sprykName
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
      * @return string
      */
@@ -131,7 +131,7 @@ class Spryk implements SprykInterface
     }
 
     /**
-     * @param array $sprykDefinitions
+     * @param array<string, array> $sprykDefinitions
      *
      * @return array
      */
@@ -163,7 +163,7 @@ class Spryk implements SprykInterface
 
     /**
      * @param string $sprykName
-     * @param mixed[] $sprykDefinition
+     * @param array<string, mixed> $sprykDefinition
      *
      * @return string
      */
@@ -196,7 +196,7 @@ class Spryk implements SprykInterface
 
     /**
      * @param string $sprykName
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
      * @return string
      */
@@ -219,7 +219,7 @@ class Spryk implements SprykInterface
 
     /**
      * @param string $sprykName
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
      * @return array
      */
@@ -279,7 +279,7 @@ class Spryk implements SprykInterface
 
     /**
      * @param string $argumentName
-     * @param array $formData
+     * @param array<string, mixed> $formData
      *
      * @return mixed
      */
@@ -293,16 +293,18 @@ class Spryk implements SprykInterface
     }
 
     /**
-     * @param array $sprykDefinition
-     * @param array $formData
+     * @param array<string, mixed> $sprykDefinition
+     * @param array<string, mixed> $formData
      *
-     * @return array
+     * @return array<string, mixed>
      */
     protected function filterSprykArguments(array $sprykDefinition, array $formData): array
     {
         $sprykArguments = [];
 
-        foreach ($sprykDefinition['arguments'] as $argumentName => $argumentDefinition) {
+        /** @var array<string, mixed> $arguments */
+        $arguments = $sprykDefinition['arguments'];
+        foreach ($arguments as $argumentName => $argumentDefinition) {
             if (isset($argumentDefinition['value']) || isset($argumentDefinition['callbackOnly'])) {
                 continue;
             }
@@ -319,7 +321,7 @@ class Spryk implements SprykInterface
     }
 
     /**
-     * @param array $argumentDefinition
+     * @param array<string, \Generated\Shared\Transfer\ArgumentTransfer> $argumentDefinition
      *
      * @return \Generated\Shared\Transfer\ArgumentTransfer
      */

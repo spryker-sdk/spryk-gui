@@ -71,7 +71,7 @@ class SprykMainForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param mixed[] $options
+     * @param array<string, mixed> $options
      *
      * @return void
      */
@@ -136,8 +136,8 @@ class SprykMainForm extends AbstractType
 
     /**
      * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     * @param mixed[] $options
-     * @param mixed[] $sprykDefinition
+     * @param array<string, mixed> $options
+     * @param array<string, mixed> $sprykDefinition
      *
      * @return void
      */

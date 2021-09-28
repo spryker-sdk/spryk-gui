@@ -123,7 +123,7 @@ class SprykDataProvider
     }
 
     /**
-     * @param array $formData
+     * @param array<string, mixed> $formData
      * @param \Generated\Shared\Transfer\SprykDefinitionTransfer $sprykDefinitionTransfer
      *
      * @return array
