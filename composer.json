@@ -25,8 +25,11 @@
         "spryker/event-dispatcher": "^1.2.0",
         "spryker/form": "^1.0.0",
         "spryker/gui": "^3.40.0",
+        "spryker/http": "^1.5.0",
+        "spryker/propel": "^3.30",
         "spryker/router": "^1.12.0",
         "spryker/testify": "^3.40.0",
+        "spryker/translator": "^1.8.0",
         "spryker/twig": "^3.13.0",
         "spryker/validator": "^1.1.0",
         "spryker/zed-navigation": "^1.5.0"

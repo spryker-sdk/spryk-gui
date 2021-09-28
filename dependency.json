@@ -7,6 +7,9 @@
     },
     "include-dev": {
         "spryker/testify": "False positive validation issue.",
+        "spryker/http": "Needed for tests",
+        "spryker/propel": "Needed for tests",
+        "spryker/translator": "Needed for tests",
         "codeception/module-asserts": "A Codeception module containing various assertions.",
         "codeception/module-phpbrowser": "A Codeception module needed for tests"
     }
