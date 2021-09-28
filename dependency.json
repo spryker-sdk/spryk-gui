@@ -1,8 +1,12 @@
 {
+    "exclude": {
+        "spryker/testify": "Only needed for require-dev."
+    },
     "include": {
         "spryker/transfer": "Provides transfer objects definition with `::get*OrFail()` functionality."
     },
     "include-dev": {
+        "spryker/testify": "False positive validation issue.",
         "codeception/module-asserts": "A Codeception module containing various assertions.",
         "codeception/module-phpbrowser": "A Codeception module needed for tests"
     }
