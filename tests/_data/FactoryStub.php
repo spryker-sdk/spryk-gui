@@ -12,7 +12,7 @@ class FactoryStub
     /**
      * @return void
      */
-    public function methodWithOneDocBlockReturnType()
+    public function methodWithOneDocBlockReturnType(): void
     {
     }
 
