@@ -20,6 +20,7 @@ class Spryk implements SprykInterface
 {
     /**
      * @uses \SprykerSdk\Spryk\SprykConfig::SPRYK_LEVEL_1
+     *
      * @var int
      */
     protected const SPRYK_LEVEL_TOP = 1;

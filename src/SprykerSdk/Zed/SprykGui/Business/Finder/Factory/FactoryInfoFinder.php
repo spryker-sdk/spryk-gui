@@ -63,7 +63,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
 
         $reflectedClass = $this->getReflectedClass($className);
 
-        if (!($reflectedClass instanceof  ReflectionClass)) {
+        if (!($reflectedClass instanceof ReflectionClass)) {
             return $classInformationTransfer;
         }
 
