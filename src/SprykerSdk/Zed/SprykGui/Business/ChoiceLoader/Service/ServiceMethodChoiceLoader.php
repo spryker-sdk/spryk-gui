@@ -25,7 +25,7 @@ class ServiceMethodChoiceLoader extends AbstractMethodChoiceLoader
         return sprintf(
             '%1$s\\Service\\%2$s\\%2$sService',
             $dependentModule->getOrganizationOrFail()->getNameOrFail(),
-            $dependentModule->getNameOrFail()
+            $dependentModule->getNameOrFail(),
         );
     }
 

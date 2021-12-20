@@ -69,7 +69,7 @@ class SprykDataProvider
     {
         $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
             $sprykDefinitionTransfer->getNameOrFail(),
-            $sprykDefinitionTransfer->getMode()
+            $sprykDefinitionTransfer->getMode(),
         );
 
         if (isset($sprykDefinition[ModuleTransfer::APPLICATION])) {
@@ -132,7 +132,7 @@ class SprykDataProvider
     {
         $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
             $sprykDefinitionTransfer->getNameOrFail(),
-            $sprykDefinitionTransfer->getMode()
+            $sprykDefinitionTransfer->getMode(),
         );
 
         $formData['mode'] = $sprykDefinition['mode'];

@@ -36,7 +36,7 @@ class ZedBusinessModelChoiceLoader implements ChoiceLoaderInterface
                 '%s\\Zed\\%s\\Business\\%s',
                 $moduleTransfer->getOrganizationOrFail()->getName(),
                 $moduleTransfer->getName(),
-                $relativeClassName
+                $relativeClassName,
             );
             $classInformationTransfer = new ClassInformationTransfer();
             $classInformationTransfer
@@ -60,7 +60,7 @@ class ZedBusinessModelChoiceLoader implements ChoiceLoaderInterface
             '%1$ssrc/%2$s/Zed/%3$s/Business/',
             $moduleTransfer->getPath(),
             $moduleTransfer->getOrganizationOrFail()->getName(),
-            $moduleTransfer->getName()
+            $moduleTransfer->getName(),
         );
 
         return $moduleBusinessDirectory;

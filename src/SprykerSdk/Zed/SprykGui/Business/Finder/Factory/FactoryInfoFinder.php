@@ -18,7 +18,7 @@ use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
 class FactoryInfoFinder implements FactoryInfoFinderInterface
 {
     /**
-     * @var string[]
+     * @var array<string>
      */
     protected $methodsToFilter = [
         'provideExternalDependencies',

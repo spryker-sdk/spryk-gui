@@ -22,7 +22,7 @@ class BuildController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return mixed[]|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|mixed[]
      */
     public function indexAction(Request $request)
     {
@@ -39,7 +39,7 @@ class BuildController extends AbstractController
                     $sprykDefinitionTransfer->getName(),
                     $preBuildForm->get('mode')->getData(),
                     $preBuildForm->get('enterModuleManually')->getData(),
-                )
+                ),
             );
         }
 
@@ -52,7 +52,7 @@ class BuildController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return mixed[]|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|mixed[]
      */
     public function buildAction(Request $request)
     {
@@ -63,7 +63,7 @@ class BuildController extends AbstractController
                 sprintf(
                     '/spryk-gui/build?spryk=%s',
                     $sprykDefinitionTransfer->getName(),
-                )
+                ),
             );
         }
 
@@ -78,7 +78,7 @@ class BuildController extends AbstractController
 
             if ($this->getClickableByName($sprykForm, 'create')->isClicked()) {
                 return $this->viewResponse(
-                    $this->getFacade()->buildSprykView($sprykName, $formData)
+                    $this->getFacade()->buildSprykView($sprykName, $formData),
                 );
             }
 

@@ -29,14 +29,17 @@ class ModuleChoiceType extends AbstractType
      * @var string
      */
     protected const ORGANIZATION = 'organization';
+
     /**
      * @var string
      */
     protected const APPLICATION = 'application';
+
     /**
      * @var string
      */
     protected const MODULE = 'module';
+
     /**
      * @var string
      */
@@ -84,7 +87,7 @@ class ModuleChoiceType extends AbstractType
     /**
      * @param array<string, mixed> $moduleFilter
      *
-     * @return \Generated\Shared\Transfer\ModuleTransfer[]
+     * @return array<\Generated\Shared\Transfer\ModuleTransfer>
      */
     protected function getFilteredModules(array $moduleFilter): array
     {

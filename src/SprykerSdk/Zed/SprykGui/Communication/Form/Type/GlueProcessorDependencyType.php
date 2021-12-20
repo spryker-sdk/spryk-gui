@@ -27,7 +27,7 @@ class GlueProcessorDependencyType extends AbstractFactoryConstructorType
             '\%1$s\Glue\%2$s\%2$s%3$s',
             $moduleTransfer->getOrganizationOrFail()->getName(),
             $moduleTransfer->getName(),
-            $this->getFactoryNamePostfix()
+            $this->getFactoryNamePostfix(),
         );
     }
 

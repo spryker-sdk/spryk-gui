@@ -31,6 +31,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
      * @var string
      */
     protected const MODULE = 'module';
+
     /**
      * @var string
      */
@@ -101,7 +102,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
                     $argumentCollectionTransfer->addArgument($argumentTransfer);
                 }
                 $event->setData($argumentCollectionTransfer->getArguments());
-            }
+            },
         );
     }
 
@@ -118,7 +119,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
     abstract protected function getFactoryNamePostfix(): string;
 
     /**
-     * @param \ArrayObject|\Generated\Shared\Transfer\MethodInformationTransfer[] $methodCollection
+     * @param \Generated\Shared\Transfer\MethodInformationTransfer[]|\ArrayObject $methodCollection
      * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
      *
      * @return \Generated\Shared\Transfer\ArgumentCollectionTransfer
@@ -136,7 +137,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
                 $methodTransfer->getReturnTypeOrFail()->getName(),
                 $moduleTransfer->getName(),
                 $this->getFactoryNamePostfix(),
-                $methodTransfer->getName()
+                $methodTransfer->getName(),
             ));
             $argumentTransfer->setType($methodTransfer->getReturnTypeOrFail()->getType());
             $argumentTransfer->setVariable($this->getVariableProposal($methodTransfer));

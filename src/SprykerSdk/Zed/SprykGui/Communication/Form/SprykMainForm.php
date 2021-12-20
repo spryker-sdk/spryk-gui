@@ -30,6 +30,7 @@ class SprykMainForm extends AbstractType
      * @var string
      */
     public const OPTION_SPRYK = 'spryk';
+
     /**
      * @var string
      */
@@ -39,18 +40,22 @@ class SprykMainForm extends AbstractType
      * @var string
      */
     protected const MODULE = 'module';
+
     /**
      * @var string
      */
     protected const DEPENDENT_MODULE = 'dependentModule';
+
     /**
      * @var string
      */
     protected const ARGUMENTS = 'arguments';
+
     /**
      * @var string
      */
     protected const TYPE = 'type';
+
     /**
      * @var string
      */
@@ -81,7 +86,6 @@ class SprykMainForm extends AbstractType
 
         $spryk = $options[static::OPTION_SPRYK];
 
-        /** @var \Symfony\Component\Form\FormBuilderInterface $builder */
         $mode = $builder->getData()['mode'] ?? null;
         $sprykDefinition = $this->getFacade()->getSprykDefinition($spryk, $mode);
 
@@ -124,7 +128,7 @@ class SprykMainForm extends AbstractType
                         'sprykDetails',
                         SprykDetailsForm::class,
                         $sprykDataProvider->getData($sprykDefinitionTransfer, $moduleTransfer),
-                        $sprykDataProvider->getOptions($sprykDefinitionTransfer, $moduleTransfer)
+                        $sprykDataProvider->getOptions($sprykDefinitionTransfer, $moduleTransfer),
                     )->getForm();
 
                 $form->add($sprykDetailsForm);

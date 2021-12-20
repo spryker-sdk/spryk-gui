@@ -81,14 +81,14 @@ class ArgumentCollectionType extends AbstractType
                     $argumentCollectionTransfer->addArgument($argumentTransfer);
                 }
                 $event->setData($argumentCollectionTransfer);
-            }
+            },
         );
     }
 
     /**
      * @param \Symfony\Component\Form\FormEvent $event
      *
-     * @return \Generated\Shared\Transfer\ArgumentTransfer[]
+     * @return array<\Generated\Shared\Transfer\ArgumentTransfer>
      */
     protected function getArgumentsFromEvent(FormEvent $event): array
     {

@@ -16,6 +16,7 @@ class OrganizationFinder implements OrganizationFinderInterface
      * @var string
      */
     protected const NAME_DEVELOPMENT_LAYER_CORE = 'core';
+
     /**
      * @var string
      */

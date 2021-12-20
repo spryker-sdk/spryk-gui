@@ -13,12 +13,12 @@ use Generated\Shared\Transfer\OptionsTransfer;
 class OptionBuilder implements OptionBuilderInterface
 {
     /**
-     * @var \SprykerSdk\Zed\SprykGui\Business\Option\OptionBuilderInterface[]
+     * @var array<\SprykerSdk\Zed\SprykGui\Business\Option\OptionBuilderInterface>
      */
     protected $optionBuilder;
 
     /**
-     * @param \SprykerSdk\Zed\SprykGui\Business\Option\OptionBuilderInterface[] $optionBuilder
+     * @param array<\SprykerSdk\Zed\SprykGui\Business\Option\OptionBuilderInterface> $optionBuilder
      */
     public function __construct(array $optionBuilder)
     {

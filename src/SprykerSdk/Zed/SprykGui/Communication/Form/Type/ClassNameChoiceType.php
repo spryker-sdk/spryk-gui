@@ -37,10 +37,12 @@ class ClassNameChoiceType extends AbstractType
 {
     protected const OPTION_MODULE = SprykDetailsForm::OPTION_MODULE;
     protected const OPTION_EXISTING_MODULE = SprykDetailsForm::OPTION_EXISTING_MODULE;
+
     /**
      * @var string
      */
     protected const SPRYK = 'spryk';
+
     /**
      * @var string
      */

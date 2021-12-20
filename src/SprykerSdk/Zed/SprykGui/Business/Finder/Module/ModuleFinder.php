@@ -29,7 +29,7 @@ class ModuleFinder implements ModuleFinderInterface
     /**
      * @param \Generated\Shared\Transfer\ModuleFilterTransfer|null $moduleFilterTransfer
      *
-     * @return \Generated\Shared\Transfer\ModuleTransfer[]
+     * @return array<\Generated\Shared\Transfer\ModuleTransfer>
      */
     public function findModules(?ModuleFilterTransfer $moduleFilterTransfer = null): array
     {
@@ -48,7 +48,7 @@ class ModuleFinder implements ModuleFinderInterface
             ->setModule($moduleTransfer);
         $existingModuleTransfers = $this->getModuleTransfers(
             $moduleFilterTransfer,
-            $moduleTransfer->getOrganizationOrFail()->getIsProjectOrFail()
+            $moduleTransfer->getOrganizationOrFail()->getIsProjectOrFail(),
         );
 
         if (!$existingModuleTransfers) {
@@ -62,7 +62,7 @@ class ModuleFinder implements ModuleFinderInterface
      * @param \Generated\Shared\Transfer\ModuleFilterTransfer|null $moduleFilterTransfer
      * @param bool $isProject
      *
-     * @return \Generated\Shared\Transfer\ModuleTransfer[]
+     * @return array<\Generated\Shared\Transfer\ModuleTransfer>
      */
     protected function getModuleTransfers(?ModuleFilterTransfer $moduleFilterTransfer, bool $isProject): array
     {

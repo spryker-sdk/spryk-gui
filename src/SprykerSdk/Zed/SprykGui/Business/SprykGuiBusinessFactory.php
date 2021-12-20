@@ -54,7 +54,7 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
         return new Spryk(
             $this->getSprykFacade(),
             $this->createGraphBuilder(),
-            $this->getConfig()
+            $this->getConfig(),
         );
     }
 
@@ -65,7 +65,7 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
     {
         return new GraphBuilder(
             $this->getSprykFacade(),
-            $this->getGraphPlugin()
+            $this->getGraphPlugin(),
         );
     }
 
@@ -108,7 +108,7 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
     {
         return new OrganizationFinder(
             $this->getConfig()->getCoreNamespaces(),
-            $this->getConfig()->getProjectNamespaces()
+            $this->getConfig()->getProjectNamespaces(),
         );
     }
 
@@ -155,7 +155,7 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
     {
         return new ModuleOutputOptionBuilder(
             $this->createAccessibleTransferFinder(),
-            $this->createPhpInternalTypes()
+            $this->createPhpInternalTypes(),
         );
     }
 
@@ -166,7 +166,7 @@ class SprykGuiBusinessFactory extends AbstractBusinessFactory
     {
         return new ArgumentOptionBuilder(
             $this->createAccessibleTransferFinder(),
-            $this->createPhpInternalTypes()
+            $this->createPhpInternalTypes(),
         );
     }
 
