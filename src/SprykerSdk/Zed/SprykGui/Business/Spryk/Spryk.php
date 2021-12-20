@@ -96,7 +96,7 @@ class Spryk implements SprykInterface
         $commandLine = $this->getCommandLine($sprykName, $normalizedFormData);
         $process = $this->getProcess($commandLine);
         $process->setEnv([
-            'DEVELOPMENT_CONSOLE_COMMANDS' => 'true',
+            'DEVELOPMENT_CONSOLE_COMMANDS' => '1',
         ]);
         $process->run();
 
