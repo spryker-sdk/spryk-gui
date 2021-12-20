@@ -109,7 +109,7 @@ vendor/bin/console spryk:run AddZedBusinessFacadeMethod  --organization=\'Spryke
             'Method "%s" does not have the expected return type "%s" found "%s"',
             $expectedMethodName,
             $expectedReturnType,
-            $methodInformationTransfer->getReturnType()->getType()
+            $methodInformationTransfer->getReturnType()->getType(),
         ));
     }
 

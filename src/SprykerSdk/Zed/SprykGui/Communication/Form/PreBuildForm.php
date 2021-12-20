@@ -24,6 +24,7 @@ class PreBuildForm extends AbstractType
      * @var string
      */
     public const FIELD_ENTER_MODULE_MANUALLY = 'enterModuleManually';
+
     /**
      * @var string
      */

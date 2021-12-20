@@ -29,7 +29,7 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
     public function createSprykFormDataProvider(): SprykDataProvider
     {
         return new SprykDataProvider(
-            $this->getFacade()
+            $this->getFacade(),
         );
     }
 
@@ -59,7 +59,7 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
         return $this->getFormFactory()->create(
             SprykMainForm::class,
             $this->createSprykFormDataProvider()->getData($sprykDefinitionTransfer),
-            $this->createSprykFormDataProvider()->getOptions($sprykDefinitionTransfer)
+            $this->createSprykFormDataProvider()->getOptions($sprykDefinitionTransfer),
         );
     }
 
@@ -72,7 +72,7 @@ class SprykGuiCommunicationFactory extends AbstractCommunicationFactory
     {
         return $this->getFormFactory()->create(
             PreBuildForm::class,
-            $this->createPreBuildDataProvider()->getData($sprykDefinitionTransfer)
+            $this->createPreBuildDataProvider()->getData($sprykDefinitionTransfer),
         );
     }
 }

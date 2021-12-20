@@ -73,7 +73,6 @@ class FormDataNormalizer implements FormDataNormalizerInterface
             }
 
             if ($value instanceof ArgumentCollectionTransfer) {
-                /** @var string $key */
                 $normalizedData = $this->normalizeArgumentCollection($key, $value, $normalizedData);
 
                 continue;

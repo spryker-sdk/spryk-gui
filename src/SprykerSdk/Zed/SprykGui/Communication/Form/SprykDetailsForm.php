@@ -27,6 +27,7 @@ class SprykDetailsForm extends AbstractType
      * @var string
      */
     public const OPTION_MODULE = 'module';
+
     /**
      * @var string
      */
@@ -188,7 +189,7 @@ class SprykDetailsForm extends AbstractType
             '%s%s%s',
             'SprykerSdk\\Zed\\SprykGui\\Communication\\Form\\Type\\',
             $argumentDefinition['type'],
-            'Type'
+            'Type',
         );
 
         if (!$this->getIsFormTypeCanBeRendered($formTypeName, $options)) {

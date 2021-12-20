@@ -16,6 +16,7 @@ class SprykGuiConfig extends AbstractBundleConfig
      * @var string
      */
     protected const SPRYK_CATEGORY_NAME_TOP_LEVEL = 'Top Level Spryks';
+
     /**
      * @var string
      */
@@ -64,7 +65,7 @@ class SprykGuiConfig extends AbstractBundleConfig
     /**
      * @api
      *
-     * @return string[]
+     * @return array<string>
      */
     public function getSprykCategories(): array
     {

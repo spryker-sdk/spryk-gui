@@ -13,12 +13,12 @@ use Generated\Shared\Transfer\ModuleTransfer;
 class ChoiceLoaderComposite implements ChoiceLoaderCompositeInterface
 {
     /**
-     * @var \SprykerSdk\Zed\SprykGui\Business\ChoiceLoader\ChoiceLoaderInterface[]
+     * @var array<\SprykerSdk\Zed\SprykGui\Business\ChoiceLoader\ChoiceLoaderInterface>
      */
     protected $choiceLoader;
 
     /**
-     * @param \SprykerSdk\Zed\SprykGui\Business\ChoiceLoader\ChoiceLoaderInterface[] $choiceLoader
+     * @param array<\SprykerSdk\Zed\SprykGui\Business\ChoiceLoader\ChoiceLoaderInterface> $choiceLoader
      */
     public function __construct(array $choiceLoader)
     {
@@ -44,7 +44,7 @@ class ChoiceLoaderComposite implements ChoiceLoaderCompositeInterface
         throw new Exception(sprintf(
             'Could not find a matching ChoiceLoader by name "%s". Available ChoiceLoader: "%s"',
             $choiceLoaderName,
-            implode(', ', $this->getChoiceLoaderNames())
+            implode(', ', $this->getChoiceLoaderNames()),
         ));
     }
 

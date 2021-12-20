@@ -38,6 +38,7 @@ class MethodNameChoiceType extends AbstractType
      * @var string
      */
     protected const MODULE = 'module';
+
     /**
      * @var string
      */

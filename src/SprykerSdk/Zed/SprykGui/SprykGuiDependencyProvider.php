@@ -23,10 +23,12 @@ class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
      * @var string
      */
     public const SPRYK_FACADE = 'SPRYK_FACADE';
+
     /**
      * @var string
      */
     public const DEVELOPMENT_FACADE = 'DEVELOPMENT_FACADE';
+
     /**
      * @var string
      */
@@ -67,7 +69,7 @@ class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::SPRYK_FACADE, function () {
             return new SprykGuiToSprykFacadeBridge(
-                new SprykFacade()
+                new SprykFacade(),
             );
         });
 
@@ -83,7 +85,7 @@ class SprykGuiDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::DEVELOPMENT_FACADE, function () use ($container) {
             return new SprykGuiToDevelopmentFacadeBridge(
-                $container->getLocator()->development()->facade()
+                $container->getLocator()->development()->facade(),
             );
         });
 

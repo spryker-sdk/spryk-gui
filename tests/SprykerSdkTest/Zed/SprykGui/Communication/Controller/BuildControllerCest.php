@@ -55,7 +55,7 @@ class BuildControllerCest
         ];
 
         $firstSprykerModuleName = $i->grabTextFrom(
-            'select#spryk_main_form_module optgroup[label=\'Spryker\'] option:nth-child(1)'
+            'select#spryk_main_form_module optgroup[label=\'Spryker\'] option:nth-child(1)',
         );
 
         $formData = [

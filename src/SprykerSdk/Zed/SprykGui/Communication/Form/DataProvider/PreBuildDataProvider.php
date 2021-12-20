@@ -35,9 +35,10 @@ class PreBuildDataProvider
     {
         $sprykDefinition = $this->sprykGuiFacade->getSprykDefinition(
             $sprykDefinitionTransfer->getNameOrFail(),
-            $sprykDefinitionTransfer->getMode()
+            $sprykDefinitionTransfer->getMode(),
         );
 
+        $formData = [];
         $formData[PreBuildForm::FIELD_MODE] = $sprykDefinition[PreBuildForm::FIELD_MODE];
         $formData[PreBuildForm::FIELD_ENTER_MODULE_MANUALLY] = isset($sprykDefinition['arguments']['module']['type'])
             && $sprykDefinition['arguments']['module']['type'] === 'NewModuleType';

@@ -61,7 +61,7 @@ class Spryk implements SprykInterface
     public function getSprykDefinitions(): array
     {
         return $this->organizeSprykDefinitions(
-            $this->sprykFacade->getSprykDefinitions()
+            $this->sprykFacade->getSprykDefinitions(),
         );
     }
 
@@ -141,7 +141,7 @@ class Spryk implements SprykInterface
         $sprykCategories = $this->sprykGuiConfig->getSprykCategories();
         $organized = array_combine(
             $sprykCategories,
-            array_fill(0, count($sprykCategories), [])
+            array_fill(0, count($sprykCategories), []),
         );
 
         if (!$organized) {
@@ -153,7 +153,7 @@ class Spryk implements SprykInterface
             $organized[$sprykCategory][$sprykName] = [
                 'humanized' => $this->createHumanizeFilter()->filter($sprykName),
                 'description' => $sprykDefinition['description'],
-                'priority' => isset($sprykDefinition['priority']) ? $sprykDefinition['priority'] : '',
+                'priority' => $sprykDefinition['priority'] ?? '',
             ];
 
             ksort($organized[$sprykCategory]);

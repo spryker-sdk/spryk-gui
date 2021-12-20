@@ -29,10 +29,12 @@ class ModuleAndOrganizationType extends AbstractType
      * @var string
      */
     public const OPTION_MODE_FILTER = 'modeFilter';
+
     /**
      * @var string
      */
     public const OPTION_MODULE_FILTER = 'moduleFilter';
+
     /**
      * @var string
      */
@@ -42,10 +44,12 @@ class ModuleAndOrganizationType extends AbstractType
      * @var string
      */
     protected const MODULE_FILTER_KEY_ORGANIZATION = 'organization';
+
     /**
      * @var string
      */
     protected const MODULE_FILTER_KEY_APPLICATION = 'application';
+
     /**
      * @var string
      */
@@ -127,7 +131,7 @@ class ModuleAndOrganizationType extends AbstractType
     /**
      * @param array<string, mixed> $options
      *
-     * @return \ArrayObject|\Generated\Shared\Transfer\OrganizationTransfer[]
+     * @return \Generated\Shared\Transfer\OrganizationTransfer[]|\ArrayObject
      */
     protected function getOrganizationCollection(array $options): ArrayObject
     {
@@ -145,7 +149,7 @@ class ModuleAndOrganizationType extends AbstractType
     /**
      * @param array<string, mixed> $moduleFilter
      *
-     * @return \Generated\Shared\Transfer\ModuleTransfer[]
+     * @return array<\Generated\Shared\Transfer\ModuleTransfer>
      */
     protected function getFilteredModules(array $moduleFilter): array
     {

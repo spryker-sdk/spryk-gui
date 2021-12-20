@@ -37,7 +37,7 @@ class GraphController extends AbstractController
         return $this->streamedResponse(
             $callback,
             Response::HTTP_OK,
-            $this->getStreamedResponseHeaders('svg')
+            $this->getStreamedResponseHeaders('svg'),
         );
     }
 
