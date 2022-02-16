@@ -92,7 +92,7 @@ class BuildController extends AbstractController
         return $this->viewResponse([
             'sprykName' => $sprykDefinitionTransfer->getName(),
             'form' => $sprykForm->createView(),
-            'messages' => $messages ?? [],
+            'messages' => isset($messages) ? $messages : [],
         ]);
     }
 
