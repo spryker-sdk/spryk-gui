@@ -3,7 +3,8 @@
         "spryker/testify": "Only needed for require-dev."
     },
     "include": {
-        "spryker/transfer": "Provides transfer objects definition with `::get*OrFail()` functionality."
+        "spryker/transfer": "Provides transfer objects definition with `::get*OrFail()` functionality.",
+        "ondrejmirtes/better-reflection": "Provides reflection wrapper used for code analysis."
     },
     "include-dev": {
         "spryker/testify": "False positive validation issue.",
