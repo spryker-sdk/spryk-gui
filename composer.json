@@ -4,7 +4,6 @@
     "description": "SprykGui module",
     "license": "proprietary",
     "require": {
-        "ondrejmirtes/better-reflection": "^4.3.0",
         "php": ">=7.4",
         "spryker-sdk/spryk": "^0.3.1",
         "spryker/development": "^3.12.0",
