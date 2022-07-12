@@ -8,7 +8,7 @@ GUI for [Spryk](https://github.com/spryker-sdk/spryk/) tool.
 The Spryk tool can be used standalone, for optimized usage this module offers a GUI in Zed backend.
 
 **DEPRECATED - This module is not continued at this point.**
-Please use [spryker-sdk/spryk](https://github.com/spryker-sdk/spryk) instead.
+Please use [spryker-sdk/spryk](https://github.com/spryker-sdk/spryk) and CLI mode directly instead.
 
 ## Installation
 
