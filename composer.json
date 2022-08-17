@@ -5,7 +5,8 @@
     "license": "proprietary",
     "require": {
         "php": ">=7.4",
-        "spryker-sdk/spryk": "^0.3.1",
+        "spryker-sdk/spryk": "^0.4.0",
+        "spryker-sdk/spryk-src": "dev-master",
         "spryker/development": "^3.12.0",
         "spryker/graph": "^3.0.0",
         "spryker/kernel": "^3.30.0",
@@ -62,7 +63,8 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "symfony/runtime": true
         }
     }
 }
