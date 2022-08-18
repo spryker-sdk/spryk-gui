@@ -6,7 +6,6 @@
     "require": {
         "php": ">=7.4",
         "spryker-sdk/spryk": "^0.4.0",
-        "spryker-sdk/spryk-src": "dev-master",
         "spryker/development": "^3.12.0",
         "spryker/graph": "^3.0.0",
         "spryker/kernel": "^3.30.0",
