@@ -7,7 +7,6 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business\Finder\Factory;
 
-use Exception;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\MethodInformationTransfer;
 use Generated\Shared\Transfer\ReturnTypeTransfer;
