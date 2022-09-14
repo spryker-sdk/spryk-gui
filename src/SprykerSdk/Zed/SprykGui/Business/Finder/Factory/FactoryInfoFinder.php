@@ -94,10 +94,10 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     {
         try {
             $betterReflection = new BetterReflection();
-            $betterReflection->classReflector()->reflect($className);
+            $betterReflection->reflector()->reflectClass($className);
 
             return true;
-        } catch (IdentifierNotFound $exception) {
+        } catch (\Exception $exception) {
             return false;
         }
     }
@@ -148,7 +148,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
      */
     protected function getReturnTypeFromDocBlock(ReflectionMethod $method): ?string
     {
-        $docBlock = $method->getAst()->getDocComment();
+        $docBlock = $method->getDocComment();
 
         if (!$docBlock) {
             return null;
@@ -173,7 +173,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
     protected function getReflectedClass(string $className)
     {
         $betterReflection = new BetterReflection();
-        $reflectedClass = $betterReflection->classReflector()->reflect($className);
+        $reflectedClass = $betterReflection->reflector()->reflectClass($className);
 
         return $reflectedClass;
     }
