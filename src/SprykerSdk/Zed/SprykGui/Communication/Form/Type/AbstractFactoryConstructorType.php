@@ -119,7 +119,7 @@ abstract class AbstractFactoryConstructorType extends AbstractType
     abstract protected function getFactoryNamePostfix(): string;
 
     /**
-     * @param \Generated\Shared\Transfer\MethodInformationTransfer[]|\ArrayObject $methodCollection
+     * @param \ArrayObject<\Generated\Shared\Transfer\MethodInformationTransfer> $methodCollection
      * @param \Generated\Shared\Transfer\ModuleTransfer $moduleTransfer
      *
      * @return \Generated\Shared\Transfer\ArgumentCollectionTransfer

@@ -22,7 +22,7 @@ class BuildController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|mixed[]
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<mixed>
      */
     public function indexAction(Request $request)
     {
@@ -52,7 +52,7 @@ class BuildController extends AbstractController
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|mixed[]
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|array<mixed>
      */
     public function buildAction(Request $request)
     {

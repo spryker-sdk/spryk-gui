@@ -36,6 +36,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ClassNameChoiceType extends AbstractType
 {
     protected const OPTION_MODULE = SprykDetailsForm::OPTION_MODULE;
+
     protected const OPTION_EXISTING_MODULE = SprykDetailsForm::OPTION_EXISTING_MODULE;
 
     /**

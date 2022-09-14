@@ -131,7 +131,7 @@ class ModuleAndOrganizationType extends AbstractType
     /**
      * @param array<string, mixed> $options
      *
-     * @return \Generated\Shared\Transfer\OrganizationTransfer[]|\ArrayObject
+     * @return \ArrayObject<\Generated\Shared\Transfer\OrganizationTransfer>
      */
     protected function getOrganizationCollection(array $options): ArrayObject
     {

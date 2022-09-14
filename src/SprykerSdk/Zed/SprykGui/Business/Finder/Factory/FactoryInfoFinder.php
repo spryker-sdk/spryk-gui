@@ -7,13 +7,13 @@
 
 namespace SprykerSdk\Zed\SprykGui\Business\Finder\Factory;
 
+use Exception;
 use Generated\Shared\Transfer\ClassInformationTransfer;
 use Generated\Shared\Transfer\MethodInformationTransfer;
 use Generated\Shared\Transfer\ReturnTypeTransfer;
 use PHPStan\BetterReflection\BetterReflection;
 use PHPStan\BetterReflection\Reflection\ReflectionClass;
 use PHPStan\BetterReflection\Reflection\ReflectionMethod;
-use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
 
 class FactoryInfoFinder implements FactoryInfoFinderInterface
 {
@@ -97,7 +97,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
             $betterReflection->reflector()->reflectClass($className);
 
             return true;
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return false;
         }
     }
