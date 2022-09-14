@@ -17,4 +17,4 @@ This is a development only "require-dev" module. Please make sure you include it
 
 ## Documentation
 
-[Module Documentation](https://academy.spryker.com/developing_with_spryker/module_guide/modules.html)
+[Module Documentation](https://docs.spryker.com/docs/sdk/dev/spryks/spryks.html)

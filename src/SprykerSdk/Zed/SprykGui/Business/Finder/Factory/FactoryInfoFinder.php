@@ -14,6 +14,7 @@ use Generated\Shared\Transfer\ReturnTypeTransfer;
 use PHPStan\BetterReflection\BetterReflection;
 use PHPStan\BetterReflection\Reflection\ReflectionClass;
 use PHPStan\BetterReflection\Reflection\ReflectionMethod;
+use PHPStan\BetterReflection\Reflector\Exception\IdentifierNotFound;
 
 class FactoryInfoFinder implements FactoryInfoFinderInterface
 {
@@ -97,7 +98,7 @@ class FactoryInfoFinder implements FactoryInfoFinderInterface
             $betterReflection->reflector()->reflectClass($className);
 
             return true;
-        } catch (Exception $exception) {
+        } catch (IdentifierNotFound $exception) {
             return false;
         }
     }
