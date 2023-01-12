@@ -10,6 +10,9 @@ The Spryk tool can be used standalone, for optimized usage this module offers a 
 **DEPRECATED - This module is not continued at this point.**
 Please use [spryker-sdk/spryk](https://github.com/spryker-sdk/spryk) and CLI mode directly instead.
 
+**DEPRECATED - This module is not continued at this point.**
+Please use [spryker-sdk/spryk](https://github.com/spryker-sdk/spryk) instead.
+
 ## Installation
 
 ```
